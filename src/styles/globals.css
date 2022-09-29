@@ -1,0 +1,172 @@
+@import url('./tailwind.css');
+@import url('./twoslash-shiki.css');
+@import url('./hljs-github-dark.css');
+@import url('./markdown.css');
+
+@tailwind base;
+@tailwind utilities;
+
+@layer base {
+
+  @font-face {
+    font-family: 'BaskervilleDisplayPT';
+    src:
+      url('/fonts/Baskerville-Display-PT_Display.woff2') format('woff2'),
+      url('/fonts/Baskerville-Display-PT_Display.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'BaskervilleDisplayPTBold';
+    src:
+      url('/fonts/Baskerville-Display-PT_Display-Bold.woff2') format('woff2'),
+      url('/fonts/Baskerville-Display-PT_Display-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .scroll-padding {
+    scroll-padding-top: 150px;
+  }
+
+  body {
+    @apply h-full font-sans antialiased dark:bg-gray-900 dark:text-white/80;
+  }
+
+  svg {
+    @apply max-w-full;
+  }
+
+  .svg-h-full svg {
+    @apply h-full;
+  }
+
+  svg:not(.disable-tailwind-svg-path-style) path {
+    fill: currentColor;
+  }
+
+  .prose code:not(.ch-code-scroll-parent) {
+    @apply rounded  py-0.5 px-1 text-sm dark:bg-gray-800;
+  }
+
+  .not-prose code {
+    background-color: transparent !important;
+  }
+
+  .not-prose.ch-codeblock * {
+    /* Fix horizontal scrollbars added to CodeHike blocks as a result of tailwind screwing up measurements */
+    @apply box-content;
+  }
+
+  .ch-code-scroll-parent {
+    overscroll-behavior-y: initial;
+  }
+
+  /* .prose a code {
+    @apply dark:text-teal-200 !important;
+  } */
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    @apply font-sans font-bold tracking-tighter;
+  }
+
+  .prose h2 {
+    @apply mb-4;
+  }
+
+  .prose a,
+  .prose a code {
+    /* position: relative; */
+    --tw-prose-underline-size: 6px;
+    @apply text-white decoration-glow-700 underline-offset-4 hover:decoration-glow-100 active:decoration-glow-100;
+
+    /* @apply after:-inset-1 after:bg-slate-800 after:absolute after:-z-10 after:rounded-sm; */
+  }
+
+  .prose pre {
+    @apply rounded-lg border border-transparent dark:border-gray-900 dark:bg-black;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-560px * 4));
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 50s linear infinite;
+  }
+
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+
+  reach-portal {
+    position: absolute;
+    z-index: 100;
+  }
+
+  .options-table .option-title h2,
+  .options-table .option-title h3,
+  .options-table .option-title h4 {
+    @apply text-gray-900 dark:text-white;
+  }
+
+  .options-table .option-title p {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  .hyphens {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+}
+
+h5 {
+  font-weight: bold;
+}
+
+.theatre-callout-content > *:first-child {
+  margin-top: 0;
+}
+.theatre-callout-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.compact-paragraph-for-api-ref pre {
+  @apply my-2;
+}
+.compact-paragraph-for-api-ref table {
+  margin: 0;
+}
+.compact-paragraph-for-api-ref p {
+  margin: 0;
+}
+
+.docs {
+  /* Add a bit of space for fixing h1 -> first child h2 spacing. See https://linear.app/theatre/issue/P-255/fix-the-remaining-visual-bugs-on-the-docs-pages */
+  @apply mt-4;
+}
+
+.docs td p {
+  /* fix janky paragraphs inserted into tables in MDX */
+  @apply m-0;
+}
+.docs summary > p:first-child {
+  /* fix janky paragraphs inserted into summary in MDX due to prettier formatting - ugh */
+  @apply inline;
+}
+
+.theatre-docs-page .docs h4.doc-heading {
+  @apply mt-3 text-sm uppercase dark:text-gray-400;
+  margin-bottom: 0;
+}

@@ -1,0 +1,111 @@
+---
+title: Using Audio
+excerpt: >
+  Learn how to load and synchronize music or narration audio to an animation.
+---
+
+export const playButton = (
+  <button
+    className="inline-block rounded-sm border border-slate-200 px-1 leading-tight"
+    onClick={() => alert('Then it plays the audio, for example.')}
+  >
+    Play
+  </button>
+)
+
+## Introduction
+
+In this manual, we'll learn how to add music tracks that are synchronized to our animation.
+We'll add a music track to a [Sequence](/docs/0.5/manual/sequences).
+If you're new to sequences, check out [Working with Sequences](/docs/0.5/manual/sequences) or the [`Sequence` API Reference](/docs/0.5/api/core#sequence).
+
+## Adding audio tracks to Sequences
+
+We can attach audio tracks to Sequences using [sequence.attachAudio](/docs/0.5/api/core#sequence.attachaudio).
+Theatre.js will then play the audio track every time the Sequence is played with the timings in sync.
+
+```ts
+console.log('Loading audio...')
+sheet.sequence.attachAudio({ source: 'http://localhost:3000/audio.mp3' }).then(() => {
+  console.log('Audio loaded!')
+})
+```
+
+In the above example, Theatre.js will:
+
+1. `fetch()` the audio file
+2. Create a [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) context.
+
+   <Callout>
+     If the browser is [blocking](https://developer.chrome.com/blog/autoplay/#webaudio) the audio context, Theatre.js
+     will wait for a user gesture (e.g., a click/touch/key down) to initiate it. It's best to prompt the user to
+     initiate audio playback. For example, we can show a {playButton} button. Once the user clicks on that button (or
+     anywhere else), Theatre.js will initiate the audio context.
+   </Callout>
+
+3. [Decode](https://docs.theatrejs.com/in-depth/#sound-and-music:~:text=Decode,the%20audio.) the audio.
+4. Resolve the returned Promise. After this, when you call [Sequence.play](/docs/0.5/api/core#sequence.play), the audio track will play simultaneously and in sync.
+
+## Create a custom audio graph
+
+If you would like to have more control over audio loading or audio setup, you can provide your own audio graph, like so:
+
+```ts
+// create an AudioContext using the Audio API
+const audioContext = new AudioContext()
+// create an AudioBuffer from your audio file or generate one on the fly
+const audioBuffer: AudioBuffer = someAudioBuffer
+// the audio output.
+const destinationNode = audioContext.destination
+
+sheet.sequence
+  .attachAudio({
+    source: audioBuffer,
+    audioContext,
+    destinationNode,
+  })
+  // this promise resolves immediately as everything is already provided
+  .then(() => {
+    sequence.play()
+  })
+```
+
+Or you re-use the Sequence's built-in audio graph, which is exposed through the result of the `attachAudio(/*...*/)` promise:
+
+```ts
+sheet.sequence
+  .attachAudio({
+    source: '/music.mp3',
+  })
+  .then((audioGraph) => {
+    // this is the audioContext that the sequence created.
+    const audioContext = audioGraph.audioContext
+    // this is the main gainNode that the sequence will feed its audio into
+    const sequenceGain = audioGraph.gainNode
+    // disconnect it from audioGraph.destinationNode so we can feed it into our
+    // own audioGraph.
+    // at this point, audio would be inaudible
+    sequenceGain.disconnect()
+    // create our own GainNode
+    const loweredGain = audioContext.createGain()
+    // lower gain (volume) to 10%
+    loweredGain.gain.setValueAtTime(0.1, audioContext.currentTime)
+    // connect the sequence's gain to our lowered gain
+    sequenceGain.connect(loweredGain)
+    // and connect the lower gain to the audioContext's destination
+    loweredGain.connect(audioContext.destination)
+    // now sequence's audio will be audible at 10% volume
+  })
+```
+
+## Advanced Audio+Animation Examples
+
+- [THREE.js + music synchronization CodeSandbox - Orb shader](https://codesandbox.io/s/orb-shader-7n8j7?file=/src/index.js)
+- [THREE.js + music synchronization CodeSandbox - Flower animation](https://codesandbox.io/s/flower-animation-9x0z2?file=/src/index.js)
+
+## Learn more
+
+Want to learn more?
+Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+
+<ChildCards urlPath="/docs/0.5/manual" exclude={(n) => n.urlPath.includes('audio')} />

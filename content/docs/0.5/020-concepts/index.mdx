@@ -1,0 +1,110 @@
+---
+title: Concepts
+excerpt: (TODO)
+---
+
+{/* TODO borrowing the idea of a "concepts" page from [liveblocks](https://liveblocks.io/docs/concepts). */}
+{/* Initial copy borrowed described by Aria in https://www.figma.com/file/MAS8RASgS67Hxfs80blndK/Website?node-id=703%3A29236 */}
+{/* Everyone seems to have trouble seeing what a "sheet" and "object" and "instance" is. */}
+{/* Maybe an animated illustration for each could make them easy to understand? */}
+
+## Objects
+
+<Video autoplay controls={false} src="/images/docs/0.5/concepts/1_objects.mp4">
+  An animated illustration of Theatre.js objects. Side-by-side animations of a jumping cube and button.
+</Video>
+
+**Everything that is animated** is represented as an object.
+Objects can be THREE.js objects or virtual objects that don't exist on the screen.
+
+{/* When you create an object using `sheet.object(name, props)`, you'll be adding the object to the animation sequence. */}
+
+{/* Maybe an animation here where the "objects" in the animation are highlighted? */}
+{/* Also, probably a good place to communicate that objects can represent anything, from 3D objects to HTML elements. */}
+{/* We can probably drive the point further by saying that you could even have dummy objects that don't represent anything on the scene. */}
+
+## Props
+
+**Objects are made up of props.** Each prop can have a different type and can be sequenced.
+
+<Image
+  src="/images/docs/0.5/concepts/5_props.png"
+  height="828px"
+  width="1300px"
+  alt="An annoted screenshot of the Theatre.js Studio UI next to a cube with an axis overlayed. The annotation draws a line between the y axis and an input labelled y in the UI, as well as a line between the width of the cube and an input labelled width in the UI."
+/>
+
+### Changing props
+
+Props can be changed via Theatre's UI or via code.
+
+<Video autoplay controls={false} src="/images/docs/0.5/concepts/6_changing_props.mp4">
+  A video of the Theatre.js UI with a cube on the webpage. Shows the mouse moving the cube up and down using the
+  grabbable axis in the 3D editor and shows the user changing the y value of the cube in the UI.
+</Video>
+
+{/* It's probably a good opportunity to show the user that props can change via Theatre's UI (like the one in DetailsPanel), via a custom UI (like the editing gizmos in the r3f extension), and programattically. */}
+
+{/* Maybe a small animation here that shows a ball moving from left to right, and its "x" prop changing? */}
+
+## Sheets
+
+Sheets **contain one or more objects** that can be animated together.
+
+<Video autoplay controls={false} src="/images/docs/0.5/concepts/2_sheets.mp4">
+  An animated illustration of Theatre.js sheets. Shows a cube jumping (obj1) and some dust particles (obj2).
+</Video>
+
+{/* An animation with multiple objects animated together (like a tennis racket hitting the tennis ball). */}
+{/* We could then highlight that the two objects are in the same sheet. */}
+
+### Sheet instances
+
+<Video autoplay controls={false} src="/images/docs/0.5/concepts/3_sheets_instances_longer.mp4">
+  An animated illustration of Theatre.js sheet instances. Shows three identical animations of a cube jumping with offset
+  animation start times.
+</Video>
+
+You can **re-use a sheet by making instances** of it.
+That means we can have more than one jumpidy-jump animation, each with its own little box and dust particles.
+
+{/* Maybe several instances of the above animation playing at different positions, to demonstrate that sheet instances are just the same sheet with independent positions. */}
+
+### Sequences
+
+<Video autoplay controls={false} src="/images/docs/0.5/concepts/4_sequences.mp4">
+  An animated illustration of Theatre.js sequences. Shows a cube jumping animations with the Theatre.js Studio "dope
+  sheet" panel below. The dope sheet panel contains a moving playhead and visual representations of props with tracks
+  containing keyframes and tweens.
+</Video>
+
+Each sheet has a single sequence _(multi-sequence sheets are in the works!)_.
+A sequence is basically made up of **all of the keyframes of all of the objects in a sheet**.
+
+{/* Right now, sheets and sequences are pretty much the same thing, so it's not even clear to the user what's the difference between the two. */}
+{/* A previous version of Theatre.js didn't even have sheets and just had sequences. */}
+{/* The reason we have two words for them, is that in the future, a sheet can house several sequences, so the same set of objects can have several separate animations, like a button having an animation for being hovered, and clicked, or a human having a jump animation and a crouch animation. */}
+
+{/* Users intuitively know that the same object could have several different animations. */}
+{/* So the user could ask herself "how would i define several animations for the same set of objects?" */}
+{/* Also, if they're the kind that's easily discouraged (like me), they may already take that question as "it's not possible to define separate animations" and just close the page. */}
+
+{/* Perhaps the best thing we can do here is to show that we know this use-case is essential, and tell the user that multi-sequence sheets are coming, and in the meantime, they can divide a sequence into different sections to achieve (like [10s-30s] is one section, then [30s-40s] is another). */}
+
+## Extensions
+
+<Image
+  src="/images/docs/0.5/concepts/extensions.png"
+  height="828px"
+  width="1300px"
+  alt="An annotated screenshot of the Theatre.js Studio UI. Annotations show 'The extension button in the toolbar', 'The extension pane', and 'The editing gizmo just for R3F objects'"
+/>
+
+**Extensions can make creating and editing objects for your animation much easier**.
+They can provide editor gizmos, toolbars, and even their own panes.
+
+{/* Perhaps we can also show the "snapshot" button and the snapshot editor coming from an extension? */}
+
+{/* ## Concepts _not_ to explain */}
+
+{/* I think we can skip explaining projects and prop types here. They're probably not that complicated to grasp. */}

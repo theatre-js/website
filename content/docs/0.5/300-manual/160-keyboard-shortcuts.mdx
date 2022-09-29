@@ -1,0 +1,205 @@
+---
+title: Keyboard & Mouse Controls
+excerpt: A catalog of controls in Theatre.js Studio.
+---
+
+### Studio-wide shortcuts
+
+<table className="table-fixed">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Keyboard input</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Play / Pause</td>
+      <td>`Space`</td>
+    </tr>
+    <tr>
+      <td>Hide / Show the Studio</td>
+      <td>`Alt`/`Option` + `\`</td>
+    </tr>
+    <tr>
+      <td>Undo</td>
+      <td>
+        Windows: `Ctrl` + `Z`
+        <div />
+        macOS: `Cmd` + `Z`
+      </td>
+    </tr>
+    <tr>
+      <td>Redo</td>
+      <td>
+        Windows: `Ctrl` + `Shift` + `Z`
+        <div />
+        macOS: `Cmd` + `Shift` + `Z`
+        <div />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Focus Range Zone controls
+
+<table className="table-fixed">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Keyboard input</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[Create a Focus Range](/docs/0.5/manual/sequences#focus-range)</td>
+      <td>
+        <details>
+          <summary>
+            `Shift` + `Left Mouse` button drag in the top bar of the [Sequence Editor](/docs/0.5/manual/Studio)
+          </summary>
+          <Video src="/images/docs/0.5/manual/keyboard-controls/focus_range.mp4">Focus range</Video>
+        </details>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Details Panel Controls
+
+<table className="table-fixed">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Keyboard input</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Scrub number props at reduced speed</td>
+      <td>
+          `alt`/`option` + `Left Mouse` button drag on a number prop in the [Details Panel](/docs/0.5/manual/Studio)
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+### Dope Sheet controls
+
+<table className="table-fixed">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Keyboard input</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Create a Dope Sheet selection (select Keyframes)</td>
+      <td>
+        <details>
+          <summary>`Shift` + `Left Mouse` button drag in the [Sequence Editor](/docs/0.5/manual/Studio)</summary>
+          <div />
+          <Video src="/images/docs/0.5/manual/keyboard-controls/dope_sheet_selection.mp4">Dope Sheet selection</Video>
+          [See a demo in the Working with Sequences Manual](/docs/0.5/manual/sequences#selections)
+        </details>
+      </td>
+    </tr>
+    <tr>
+      <td>Context menu which can copy, paste, and delete items.</td>
+      <td>`Right Mouse` button</td>
+    </tr>
+    <tr>
+      <td>Place a marker at playhead position</td>
+      <td>
+        <details>
+          <summary>`Right Mouse` button click the playhead</summary>
+          <div />
+          <Video src="/images/docs/0.5/manual/keyboard-controls/place_marker.mp4">Place marker</Video>
+        </details>
+      </td>
+    </tr>
+    <tr>
+      <td>Zoom in and out of the Dope Sheet</td>
+      <td>
+        Windows: `Ctrl` + `Scroll Up/Down`
+        <div />
+        macOS: `Control` + `Scroll Up/Down`
+        <div />
+        `Pinch` on trackpad
+      </td>
+    </tr>
+    <tr>
+      <td>Pan left and right in the Dope Sheet</td>
+      <td>
+        `Shift` + `Scroll Up/Down`
+        <div />
+        `Scroll Left/Right` on trackpad
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Keyframe Curve Editor Popover controls
+
+<table className="table-fixed">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Keyboard input</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Navigate preset selection</td>
+      <td>
+        <details>
+          <summary>`←`/`→`/`↑`/`↓` (arrow keys)</summary>
+          <div />
+          <Video src="/images/docs/0.5/manual/keyboard-controls/keyboard_nav_presets.mp4">
+            Keyboard navigating tween selection
+          </Video>
+        </details>
+      </td>
+    </tr>
+    <tr>
+      <td>Close popover *without* saving curve</td>
+      <td>`Escape`</td>
+    </tr>
+    <tr>
+      <td>Close popover and save curve</td>
+      <td>`Enter`</td>
+    </tr>
+  </tbody>
+</table>
+
+### Color Picker Prop Editor controls
+
+<table className="table-fixed">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Keyboard input</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Move the color picker pointer to adjust color</td>
+      <td>
+        <details>
+          <summary>`←`/`→`/`↑`/`↓` (arrow keys)</summary>
+          <div />
+          <Video src="/images/docs/0.5/manual/keyboard-controls/keyboard_nav_color_picker.mp4">Color picker</Video>
+        </details>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Learn more
+
+Want to learn more?
+Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+
+<ChildCards urlPath="/docs/0.5/manual" exclude={(n) => n.urlPath.includes('keyboard-shortcuts')} />

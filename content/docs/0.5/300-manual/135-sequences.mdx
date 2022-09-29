@@ -1,0 +1,154 @@
+---
+title: Working with Sequences
+nav_title: Sequences
+excerpt: >
+  In this guide, we'll explore the tools that Theatre.js offers for creating animations.
+---
+
+## Introduction
+
+In this guide, we'll explore the tools that Theatre.js offers for creating animations.
+We'll see how to add and delete keyframes, modify properties, edit the speed curves of the animations, and more.
+
+## Sequencing props
+
+Let's say you have a THREE.js `Directional Light` in your code, and you want to change its color property.
+
+```typescript
+// Directional light THREE.js object
+const directionalLight = new THREE.DirectionalLight('#ff0000')
+directionalLight.intensity = 30
+
+// Directional light Theatre.js object
+const directionalLightObj = sheet.object('Directional Light', {
+  intensity: types.number(
+    directionalLight.intensity, // initial value
+    { range: [0, 30] }, // options for prop number
+  ),
+})
+
+directionalLightObj.onValuesChange((values) => {
+  // update THREE.js object based on Theatre.js values
+  directionalLight.intensity = values.intensity
+})
+```
+
+The object would look like the following in the studio.
+
+<Screenshot
+  src="/images/docs/0.5/manual/sequences/01-directionalLight-properties.png"
+  alt="The intensity property of the Directional Light in the Details Panel"
+/>
+
+To animate the `intensity` property of the object above, right-click on its name in the [Details Panel](/docs/0.5/manual/Studio#details-panel), and select the "Sequence" option from the context menu.
+
+<Video src="/images/docs/0.5/manual/sequences/01-sequence-a-prop.mp4">Sequence the "intensity" prop</Video>
+
+In the [prop types guide](/docs/0.5/manual/prop-types), we mentioned the difference between simple props (like `string` or `number`) and compound props (a group of named props).
+The props within compound props can be sequenced all at once by right-clicking on the name of the compound prop and selecting the "Sequence all" option in the context menu.
+
+<Video src="/images/docs/0.5/manual/sequences/02-sequence-compound-props.mp4">Sequence the rotation prop</Video>
+
+You can use the "Make static"/"Make all static" menu items from the same context menus for removing the prop from the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor).
+Note that this will also remove all the keyframes that belong to that prop, and thus all the animation.
+
+<Video src="/images/docs/0.5/manual/sequences/03-make-props-static.mp4">Make props static</Video>
+
+## Adding/removing keyframes
+
+Now that we have the props in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor), we can finally animate them by inserting keyframes into the timeline.
+
+<Video src="/images/docs/0.5/manual/sequences/04-adding-keyframes.mp4">Adding keyframes</Video>
+
+Removing keyframes is as easy as right-clicking on them and selecting the "Delete" option from the context menu.
+
+<Video src="/images/docs/0.5/manual/sequences/05-removing-keyframes.mp4">Removing keyframes</Video>
+
+## Editing keyframe values in the inline editor
+
+An easy and quick way to edit the value of a keyframe is to left-click on the keyframe in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor) and modify its value in the inline editor popup.
+This works for all the prop types.
+
+<Video src="/images/docs/0.5/manual/sequences/14-inline-editor.mp4">Inline editor</Video>
+
+## Aggregate keyframes
+
+Aggregate keyframes are automatically created for compound props and objects to make it easier to edit the child keyframes that have the same position.
+This explanation is a bit hard to parse at first, so let's look at an example:
+
+<Video src="/images/docs/0.5/manual/sequences/08-create-aggregate-keyframes.mp4">Create aggregate keyframes</Video>
+
+At the start of the video above, we added a keyframe for the "wireframe" property, which meant that a new keyframe had to be created by Theatre.js in the track of the "Torus Knot" object.
+When we moved that keyframe, the keyframe in the "wireframe" track was moving too.
+In this case, the wireframe's track keyframe was a child of the keyframe in the "Torus Knot" track.
+When a connector (the line connecting two keyframes in the same track) of two aggregate keyframes is moved, it also moves the connectors of the child keyframes.
+
+Aggregate keyframes can also be deleted (or copied/pasted) which results in the deletion of all the child keyframes.
+
+<Video src="/images/docs/0.5/manual/sequences/09-delete-aggregate-keyframes.mp4">Delete aggregate keyframes</Video>
+
+## Copying/pasting keyframes
+
+To copy a keyframe simply right-click on it and select the "Copy" option from the context menu.
+After that, you can move the playhead to the position where you want the pasted keyframe to be and right-click on an empty part of a track to paste the keyframe into that track.
+
+<Video src="/images/docs/0.5/manual/sequences/10-copy-paste-keyframes.mp4">Copy paste keyframes</Video>
+
+## Focus range
+
+The Focus Range is a very useful feature if you want to focus on editing a small section of the sequence.
+Create a focus range on the selected section of the sequence by holding down the `Shift` key and dragging the cursor from the start of the section to the end in the top bar of the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor).
+
+<Video src="/images/docs/0.5/manual/sequences/06-create-a-focus-range.mp4">Create a focus range</Video>
+
+By default, the playback will play within the focus range on repeat if you start it from within the focus range, but you can disable the focus range temporarily (and enable it later), or even delete it.
+Note that if you create a new focus range, the old one will automatically get deleted.
+
+<Video src="/images/docs/0.5/manual/sequences/07-delete-a-focus-range.mp4">Delete a focus range</Video>
+
+## Using the tween editor
+
+The tween editor can be used to apply timing functions that control the speed curve of the transition between the two keyframes.
+These are very similar to the [`transition-timing-functions`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) in CSS.
+
+You just have to click on the connector of the two keyframes and the _Tween editor_ menu will appear.
+You can fuzzy-search for the function's name (like "linear" or "quad-in-out"), or even define your custom [cubic Bezier curve](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function#cubic-bezierp1_p2_p3_p4).
+
+<Video src="/images/docs/0.5/manual/sequences/11-tween-editor.mp4">The tween editor</Video>
+
+## Using the multi-track editor
+
+The multi-track curve editor comes in handy when you want to edit the speed curve of one or more tracks by hand.
+To activate it you just have to click the icon next to the name of the track in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor).
+This will open up the multi-track curve editor with the speed curves in it that you can edit by moving their handles.
+The curves have the same color as the icon of the track they belong to.
+
+<Video src="/images/docs/0.5/manual/sequences/12-multi-track-editor.mp4">The multi-track curve editor</Video>
+
+## Selections
+
+Selections can be made in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor) by holding down `Shift` and dragging the mouse to create a selection rectangle area.
+Selected keyframes can be moved or deleted together.
+
+<Video src="/images/docs/0.5/manual/sequences/13-selections.mp4">Selections</Video>
+
+## Playback control
+
+Play and pause with `Space` while the Studio is focused.
+
+## Programmatic control
+
+You can do a lot more when interacting with the `sheet.sequence` directly in our code which you can learn more about in [the Sequence API Reference](/docs/0.5/api/core#sequence).
+
+- [Sequence.play](/docs/0.5/api/core#sequence.play-fn): play at a position, with repeats, in direction, etc
+- [Sequence.pause](/docs/0.5/api/core#sequence.pause-fn): pausing a sequence
+- [Sequence.position](/docs/0.5/api/core#sequence.position-api): getting the position of the playhead
+- [Sequence.pointer](/docs/0.5/api/core#sequence.pointer-api): watching additional data as it changes
+- [Sequence.attachAudio](/docs/0.5/api/core#sequence.attachAudio-fn): directly attaching audio to play with the sequence
+
+## Learn more
+
+Want to learn more?
+Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+
+<ChildCards urlPath="/docs/0.5/manual" exclude={(n) => n.urlPath.includes('sequences')} />

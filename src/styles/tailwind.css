@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .word-spacing-body {
+    word-spacing: -0.02rem;
+  }
+}

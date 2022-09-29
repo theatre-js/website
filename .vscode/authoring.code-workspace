@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "path": "../content"
+    },
+    {
+      "path": "../public/images"
+    },
+    {
+      "name": "docs-site",
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": false,
+      "source.fixAll": false,
+      "source.addMissingImports": false
+    },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/node_modules/typescript": true,
+      "content/*": true,
+      "public/images/*": true
+    }
+  }
+}

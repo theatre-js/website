@@ -1,0 +1,225 @@
+---
+title: Theatre.js v0.5 is out!
+title_formatted: Theatre.js v0.5 is out!
+category: Product Updates
+cover_image:
+  url: /images/blog/theatre-v05-is-out/v05-cover.png
+  alt: Announcing Theatre.js v0.5
+  width: 2820
+  height: 1200
+excerpt: Theatre.js 0.5 introduces 3D scene editing, complex keyframing, and a new extension API
+date: 2022-09-15
+authors:
+  - name: Aria Minaei
+    handle: ariaminaei
+    avatar: https://pbs.twimg.com/profile_images/1367137683/aria_400x400.jpg
+
+seo:
+  imagePath: /images/blog/theatre-v05-is-out/v05-social.png
+---
+
+Friends, **Theatre.js v0.5** is finally out! It comes with a brand new 3D editor and a new set of tools for animating complex scenes.
+
+> If you're new here: Theatre.js is a hackable animation library with visual tools. Learn more [here](https://twitter.com/ariaminaei/status/1439918117807853575).
+
+Now let's talk about what's new!
+
+## A hackable 3D editor
+
+We've been building a 3D editor for existing React Three Fiber projects.
+It's an extension of Theatre.js.
+We call it `@theatre/r3f`.
+
+You can use it by wrapping your React Three Fiber JSX tree with a `<SheetProvider>`:
+
+```jsx Scene.jsx
+// focus
+import { SheetProvider } from '@theatre/r3f'
+
+export default function Scene() {
+  return (
+    <Canvas camera={{ position: [5, 5, -5] }}>
+      // focus
+      <SheetProvider sheet={demoSheet}>
+        <pointLight position={[10, 10, 10]} />
+        <mesh>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="orange" />
+        </mesh>
+        // focus
+      </SheetProvider>
+    </Canvas>
+  )
+}
+```
+
+And prepend your editable objects with `editable.`:
+
+```jsx Scene.jsx
+// focus[24:32]
+import { SheetProvider, editable } from '@theatre/r3f'
+
+export default function Scene() {
+  return (
+    <Canvas camera={{ position: [5, 5, -5] }}>
+      <SheetProvider sheet={demoSheet}>
+        // focus[10:18]
+        <editable.pointLight
+          theatreKey="Lighting / Primary Source"
+          position={[10, 10, 10]} />
+        // focus[10:18]
+        <editable.mesh theatreKey"The Box"">
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="orange" />
+        // focus[11:19]
+        </editable.mesh>
+      </SheetProvider>
+    </Canvas>
+  )
+}
+
+```
+
+Now switch to the browser, and voila!
+We have a 3D editor driven by your React Three Fiber code!
+
+<Video src="/images/blog/theatre-v05-is-out/voila.mp4">
+  Video showing a three dimensional scene with objects being moved around.
+</Video>
+
+All your editable objects are selectable, so you can move them around and change their props.
+Standard THREE.js objects have default bindings, so for example, lights get an `intensity` prop and fogs have `near` and `far` planes:
+
+<Video src="/images/blog/theatre-v05-is-out/fog.mp4">
+  Video showing a steampunk-inspired setting with objects in the background fading in and out as the fog's far plane
+  moves closer and farther away.
+</Video>
+
+And you can extend the defaults with custom props:
+
+```jsx Lighting.jsx
+export default function Lighting() {
+  return (
+    <e.ambientLight
+      theatreKey="Lighting / Base"
+      // focus(1:4)
+      additionalProps={{
+        secondaryColor: types.rgba(),
+        bloomContribution: 3.4,
+      }}
+    />
+  )
+}
+```
+
+There are two ways to edit your 3D object's props: directly manipulate them in the 3D editor or tweak and fine-tune them in the
+prop editor.
+
+<Video src="/images/blog/theatre-v05-is-out/butterfly-preview.mp4">
+  Video showing a 3D scene with a flying butterfly whose position/rotation is being controlled by a set of keyframes in
+  a sequence editor.
+</Video>
+
+You can follow this [quick Theatre.js R3F tutorial](/docs/0.5/getting-started/with-react-three-fiber) to get started.
+
+<Callout type="info">
+  `@theatre/r3f` is just an extension. We have more extensions in the works, and you can also roll your own!
+</Callout>
+
+## New ways to animate
+
+When the original Theatre.js came out, it could only animate one track at a time and that track could only have numeric props.
+We were actually pretty embarrassed by how bare bones it was 😅
+
+Almost immediately, teams started using Theatre.js to drive game cinematics, audiovisual experiences, and interactive articles.
+Some of these projects have hundreds of keyframed tracks choreographed together.
+Animating such large scenes is doable but painful.
+So, for v0.5 we wanted to address some of the most painful of these pain points...
+
+For starters, we made all props types sequenceable. Booleans, switches, and even strings are animatable now; and you can customize their interpolation functions too.
+
+<Video className="md:w-1/2" src="/images/blog/theatre-v05-is-out/sequence-different-prop-types.mp4">
+  TODO
+</Video>
+
+Keyframe values can now be edited inline, saving you seconds on each edit.
+
+<Video src="/images/blog/theatre-v05-is-out/inline.mp4">TODO</Video>
+
+Theatre.js's multi-track editor is great for animating related values with fine-grained detail. The new tween editor adds to that by letting you control several tweens at once.
+
+<Video src="/images/blog/theatre-v05-is-out/tween-editor-1.mp4">TODO</Video>
+
+Plus it comes with presets for the most common easing curves (thank you, Michael Anthony!)
+
+<Video src="/images/blog/theatre-v05-is-out/tween-editor-presets.mp4">TODO</Video>
+
+And the fuzzy-matched search saves you a few seconds if you know the name of the preset you're looking for.
+
+<Video src="/images/blog/theatre-v05-is-out/tween-editor-fuzzy.mp4">TODO</Video>
+
+You can now drag keyframes in tracks that have child tracks to drag all the child track keyframes at once.
+
+<Video src="/images/blog/theatre-v05-is-out/aggregate-keyframes.mp4">TODO</Video>
+
+Sync things even more with sequence-wide markers.
+
+<Video src="/images/blog/theatre-v05-is-out/markers.mp4">TODO</Video>
+
+If you have a long animation, you may want to focus playback on a short range of the sequence while you get it right.
+The new focus range makes that easy.
+
+<Video src="/images/blog/theatre-v05-is-out/focus-range.mp4">TODO</Video>
+
+As is always the case with the sequence editor, _everything_ snaps!
+
+<Video src="/images/blog/theatre-v05-is-out/everything-snaps.mp4">TODO</Video>
+
+Multi-track selections and copy/paste are here.
+
+<Video src="/images/blog/theatre-v05-is-out/selections-copy.mp4">TODO</Video>
+
+Oh, and we added a color prop, with a twist!
+It interpolates colors in the [Oklab color space](https://raphlinus.github.io/color/2021/01/18/oklab-critique.html).
+So, you don't have to make multi-point gradients to make your color transitions look natural:
+
+<Video src="/images/blog/theatre-v05-is-out/color-lab.mp4">TODO</Video>
+
+## The extension API
+
+You can now call the same extension API used by `@theatre/r3f` to build editing tools for _your_ stack; no matter if you use SVG, [D3.js](https://d3js.org/), or even a custom WebGL engine.
+Follow our [Authoring Extensions Guide](/docs/0.5/manual/authoring-extensions) to get started making your own extensions to the Theatre.js Studio.
+
+## And more
+
+This release comes with a bunch of DX/UX quality-of-life improvements, more tools for navigating larger projects, bug fixes for Windows, better compatibility with the rest of the JS ecosystem, new docs, and perf optimizations.
+Read more about all the changes on the [releases page](/docs/0.5/releases).
+
+## Thank you
+
+v0.5 was a big release with a lot of help from our contributors.
+We want to help everyone who helped implement features and fixes and gave us feedback.
+
+- [Mariusz Wnęk](https://twitter.com/mariuszwnek)
+- [Fülöp Kovácks](https://twitter.com/notacheetah)
+- [Cole Lawrence](https://twitter.com/refactorordie)
+- [Michael Anthony](https://github.com/michaeltheory)
+- [Don McCurdy](https://github.com/donmccurdy)
+- [Or Fleisher](https://github.com/juniorxsound)
+- [Tyler Sammy](https://twitter.com/RealSammyT)
+- [Thieb Delaporte-Richard](https://twitter.com/thieb_co)
+- [@coryg-looh](https://github.com/cory-glooh)
+- [Jørn Myrland](https://github.com/jmyrland)
+- [@RuiOrey](https://github.com/RuiOrey)
+- [Yuri Artiukh](https://github.com/akella)
+- [@PaleHazy](https://github.com/PaleHazy)
+- [Dan Voyce](https://github.com/danvoyce)
+- [Nikhil Saraf](https://github.com/nksaraf)
+- [Colin Duffy](https://twitter.com/tomorrowevening)
+- [Marcel Weissler](https://twitter.com/marcel_wiessler)
+- [@SteamOr](https://github.com/steam0r)
+
+If you are interested in helping improve Theatre.js, we invite you to [join the Theatre.js Discord](https://discord.gg/bm9f8F9Y9N) and look for the `#contributing` channel to get started helping with design, implementation, docs, or bug fixes.
+You can also `#help` others, write or record tutorials, create extensions, or just hang out with us on `#chat` 😉
+
+Til the next release!

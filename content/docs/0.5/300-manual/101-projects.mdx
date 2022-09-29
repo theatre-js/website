@@ -1,0 +1,70 @@
+---
+title: Projects
+excerpt: >
+  This guide covers creating projects, managing their states, saving and loading their states, and more.
+---
+
+## What is a Project in Theatre.js?
+
+All your work in Theatre.js is organized into Projects. Projects are a way to organize related work.
+
+Theatre.js allows you to save the state of projects and consume them in `@theatre/core`.
+We can create multiple Projects on a single web page, but often one project is sufficient for a whole website.
+
+## Creating projects
+
+You can create a project with the [getProject](/docs/0.5/api/core#getproject) function in `@theatre/core`.
+If a project with the given name already exists, it will return the existing project instead of creating a new one.
+
+```typescript
+import { getProject } from '@theatre/core'
+
+// This will create a project called "My Project"
+// or return it if it already exists:
+const project = getProject('My Project')
+```
+
+## State
+
+All the tweaks and animations that you create with Theatre.js are considered the project's state.
+`@theatre/core` uses the project state to run your tweaks and animations, and `@theatre/studio` is an editor for the project state.
+
+This state is stored as a JSON object in `localStorage` when the studio is open and can be exported as a JSON file.
+
+<Screenshot
+  src="/images/docs/0.5/manual/projects/01-state-in-localStorage.png"
+  alt="The state of the project in the local storage"
+/>
+
+To export the project, click on the name of the project in the [Outline Panel](/docs/0.5/manual/Studio#outline-panel) of the studio and then click on the "Export [Project's name]" button in the top right corner of the screen as seen below.
+
+<Video src="/images/docs/0.5/manual/projects/01-save-a-project.mp4">Saving a project's state</Video>
+
+You can load a project's state from a JSON file by passing the state down as an object in the configuration of [getProject](/docs/0.5/api/core#getproject):
+
+```typescript
+import { getProject } from '@theatre/core'
+import projectState from './state.json'
+
+// This will load the state from the `state.json` file
+const project = getProject('My Project', { state: projectState })
+```
+
+Currently, the configuration object of [getProject](/docs/0.5/api/core#getproject) consists only of the `state` property.
+
+When using Studio, loading a project happens asynchronously. You can wait for the project to load through [Project.ready](/docs/0.5/api/core#project.ready) and [Project.isReady](/docs/0.5/api/core#project.isready)
+
+```ts
+project.ready.then(() => console.log('Project loaded!'))
+```
+
+## API
+
+Learn more about related API at [Project API docs](/docs/0.5/api/core#project).
+
+## Learn more
+
+Want to learn more?
+Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+
+<ChildCards urlPath="/docs/0.5/manual" exclude={(n) => n.urlPath.includes('projects')} />

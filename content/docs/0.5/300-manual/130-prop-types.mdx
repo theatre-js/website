@@ -1,0 +1,227 @@
+---
+title: Prop types
+excerpt: >
+  Learn how to customize the props you want to animate with Theatre.js.
+  When creating a Sheet Object, we define the props that we want to animate on it.
+  Props can have different types which can be imported from "@theatre/core".
+---
+
+## What are props?
+
+When you want to animate something in Theatre.js, you first have to create a Sheet Object for it and then define the props that you want to animate on this object.
+The props can have different types, which can be imported via `import {types} from "@theatre/core"`.
+
+To understand Sheet Objects and their relationship with props, let's look at this scene from the project that we created in the [Getting started with THREE.js](/docs/0.5/getting-started/with-three-js) guide.
+
+```typescript
+/* ... */
+
+import { getProject, types } from '@theatre/core'
+
+/* ... */
+
+// Adding the THREE.js mesh object to THREE.js scene
+scene.add(mesh)
+
+// Creating a Theatre.js object for the mesh with the
+// properties we want to animate
+const torusKnotObj = sheet.object('Torus Knot', {
+  // Note that the rotation is in radians
+  // (full rotation: 2 * Math.PI)
+  // `mesh.rotation.x` is a number we're using as an initial value
+  rotation: types.compound({
+    x: types.number(mesh.rotation.x, { range: [-2, 2] }),
+    y: types.number(mesh.rotation.y, { range: [-2, 2] }),
+    z: types.number(mesh.rotation.z, { range: [-2, 2] }),
+  }),
+})
+```
+
+In this scene, the "Torus Knot" object (`torusKnotObj`) has a rotation prop that contains 3 other props: the rotation of the torus knot on the `x`, `y`, and `z` axes.
+
+<Video src="/images/docs/0.5/manual/prop-types/01-scene.mp4">
+  A TorusKnot object with animated props in Theatre.js
+</Video>
+
+On the left side of the screen, you will see the "Torus Knot" object in the outline menu.
+
+<Screenshot src="/images/docs/0.5/manual/prop-types/02.png" alt="The Torus Knot object in the outline menu" />
+
+On the right side of the screen, you will see the props of the "Torus Knot" object in the [Details Panel](/docs/0.5/manual/Studio#details-panel).
+By default, the props are static, meaning they are not animated.
+Once they are [sequenced](/docs/0.5/manual/sequences#sequencing-props), they will also be displayed in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor) at the bottom of the screen.
+
+<Screenshot
+  src="/images/docs/0.5/manual/prop-types/03.png"
+  alt="The properties of the Torus Knot object in the Details Panel"
+/>
+
+## Property types
+
+When you define a property you have to tell Theatre.js what kind of value it has.
+Studio will give you different tools to edit props based on their types (e.g. sliders for numeric values, color pickers for color values) and it will also handle the interpolation between keyframes differently under the hood (moving to `5` from `3` is different from moving from `#ff0000` to `#00ff00`).
+
+You can also customize the props when you create them by passing down an object containing the options.
+In the following example the `x` prop has a min value of -1 and a maximum of 1 in the UI.
+
+```typescript
+const torusKnotObj = sheet.object('Torus Knot', {
+  x: types.number(mesh.rotation.x, {range [-2, 1]})
+})
+```
+
+Let's go through the list of props that Theatre.js currently has.
+
+### types.number $fn
+
+<Video src="/images/docs/0.5/manual/prop-types/02-number-prop.mp4">The number prop</Video>
+
+The `number` prop holds a numeric value.
+See the examples below for more information about its usage.
+
+```typescript
+// shorthand:
+const obj = sheet.object('key', { x: 0 })
+
+// With options (equal to above)
+const obj = sheet.object('key', {
+  x: types.number(0),
+})
+
+// With a range (note that opts.range is just a visual guide, not a validation rule)
+const x = types.number(0, { range: [0, 10] }) // limited to 0 and 10
+
+// With custom nudging
+const x = types.number(0, { nudgeMultiplier: 0.1 }) // nudging will happen in 0.1 increments
+
+// With custom nudging function
+const x = types.number({
+  nudgeFn: (
+    // the mouse movement (in pixels)
+    deltaX: number,
+    // the movement as a fraction of the width of the number editor's input
+    deltaFraction: number,
+    // A multiplier that's usually 1, but might be another number if user wants to nudge slower/faster
+    magnitude: number,
+    // the configuration of the number
+    config: { nudgeMultiplier?: number; range?: [number, number] },
+  ): number => {
+    return deltaX * magnitude
+  },
+})
+```
+
+### types.compound $fn
+
+<Screenshot src="/images/docs/0.5/manual/prop-types/compound-prop.png" alt="The compound prop" />
+
+The `compound` prop is useful for grouping props.
+In the example below, we create a `rotation` group for the rotation of the `torusKnotObj` on the `x`, `y` and `z` axes.
+
+```typescript
+const torusKnotObj = sheet.object('Torus Knot', {
+  rotation: types.compound({
+    x: types.number(mesh.rotation.x, { range: [-2, 2] }),
+    y: types.number(mesh.rotation.y, { range: [-2, 2] }),
+    z: types.number(mesh.rotation.z, { range: [-2, 2] }),
+  }),
+})
+```
+
+### types.boolean $fn
+
+<Screenshot src="/images/docs/0.5/manual/prop-types/boolean-prop.png" alt="The boolean prop" />
+
+The `boolean` prop has a boolean value (like `true` or `false`).
+
+```typescript
+// shorthand:
+const obj = sheet.object('key', { isOn: true })
+
+// with a label:
+const obj = sheet.object('key', {
+  isOn: types.boolean(true, {
+    // override the label given in the Details Panel and DopeSheet
+    label: 'Enabled',
+  }),
+})
+```
+
+### types.string $fn
+
+<Screenshot src="/images/docs/0.5/manual/prop-types/string-prop.png" alt="The string prop" />
+
+The `string` prop type holds a string value.
+
+```typescript
+// shorthand:
+const obj = sheet.object('key', { message: 'Animation loading' })
+
+// with a label:
+const obj = sheet.object('key', {
+  message: types.string('Animation Loading', {
+    // override the label given in the Details Panel and DopeSheet
+    label: 'The Message',
+  }),
+})
+```
+
+### types.stringLiteral $fn
+
+<Video src="/images/docs/0.5/manual/prop-types/03-string-literal.mp4">The string literal prop</Video>
+
+The `stringLiteral` prop type is useful for building menus or radio buttons.
+
+```typescript
+// Basic usage
+const obj = sheet.object('key', {
+  light: types.stringLiteral(
+    'r',
+    // Specify labels for the specific values given in the Details Panel and Keyframe Editor
+    { r: 'Red', g: 'Green' },
+  ),
+})
+
+// Shown as a radio switch with a custom label
+const obj = sheet.object(
+  'key',
+  {
+    light: types.stringLiteral('r', { r: 'Red', g: 'Green' }),
+  },
+  // Optionally pass in prop options
+  { as: 'switch', label: 'Street Light' },
+)
+```
+
+### types.rgba $fn
+
+<Video src="/images/docs/0.5/manual/prop-types/04-color-prop.mp4">The rgba (color) prop</Video>
+
+The `rgba` type holds a color value.
+In the editor UI, it supports all the [syntax variants of `<hex-color>`](https://developer.mozilla.org/en-US/docs/Web/CSS/hex-color#syntax}):
+
+```
+#RGB        // The three-value syntax
+#RGBA       // The four-value syntax
+#RRGGBB     // The six-value syntax
+#RRGGBBAA   // The eight-value syntax
+```
+
+```typescript
+const obj = sheet.object('key', {
+  color: types.rgba({ r: 255, g: 0, b: 0, a: 1 }),
+})
+```
+
+## Playground
+
+You can play with the available prop types here:<br/>[https://theatre-playground.vercel.app/shared/dom](https://theatre-playground.vercel.app/shared/dom).
+
+## Learn more
+
+Look at [Prop Types in the API Reference](/docs/0.5/api/core#prop-types) for a closer look at the code.
+
+Want to learn more?
+Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+
+<ChildCards urlPath="/docs/0.5/manual" exclude={(n) => n.urlPath.includes('prop-types')} />

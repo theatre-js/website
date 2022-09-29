@@ -1,0 +1,333 @@
+---
+title: With HTML/SVG
+excerpt: >
+  How to get started animating HTML elements directly with Theatre.js.
+  This tutorial doesn't require any knowledge beyond HTML + JavaScript.
+---
+
+export const htmlFileNameString = 'animation-tutorial.html'
+export const htmlFileNameJSX = <code>{htmlFileNameString}</code>
+export const htmlFilePreview = (children) => (
+  <details>
+    <summary>Preview {htmlFileNameJSX}</summary>
+    {children}
+  </details>
+)
+
+<Callout className="mt-0" type="info">
+  This guide just assumes you have familiarity with HTML and JavaScript. No package management or bundling is involved.
+</Callout>
+
+In this tutorial, we will:
+
+1.  Show the Theatre.js Studio UI on a simple HTML page
+2.  Create a new Theatre.js Project which will control JavaScript values on the page
+3.  Use Theatre.js to animate UI elements on our page
+4.  Create a production (publishable) version of our Project we can share with users, collaborators, or friends
+
+## Prerequisites
+
+Let's start by creating a basic HTML file called {htmlFileNameJSX}.
+Below is a starter HTML file.
+It only contains the basic tags an HTML page should have, nothing Theatre.js specific yet.
+
+```html animation-tutorial.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theatre.js Tutorial</title>
+    <style>
+      body {
+        margin: 0;
+        color: white;
+        background: black;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="article-heading" style="text-align: center">Welcome</h1>
+
+    <script type="module">
+      // mark
+      // Add JavaScript here
+    </script>
+  </body>
+</html>
+```
+
+If we've saved the above HTML in a file called {htmlFileNameJSX} and open that file in our browser,
+it results in a Welcome page that looks like the following:
+
+<TheatreTutorialCodePreview filename={htmlFileNameString} />
+
+## Add Theatre.js Studio
+
+To add functionality to our static HTML page, we should first set up our Theatre.js **Project**.
+Let's add the following JS into the `<script>` towards the bottom of the HTML where it says `// Add JavaScript here`:
+
+```javascript
+import 'https://cdn.jsdelivr.net/npm/@theatre/browser-bundles@0.5.0-insiders.88df1ef/dist/core-and-studio.js'
+// We can now access Theatre.core and Theatre.studio from here
+const { core, studio } = Theatre
+
+studio.initialize() // Start the Theatre.js UI
+```
+
+Now when we open / refresh the Welcome page in our browser, we should see the Theatre.js Studio on top of the HTML Welcome page.
+There's an "Outline Menu" button in the top left of the page and a "..." menu and "Property Editor" button in the top right:
+
+<TheatreTutorialCodePreview filename={htmlFileNameString} />
+
+<Callout type="info">
+  In this tutorial, we use the `@theatre/browser-bundles` package imported via a CDN to make it easier to get started!
+  There are other ways of importing Theatre.js using a bundler like WebPack or ESBuild.
+</Callout>
+
+Now that we've gotten the Studio to appear, let's create a Theatre.js Project called 'HTML Animation Tutorial' containing a
+Sheet called 'Sheet 1' and an Object called 'Heading 1' with props "y" and "opacity":
+
+```javascript
+const project = core.getProject('HTML Animation Tutorial')
+const sheet = project.sheet('Sheet 1')
+const obj = sheet.object('Heading 1', {
+  y: 0, // you can use just a simple default value
+  opacity: core.types.number(1, { range: [0, 1] }), // or use a type constructor to customize
+})
+```
+
+Now we should see `HTML Animation Tutorial > Sheet 1: Default > Heading 1` under the
+"Outline Menu" button in the top left of our page.
+
+<TheatreTutorialCodePreview filename={htmlFileNameString} />
+
+We've just configured our Theatre.js Project structure, but if we try to change any values
+in the [Details Panel](/docs/0.5/manual/Studio#details-panel) on the right, they will not yet change any part of the original HTML Welcome page.
+
+Next, let's ensure the values in Theatre.js are applied to our page's elements.
+We can call the [Object.onValuesChange](/docs/0.5/api/core#object.onvalueschange) method on `obj` to listen to the value changes on our Object.
+
+```javascript
+const articleHeadingElement = document.getElementById('article-heading')
+
+obj.onValuesChange((obj) => {
+  articleHeadingElement.style.transform = `translateY(${obj.y}px)`
+  articleHeadingElement.style.opacity = obj.opacity
+})
+```
+
+Now that our code synchronizes Theatre.js with the `articleHeadingElement`'s style,
+try dragging or clicking on the number beside "y" or "opacity" in the [Details Panel](/docs/0.5/manual/Studio#details-panel)
+on the right in the preview below.
+
+<TheatreTutorialCodePreview filename={htmlFileNameString} />
+
+The "Welcome" element you see moving around and fading in and out should behave like in
+the video below.
+
+<Video src="/images/docs/0.5/getting-started/with-html-svg/welcome-studio-ui.mp4">Studio UI</Video>
+
+## Sequencing Properties to create an animation
+
+Now that we have set up our Project, let's go ahead and use the Studio to create an animation.
+In Theatre.js, an animation consists of a set of "Sequenced" props with "Keyframes".
+
+First, let's try Sequencing the "y" prop and adding keyframes to it.
+Check the video below to see how we can sequence a prop.
+
+<Video src="/images/docs/0.5/getting-started/with-html-svg/welcome-sequencing.mp4">Sequencing</Video>
+
+Now that we've sequenced a prop and added keyframes, we can play back the resulting animation in our browser.
+But the animation is, so far, only stored in your browser's local data (in `localStorage`).
+To share the animation with others (or include it on a website), we have to export the animation state and initialize our Theatre.js project with it.
+We'll look at that in the next section.
+
+## Getting ready for production
+
+Now that we've created a basic animation locally, we want to share it with the world!
+So, here's a checklist for what we need to do to share our animation / include it on a webpage.
+
+Production (published webpage) animation checklist:
+
+1.  Export the Project's `state.json` by clicking the Project ("HTML Animation Tutorial") in the outline panel on the left and then click the "Export HTML Animation Tutorial to JSON" in the panel on the right. A file download for `state.json` should start in your browser.
+2.  Open `state.json` in a text editor and copy its contents into your JavaScript code as a value stored in a `projectState` variable (if you use a bundler, it's possible to import the `state.json` file directly).
+3.  In the part of the code where you created the Theatre.js Project, modify it to include your animation state like so:
+    ```javascript
+    const project = core.getProject('HTML Animation Tutorial', {
+      state: projectState,
+    })
+    ```
+4.  Remove Studio imports
+
+    a. for simple projects using `@theatre/browser-bundles`, remove the `core-and-studio.js` part of the import URL, and replace it with `core-only.min.js`.
+
+    b. for projects directly importing from `@theatre/studio` (using a bundler), don't import Studio for your production builds.
+
+5.  Remove all `Theatre.studio.initialize()` calls so that the animation shows, but the Studio UI does not.
+6.  Add some code that plays the animation! Here's some code that plays 6 seconds of the animation and loops it as soon as it has loaded:
+    ```javascript
+    project.ready.then(() => {
+      sheet.sequence.play({ iterationCount: Infinity, range: [0, 6] })
+    })
+    ```
+
+The following shows our _production_ HTML version of {htmlFileNameJSX} which applies the above and uses a project JSON state the author designed while writing this tutorial.
+
+```html production-animation-tutorial.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theatre.js Tutorial</title>
+    <style>
+      body {
+        margin: 0;
+        color: white;
+        background: black;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="article-heading" style="text-align: center">Welcome</h1>
+
+    <script type="module">
+      // only import core
+      import 'https://cdn.jsdelivr.net/npm/@theatre/browser-bundles@0.5.0-insiders.88df1ef/dist/core-only.min.js'
+      // We can now access just Theatre.core from here
+
+      const articleHeadingElement = document.getElementById('article-heading')
+
+      // Exported by clicking the project name and "Export Project Name to JSON" button.
+      const projectState = {
+        sheetsById: {
+          'Sheet 1': {
+            staticOverrides: {
+              byObject: {
+                'Heading 1': {
+                  opacity: 0.9936708860759493,
+                },
+              },
+            },
+            sequence: {
+              subUnitsPerUnit: 30,
+              length: 10,
+              type: 'PositionalSequence',
+              tracksByObject: {
+                'Heading 1': {
+                  trackData: {
+                    LrJ3eujCAE: {
+                      type: 'BasicKeyframedTrack',
+                      keyframes: [
+                        {
+                          id: 'i-s2GT5JFm',
+                          position: 0,
+                          connectedRight: true,
+                          handles: [0.5, 1, 0.882, 0],
+                          value: 0,
+                        },
+                        {
+                          id: 'I3Suv35jmV',
+                          position: 3.433,
+                          connectedRight: true,
+                          handles: [0.055, 0.969, 0.82, -0.031],
+                          value: 96,
+                        },
+                        {
+                          id: 'M_00uVAeuK',
+                          position: 5.6,
+                          connectedRight: true,
+                          handles: [0.087, 1.01, 0.5, 0],
+                          value: 0,
+                        },
+                      ],
+                    },
+                    '9JzZUrUSb7': {
+                      type: 'BasicKeyframedTrack',
+                      __debugName: 'Heading 1:["opacity"]',
+                      keyframes: [
+                        {
+                          id: 'EfAPcjrYAy',
+                          position: 0,
+                          connectedRight: true,
+                          handles: [0.5, 1, 0.5, 0],
+                          value: 0.9936708860759493,
+                        },
+                        {
+                          id: 'hZ-tUkMP4C',
+                          position: 2.367,
+                          connectedRight: true,
+                          handles: [0.5, 1, 0.5, 0],
+                          value: 0,
+                        },
+                        {
+                          id: 'D5PA_XGfS6',
+                          position: 5.6,
+                          connectedRight: true,
+                          handles: [0.5, 1, 0.5, 0],
+                          value: 0.9936708860759493,
+                        },
+                      ],
+                    },
+                  },
+                  trackIdByPropPath: {
+                    '["y"]': 'LrJ3eujCAE',
+                    '["opacity"]': '9JzZUrUSb7',
+                  },
+                },
+              },
+            },
+          },
+        },
+        definitionVersion: '0.4.0',
+        revisionHistory: ['vLg01lxRrpP8eGsS'],
+      }
+
+      const { core } = Theatre
+
+      // We don't need studio in production
+      // studio.initialize()
+
+      const project = core.getProject('HTML Animation Tutorial', {
+        state: projectState,
+      })
+
+      const sheet = project.sheet('Sheet 1')
+      const obj = sheet.object('Heading 1', {
+        y: 0,
+        opacity: core.types.number(1, { range: [0, 1] }),
+      })
+
+      // animations
+      obj.onValuesChange((obj) => {
+        articleHeadingElement.style.transform = `translateY(${obj.y}px)`
+        articleHeadingElement.style.opacity = obj.opacity
+      })
+
+      // wait for project to be ready
+      project.ready.then(() => {
+        sheet.sequence.play({ iterationCount: Infinity, range: [0, 6] })
+      })
+    </script>
+  </body>
+</html>
+```
+
+And here's the final product.
+
+<TheatreTutorialCodePreview filename={'production-' + htmlFileNameString} />
+
+## Next steps
+
+Want to learn more ways to use Theatre.js? Check out another getting started guide:
+
+<ChildCards urlPath="/docs/0.5/getting-started" exclude={(n) => n.urlPath.includes('with-html-svg')} />
+
+Also, take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+
+<ChildCards urlPath="/docs/0.5/manual" />
