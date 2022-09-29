@@ -51,7 +51,7 @@ const GetStarted = () => (
       Get started with Theatre.js
     </a>
 
-    <div className="pointer-events-none absolute inset-0 flex items-center overflow-hidden blur-lg transition-transform duration-500 group-hover:scale-110">
+    <div className="pointer-events-none absolute inset-0 flex items-center overflow-hidden blur-lg transition-transform duration-500 group-hover:scale-110 will-change-transform">
       <div className="aspect-square w-full scale-110">
         <div className="h-full w-full bg-gradient-to-tr from-amber-600 to-teal-600 group-hover:animate-spin-slow" />
       </div>
