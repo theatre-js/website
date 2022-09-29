@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 import { Doc } from 'contentlayer/generated'
 
 const githubBranch = 'main'
-const githubBaseUrl = `https://github.com/theatre-js/website-temp/blob/${githubBranch}/content/`
+const githubBaseUrl = `https://github.com/theatre-js/website/blob/${githubBranch}/content/`
 
 export const DocsFooter: FC<{ doc: Doc }> = ({ doc }) => {
   return (
