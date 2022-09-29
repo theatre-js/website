@@ -4,3 +4,15 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "https://theaterjs.com/*"
+  to = "https://www.theatrejs.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.theaterjs.com/*"
+  to = "https://www.theatrejs.com/:splat"
+  status = 301
+  force = true
