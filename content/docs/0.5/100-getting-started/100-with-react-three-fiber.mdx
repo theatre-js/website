@@ -297,7 +297,7 @@ Here, we are going to instruct Theatre.js to play the animation forever and in t
 ```tsx
 const App = () => {
   useEffect(() => {
-    demoSheet.sequence.play({ iterationCount: Infinity, range: [0, 1] })
+    demoSheet.project.ready.then(() => demoSheet.sequence.play({ iterationCount: Infinity, range: [0, 1] }))
   }, [])
 
   return (
@@ -335,7 +335,7 @@ const demoSheet = getProject('Demo Project', { state: demoProjectState }).sheet(
 
 const App = () => {
   useEffect(() => {
-    demoSheet.sequence.play({ iterationCount: Infinity, range: [0, 1] })
+    demoSheet.project.ready.then(() => demoSheet.sequence.play({ iterationCount: Infinity, range: [0, 1] }))
   }, [])
 
   return (
