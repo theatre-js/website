@@ -22,6 +22,9 @@ Once you're set up, navigate to the folder containing the project in your termin
 
 Run the commands below to install the dependencies we'll be using.
 
+Notice that we are also using `@react-three/drei`, a library that provides useful helpers for React Three Fiber.
+We will use it to add a custom camera that we can tweak with Theatre.js.
+
 ```bash
 # r3f and its dependencies
 npm install --save react three @react-three/fiber
@@ -38,7 +41,7 @@ npm install --save-dev @types/three
 
 ```bash
 # r3f and its deps
-yarn add react three @react-three/fiber
+yarn add react three @react-three/fiber @react-three/drei
 
 # Theatre.js
 yarn add @theatre/core@0.5 @theatre/studio@0.5 @theatre/r3f@0.5
@@ -65,6 +68,7 @@ import * as THREE from 'three'
 import { createRoot } from 'react-dom/client'
 import React, { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { PerspectiveCamera } from '@react-three/drei'
 import { getProject } from '@theatre/core'
 
 // our Theatre.js project sheet, we'll use this later
@@ -72,7 +76,8 @@ const demoSheet = getProject('Demo Project').sheet('Demo Sheet')
 
 const App = () => {
   return (
-    <Canvas camera={{ position: [5, 5, -5] }}>
+    <Canvas>
+      <PerspectiveCamera makeDefault position={[5, 5, -5]} fov={75} />
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <mesh>
@@ -169,6 +174,7 @@ Then, add a wrapping `<SheetProvider sheet={demoSheet}>` with reference to the `
 <Canvas camera={{ position: [5, 5, -5] }}>
   {/* Provide sheet created earlier with `const demoSheet = getProject('Demo Project').sheet('Demo Sheet')` */}
   <SheetProvider sheet={demoSheet}>
+    <PerspectiveCamera makeDefault position={[5, 5, -5]} fov={75} />
     <ambientLight />
     <pointLight position={[10, 10, 10]} />
     <mesh>
@@ -200,6 +206,7 @@ The following code will make the point light object editable:
 ```tsx
 <Canvas camera={{ position: [5, 5, -5] }}>
   <SheetProvider sheet={getProject('Demo Project').sheet('Demo Sheet')}>
+    <PerspectiveCamera makeDefault position={[5, 5, -5]} fov={75} />
     <ambientLight />
     <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
     <mesh>
@@ -222,6 +229,7 @@ We can make the cube editable in the same way:
 ```tsx
 <Canvas camera={{ position: [5, 5, -5] }}>
   <SheetProvider sheet={getProject('Demo Project').sheet('Demo Sheet')}>
+    <PerspectiveCamera makeDefault position={[5, 5, -5]} fov={75} />
     <ambientLight />
     <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
     <e.mesh theatreKey="Cube">
@@ -231,6 +239,33 @@ We can make the cube editable in the same way:
   </SheetProvider>
 </Canvas>
 ```
+
+Making the camera editable is a little trickier. Since it is not an intrinsic element, but a component exposed by `@react-three/drei`, we can't use the `e.elementName` shortcut.
+We instead need to make an editable component out of it, which we can then use in our JSX.
+
+First, create an editable camera component from drei's PerspectiveCamera.
+
+```tsx
+const EditableCamera = e(PerspectiveCamera, 'perspectiveCamera')
+```
+
+Then replace the `<PerspectiveCamera />` element with `<EditableCamera />`.
+
+```tsx
+<Canvas camera={{ position: [5, 5, -5] }}>
+  <SheetProvider sheet={getProject('Demo Project').sheet('Demo Sheet')}>
+    <EditableCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
+    <ambientLight />
+    <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
+    <e.mesh theatreKey="Cube">
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="orange" />
+    </e.mesh>
+  </SheetProvider>
+</Canvas>
+```
+
+```tsx
 
 ## Animating objects
 
@@ -303,6 +338,7 @@ const App = () => {
   return (
     <Canvas camera={{ position: [5, 5, -5] }}>
       <SheetProvider sheet={demoSheet}>
+        <EditableCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
         <ambientLight />
         <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
         <e.mesh theatreKey="Cube">
@@ -341,6 +377,7 @@ const App = () => {
   return (
     <Canvas camera={{ position: [5, 5, -5] }}>
       <SheetProvider sheet={demoSheet}>
+        <EditableCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
         <ambientLight />
         <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
         <e.mesh theatreKey="Cube">
