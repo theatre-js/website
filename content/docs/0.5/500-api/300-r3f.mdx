@@ -25,7 +25,7 @@ These elements behave the same as the originals, but also show up in the Studio.
 
 While they take the same props as their r3f counterparts, there are a couple of Theatre.js-specific props.
 
-#### props.theatreKey
+#### props.theatreKey$api
 
 The element's [object's](/docs/0.5/api/core#object) name in Theatre.js.
 All editable elements **need** to have a `theatreKey` prop so that they can be connected to a backing-object.
@@ -34,7 +34,7 @@ All editable elements **need** to have a `theatreKey` prop so that they can be c
 <editable.group theatreKey="My group" />
 ```
 
-#### props.visible
+#### props.visible$api
 
 The `visible` prop is the same as for all r3f elements, however, while regular r3f elements can only take `true` or `false`, `editable` elements can take a third, `'editor'` option that signals to Theatre.js that we only want the object to be visible in the snapshot editor. This is helpful for helper objects that we don't want to be part of the final scene.
 
@@ -45,7 +45,7 @@ The `visible` prop is the same as for all r3f elements, however, while regular r
 </editable.mesh>
 ```
 
-#### props.additionalProps
+#### props.additionalProps$api
 
 Allows you to specify additional Theatre.js props under the backing-object of the element. These props won't have an immediate effect on the element, but you can observe them by subscribing to the element's backing-object directly through `objRef`.
 
@@ -60,7 +60,7 @@ Allows you to specify additional Theatre.js props under the backing-object of th
 />
 ```
 
-#### props.objRef
+#### props.objRef$api
 
 Exposes the element's backing-object directly.
 
@@ -72,7 +72,7 @@ const MyComponent: React.FC = () => {
 }
 ```
 
-#### props.editableType
+#### props.editableType$api
 
 This prop is only used when using `editable.primitive`, since primitive elements can represent any THREE.js object.
 The `editableType` prop tells Theatre.js what THREE.js object type to assume in this case.
@@ -103,7 +103,8 @@ The r3f extension needs to know what [sheet](/docs/0.5/api/core#sheet) to attach
 
 ```tsx
 <Canvas>
-  <SheetProvider getSheet={getProject('Playground - R3F').sheet('R3F-Canvas')}>
+  // focus
+  <SheetProvider sheet={getProject('Playground - R3F').sheet('R3F-Canvas')}>
     <ambientLight intensity={0.5} />
     <editable.spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} theatreKey="Spotlight" />
     <editable.pointLight theatreKey="PointLight" />
@@ -111,19 +112,34 @@ The r3f extension needs to know what [sheet](/docs/0.5/api/core#sheet) to attach
       <boxBufferGeometry />
       <meshStandardMaterial color="orange" />
     </editable.mesh>
+    // focus
   </SheetProvider>
 </Canvas>
 ```
 
-### props.sheet
-
-The sheet that the `SheetProvider` should provide.
-
-## useCurrentSheet $fn
+## useCurrentSheet$api()
 
 Hook to access the sheet of the nearest `SheetProvider`.
 
-## refreshSnapshot $fn
+```tsx
+// focus
+import { useCurrentSheet } from '@theatre/r3f'
+
+export default function Scene() {
+  // focus
+  const currentSheet = useCurrentSheet()
+  console.log(currentSheet)
+
+  return (
+    <editable.mesh theatreKey="Box">
+      <boxBufferGeometry />
+      <meshStandardMaterial color="orange" />
+    </editable.mesh>
+  )
+}
+```
+
+## refreshSnapshot$api()
 
 Utility to refresh the snapshot in the snapshot editor from code. Useful for example to refresh the snapshot editor when some assets have loaded that otherwise would not be visible.
 

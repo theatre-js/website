@@ -25,6 +25,24 @@ however if you need more control, you can specify the types [explicitly](/docs/0
 const myObject = sheet.object('My Object', { position: { x: 0, y: 0 } })
 ```
 
+## Reconfiguring existing objects $aw
+
+Objects can be reconfigured on the fly. For example, you can add a `rotation` prop to a live object without having to refresh the page.
+Simply call `sheet.object()` with `{reconfigure: true}` and the existing object will be reconfigured.
+
+```ts
+const obj = sheet.object('obj', { foo: 0 })
+console.log(object.value.foo) // prints 0
+// mark[46:66]
+const obj2 = sheet.object('obj', { bar: 0 }, { reconfigure: true })
+
+console.log(object.value.foo) // prints undefined, since we've removed this prop via reconfiguring the object
+
+console.log(object.value.bar) // prints 0, since we've introduced this prop by reconfiguring the object
+
+assert(obj === obj2) // passes, because reconfiguring the object returns the same object
+```
+
 ## Namespacing objects
 
 The key of the sheet object can be used to namespace objects.
