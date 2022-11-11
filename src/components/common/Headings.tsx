@@ -1,5 +1,5 @@
 import { sluggifyTitle, getNodeText } from 'src/utils/sluggify'
-import { ReactNode } from 'react'
+import { Fragment, ReactNode } from 'react'
 import { parseHeading } from 'src/utils/parseHeading'
 
 const headingClass = 'group cursor-pointer relative'
@@ -7,7 +7,11 @@ const spanClass = 'absolute -left-8 hidden text-gray-400 dark:text-gray-600 lg:g
 
 const transformHeading = (text: ReactNode) => {
   if (typeof text !== 'string') {
-    return text
+    if (Array.isArray(text)) {
+      return text.map((t, i) => <Fragment key={'k' + i}>{transformHeading(t)}</Fragment>)
+    } else {
+      return text
+    }
   }
 
   const heading = parseHeading(text)
@@ -32,7 +36,7 @@ export const H2: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
     <h2
       id={slug}
       onClick={() => (window.location.hash = `#${slug}`)}
-      className={`${headingClass} mt-12 text-h2-mobile md:text-h2-desktop`}
+      className={`${headingClass} mt-12 flex items-center text-h2-mobile md:text-h2-desktop`}
     >
       <span className={spanClass}>#</span>
       {heading}

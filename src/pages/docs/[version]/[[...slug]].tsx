@@ -135,6 +135,34 @@ function LinkToSource(props: { links: SourceLink[] }) {
   )
 }
 
+const Since = ({ version }: { version: string }) => {
+  return (
+    <span
+      //  yup, tailwind was a mistake...
+      style={{
+        // @ts-ignore
+        'font-family': 'Inter',
+        'font-style': 'normal',
+        'font-weight': '600',
+        'font-size': '12px',
+        'line-height': '15px',
+        'text-align': 'center',
+        'text-transform': 'uppercase',
+        padding: '4px 8px',
+        background: '#082D22',
+        'border-radius': '3px',
+        'letter-spacing': '0',
+        color: 'rgba(0, 215, 189, 0.56)',
+        'margin-left': '1em',
+        position: 'relative',
+        // top: '-1px',
+      }}
+    >
+      Since {version}
+    </span>
+  )
+}
+
 const mdxComponents = {
   ApiTag,
   Callout,
@@ -154,6 +182,7 @@ const mdxComponents = {
   Screenshot,
   TheatreTutorialCodePreview,
   Video,
+  Since,
 }
 
 /** Components which depend on environment values */

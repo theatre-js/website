@@ -19,7 +19,12 @@ type Heading = {
 
 export function parseHeading(text: string): Heading {
   const args: string[] = text.match(/\$[a-z]*/g) ?? []
-  const cleanText = text.replaceAll(/\$[a-z]*/g, '').trim()
+  const cleanText = text
+    // remove everything after "$api"
+    .replaceAll(/\$[a-zA-Z]*/g, '')
+    // remove everything after "<tag"
+    .replaceAll(/\<.*$/g, '')
+    .trim()
 
   const isApi = args.includes('$api')
 

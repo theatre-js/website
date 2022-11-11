@@ -92,6 +92,14 @@ const myObject = sheet.object('My Object', { position: { x: 0, y: 0 } })
 console.log(myObject.value.position)
 ```
 
+Objects can also be reconfigured on the fly. Learn more [here](/docs/latest/manual/objects#reconfiguring-existing-objects).
+
+### sheet.detatchObject$api(key) <Since version="0.5.1" />
+
+Detaches a previously created child object from the sheet.
+
+If you call `sheet.object(key)` again with the same `key`, the values of the object's props WILL NOT be reset to their initial values.
+
 ### sheet.sequence $api
 
 The [Sequence](#sequence) of this sheet. Sequences are JS objects that hold animation data such as Keyframes and current position.
