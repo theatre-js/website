@@ -158,8 +158,6 @@ const mdxComponents = {
 
 /** Components which depend on environment values */
 const injectedComponents = (tree: TreeNode[], router: NextRouter) => {
-  // TODO: remove the logs if they are not necessary
-  // console.error(tree.map((x) => x.urlPath))
   return {
     ChildCards(props: {
       urlPath: string
@@ -225,7 +223,7 @@ const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ doc, tree, b
           </div>
           <div
             style={{ maxHeight: 'calc(100vh - 128px)' }}
-            className="sticky top-40 hidden w-80 shrink-0 overflow-y-scroll py-8 pl-10 pr-8 xl:block"
+            className="sticky top-40 hidden w-80 shrink-0 overflow-y-scroll py-16 pt-8 pl-10 pr-8 xl:block"
           >
             <PageNavigation headings={doc.headings} />
           </div>
