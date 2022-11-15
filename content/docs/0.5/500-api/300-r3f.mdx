@@ -4,50 +4,58 @@ nav_title: '@theatre/r3f'
 excerpt: '@theatre/r3f'
 ---
 
-This is a documentation page for the r3f extension that makes it easier to use Theatre.js with [React Three Fiber](https://www.npmjs.com/package/@react-three/fiber).
+This is a documentation page for the r3f extension that makes it easier to use Theatre.js
+with [React Three Fiber](https://www.npmjs.com/package/@react-three/fiber).
 Want to learn how to set up Theater.js with React Three Fiber?
 Head over to the [Getting Started with React Three Fiber](/docs/0.5/getting-started/with-react-three-fiber) page
 
 ## editable
 
-The `editable` object can be used either as [a React component](#editable-react-component) to create editable versions of r3f elements,
-or as [a function](#editable-fn) to create editable versions of React components that have an API that matches that of a supported React Three Fiber element.
+The `editable` object can be used either as [a React component](#editable-react-component) to create editable versions
+of r3f elements,
+or as [a function](#editable-fn) to create editable versions of React components that have an API that matches that of a
+supported React Three Fiber element.
 
 ### editable &ndash; as a React component
 
 You can create editable versions of React Three Fiber elements using properties on the `editable` object.
 
 ```tsx
-<editable.pointLight theatreKey="Key light" />
+<editable.pointLight theatreKey="Key light"/>
 ```
 
 These elements behave the same as the originals, but also show up in the Studio.
 
 While they take the same props as their r3f counterparts, there are a couple of Theatre.js-specific props.
 
-#### props.theatreKey
+#### props.theatreKey$api
 
 The element's [object's](/docs/0.5/api/core#object) name in Theatre.js.
 All editable elements **need** to have a `theatreKey` prop so that they can be connected to a backing-object.
 
 ```tsx
-<editable.group theatreKey="My group" />
+<editable.group theatreKey="My group"/>
 ```
 
-#### props.visible
+#### props.visible$api
 
-The `visible` prop is the same as for all r3f elements, however, while regular r3f elements can only take `true` or `false`, `editable` elements can take a third, `'editor'` option that signals to Theatre.js that we only want the object to be visible in the snapshot editor. This is helpful for helper objects that we don't want to be part of the final scene.
+The `visible` prop is the same as for all r3f elements, however, while regular r3f elements can only take `true`
+or `false`, `editable` elements can take a third, `'editor'` option that signals to Theatre.js that we only want the
+object to be visible in the snapshot editor. This is helpful for helper objects that we don't want to be part of the
+final scene.
 
 ```tsx
 <editable.mesh theatreKey="Marker" visible="editor">
-  <boxBufferGeometry />
-  <meshBasicMaterial color="yellow" />
+  <boxBufferGeometry/>
+  <meshBasicMaterial color="yellow"/>
 </editable.mesh>
 ```
 
-#### props.additionalProps
+#### props.additionalProps$api
 
-Allows you to specify additional Theatre.js props under the backing-object of the element. These props won't have an immediate effect on the element, but you can observe them by subscribing to the element's backing-object directly through `objRef`.
+Allows you to specify additional Theatre.js props under the backing-object of the element. These props won't have an
+immediate effect on the element, but you can observe them by subscribing to the element's backing-object directly
+through `objRef`.
 
 ```tsx
 <editable.group
@@ -60,7 +68,7 @@ Allows you to specify additional Theatre.js props under the backing-object of th
 />
 ```
 
-#### props.objRef
+#### props.objRef$api
 
 Exposes the element's backing-object directly.
 
@@ -68,26 +76,27 @@ Exposes the element's backing-object directly.
 const MyComponent: React.FC = () => {
   const objRef = useRef<ISheetObject>()
 
-  return <editable.group theatreKey="My group" objRef={objRef} />
+  return <editable.group theatreKey="My group" objRef={objRef}/>
 }
 ```
 
-#### props.editableType
+#### props.editableType$api
 
 This prop is only used when using `editable.primitive`, since primitive elements can represent any THREE.js object.
 The `editableType` prop tells Theatre.js what THREE.js object type to assume in this case.
 
 ```tsx
-<editable.primitive object={myMesh} theatreKey="My Mesh" editableType="mesh" />
+<editable.primitive object={myMesh} theatreKey="My Mesh" editableType="mesh"/>
 ```
 
 ### editable &ndash; as a function
 
-You can also use `editable` as a function to create editable versions of react components that have an API that matches that of a supported React Three Fiber element.
+You can also use `editable` as a function to create editable versions of react components that have an API that matches
+that of a supported React Three Fiber element.
 
 ```ts
-import { editable } from '@theatre/r3f'
-import { PerspectiveCamera } from '@react-three/drei'
+import {editable} from '@theatre/r3f'
+import {PerspectiveCamera} from '@react-three/drei'
 
 const EditableCamera = editable(PerspectiveCamera, 'perspectiveCamera')
 ```
@@ -95,63 +104,129 @@ const EditableCamera = editable(PerspectiveCamera, 'perspectiveCamera')
 ## SheetProvider
 
 All editable elements are backed by a Theatre.js [sheet object](/docs/0.5/api/core#object).
-The r3f extension needs to know what [sheet](/docs/0.5/api/core#sheet) to attach these objects to. The way it does this is through the `SheetProvider` React component.
+The r3f extension needs to know what [sheet](/docs/0.5/api/core#sheet) to attach these objects to. The way it does this
+is through the `SheetProvider` React component.
 `SheetPovider`s can be arbitrarily placed and nested, there are only two rules:
 
 1. All editable elements need to be a descendant of a `SheetProvider`.
-2. All editable elements need to have a unique `theatreKey` prop under their `SheetProvider`. `theatreKey`s across sheets don't need to be unique.
+2. All editable elements need to have a unique `theatreKey` prop under their `SheetProvider`. `theatreKey`s across
+   sheets don't need to be unique.
 
 ```tsx
 <Canvas>
-  <SheetProvider getSheet={getProject('Playground - R3F').sheet('R3F-Canvas')}>
-    <ambientLight intensity={0.5} />
-    <editable.spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} theatreKey="Spotlight" />
-    <editable.pointLight theatreKey="PointLight" />
+  // focus
+  <SheetProvider sheet={getProject('Playground - R3F').sheet('R3F-Canvas')}>
+    <ambientLight intensity={0.5}/>
+    <editable.spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} theatreKey="Spotlight"/>
+    <editable.pointLight theatreKey="PointLight"/>
     <editable.mesh theatreKey="Box">
-      <boxBufferGeometry />
-      <meshStandardMaterial color="orange" />
+      <boxBufferGeometry/>
+      <meshStandardMaterial color="orange"/>
     </editable.mesh>
+    // focus
   </SheetProvider>
 </Canvas>
 ```
 
-### props.sheet
-
-The sheet that the `SheetProvider` should provide.
-
-## useCurrentSheet $fn
+## useCurrentSheet$api()
 
 Hook to access the sheet of the nearest `SheetProvider`.
 
-## refreshSnapshot $fn
+```tsx
+// focus
+import {useCurrentSheet} from '@theatre/r3f'
 
-Utility to refresh the snapshot in the snapshot editor from code. Useful for example to refresh the snapshot editor when some assets have loaded that otherwise would not be visible.
+export default function Scene() {
+  // focus
+  const currentSheet = useCurrentSheet()
+  console.log(currentSheet)
+
+  return (
+    <editable.mesh theatreKey="Box">
+      <boxBufferGeometry/>
+      <meshStandardMaterial color="orange"/>
+    </editable.mesh>
+  )
+}
+```
+
+## refreshSnapshot$api()
+
+Utility to refresh the snapshot in the snapshot editor from code. Useful for example to refresh the snapshot editor when
+some assets have loaded that otherwise would not be visible.
 
 ```ts
-import { refreshSnapshot } from '@theatre/r3f'
+import {refreshSnapshot} from '@theatre/r3f'
 
 refreshSnapshot()
 ```
 
 ## RefreshSnapshot
 
-React component that refreshes the snapshot editor on mount. Useful when you use `Suspense` to wait for assets to load, and you want to refresh when the suspended components render.
+React component that refreshes the snapshot editor on mount. Useful when you use `Suspense` to wait for assets to load,
+and you want to refresh when the suspended components render.
 
 ```tsx
 <Suspense fallback={Fallback}>
-  <RefreshSnapshot />
-  <MyModel />
+  <RefreshSnapshot/>
+  <MyModel/>
 </Suspense>
+```
+
+## Cameras <Since version="0.5.1" />
+
+The r3f extension comes with counterparts to the regular Three.js `perspectiveCamera` and `orthographicCamera` objects,
+which expose the `makeDefault` prop for making them the default for rendering, and are editable in the snapshot editor.
+
+```tsx
+import { PerspectiveCamera } from '@theatre/r3f'
+
+const MyComponent = () => (
+  // ...
+  <PerspectiveCamera
+    theatreKey="Camera"
+    makeDefault
+    position={[0, 0, 16]}
+    fov={75}
+  />
+)
+```
+
+These cameras also expose a `lookAt` prop, which can be passed any Three.js object, or object ref, and it'll
+automatically update the camera to track that object, both live, and in the snapshot editor.
+
+```tsx
+const MyComponent = () => {
+  const ref = useRef<THREE.Object3D>()
+
+  return (
+    // ...
+    <>
+      <PerspectiveCamera
+        theatreKey="Camera"
+        makeDefault
+        position={[0, 0, 16]}
+        fov={75}
+        lookAt={ref}
+      />
+      <editable.mesh theatreKey="Target" ref={ref}>
+        <boxBufferGeometry/>
+        <meshStandardMaterial color="orange"/>
+      </editable.mesh>
+    </>
+  )
+}
 ```
 
 ## extension
 
 JS object used to register the extension with the Studio.
 
-Note, `extension` is not exported from `@theatre/r3f`! It is instead exported from `@theatre/r3f/dist/extension` in order to aid in excluding it and Studio from production code.
+Note, `extension` is not exported from `@theatre/r3f`! It is instead exported from `@theatre/r3f/dist/extension` in
+order to aid in excluding it and Studio from production code.
 
 ```ts
-import { extension } from '@theatre/r3f/dist/extension'
+import {extension} from '@theatre/r3f/dist/extension'
 import studio from '@theatre/studio'
 
 studio.extend(extension)

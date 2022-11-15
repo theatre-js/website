@@ -89,6 +89,7 @@ module.exports = {
         sans: ['Inter', ...sansSerifFallbacks, ...emojiFallbacks],
         serif: ['BaskervilleDisplayPT', 'ui-serif', 'serif', ...emojiFallbacks],
         mono: ['Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', 'monospace', ...emojiFallbacks],
+        displayMono: ['Inconsolata', 'Inter', ...sansSerifFallbacks, ...emojiFallbacks],
       },
       aspectRatio: {
         anamorphic: '2.35 / 1',

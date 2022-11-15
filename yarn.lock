@@ -33,9 +33,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@code-hike/mdx@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@code-hike/mdx@npm:0.7.0"
+"@code-hike/mdx@npm:^0.7.4":
+  version: 0.7.4
+  resolution: "@code-hike/mdx@npm:0.7.4"
   dependencies:
     hast-util-to-estree: ^1.4.0
     is-plain-obj: ^3.0.0
@@ -47,7 +47,7 @@ __metadata:
     unist-util-visit-parents: ^3.0.0
   peerDependencies:
     react: ^16.8.3 || ^17 || ^18
-  checksum: 16930271f31c3f63056ad525be5dd2b24b835c2134caa9f876148b6a319eaf739ddb45e47c9be66c91673bd1cfca641c5fcaa8f46fc32b1cdb54df757cec895e
+  checksum: 90805a07d56877d502d2034101206962d41d41ad7820e06c5e6e7daa5e7e7589778285471b42de2b6024d5cd207c530b4201922cd64153697ce9b9a7a91fe081
   languageName: node
   linkType: hard
 
@@ -8957,7 +8957,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "theatrejs-website@workspace:."
   dependencies:
-    "@code-hike/mdx": ^0.7.0
+    "@code-hike/mdx": ^0.7.4
     "@mdx-js/loader": ^2.1.2
     "@netlify/plugin-nextjs": ^4.22.0
     "@next/mdx": ^12.2.3

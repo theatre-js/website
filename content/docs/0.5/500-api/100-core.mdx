@@ -4,7 +4,7 @@ nav_title: '@theatre/core'
 excerpt: '@theatre/core'
 ---
 
-## getProject $fn
+## getProject$api(id, config)
 
 If you import and [initialize Studio](/docs/0.5/api/studio#studio.initialize-fn), you can call `getProject()` without an explicit state.
 In this case, the state of the project will be managed by Studio.
@@ -30,7 +30,7 @@ Project returned by `getProject`.
 
 _To read about Projects, check out the [Projects Manual](/docs/0.5/manual/projects)!_
 
-### Project.ready $api
+### project.ready $api
 
 `Promise` that resolves when Theatre.js is loaded. If `@theatre/studio` is used, this `Promise` would resolve when Studio has loaded the state of the project into memory. If `@theatre/studio` is not used, this `Promise` is already resolved.
 
@@ -38,7 +38,7 @@ _To read about Projects, check out the [Projects Manual](/docs/0.5/manual/projec
 project.ready.then(() => console.log('Project loaded!'))
 ```
 
-### Project.isReady $api
+### project.isReady $api
 
 Indicates whether the project is ready to be used.
 It is better to use [Project.ready](#project.ready), which is a `Promise` that resolves when the project is ready.
@@ -51,7 +51,7 @@ if (project.isReady) {
 }
 ```
 
-### Project.address $api
+### project.address $api
 
 The Project's unique address in Theatre.js.
 It is a JS object that contains a single property `projectId`.
@@ -60,7 +60,7 @@ It is a JS object that contains a single property `projectId`.
 const { projectId } = project.address
 ```
 
-### Project.sheet $fn
+### project.sheet$api(name, instanceId?)
 
 Creates or returns a [Sheet](#sheet) under the Project.
 If a Sheet with the given name is in the Project's state then the existing Sheet is returned; otherwise, a new Sheet is created and returned.
@@ -79,7 +79,7 @@ const sheet = project.sheet('My Sheet', 'My optional Sheet instance id')
 
 Sheet returned by [`Project.sheet`](#project.sheet).
 
-### Sheet.object $fn
+### sheet.object$api(key, config, options?)
 
 Creates or returns an [Object](#object) with given props under this Sheet.
 If an Object with the given name is in the Project's state then the existing Object is returned; otherwise, a new Object is created and returned.
@@ -92,11 +92,19 @@ const myObject = sheet.object('My Object', { position: { x: 0, y: 0 } })
 console.log(myObject.value.position)
 ```
 
-### Sheet.sequence $api
+Objects can also be reconfigured on the fly. Learn more [here](/docs/latest/manual/objects#reconfiguring-existing-objects).
+
+### sheet.detatchObject$api(key) <Since version="0.5.1" />
+
+Detaches a previously created child object from the sheet.
+
+If you call `sheet.object(key)` again with the same `key`, the values of the object's props WILL NOT be reset to their initial values.
+
+### sheet.sequence $api
 
 The [Sequence](#sequence) of this sheet. Sequences are JS objects that hold animation data such as Keyframes and current position.
 
-### Sheet.project $api
+### sheet.project $api
 
 The [Project](#project) this Sheet belongs to.
 
@@ -110,7 +118,7 @@ const sheet = project.sheet('My Sheet')
 console.log(sheet.project === project)
 ```
 
-### Sheet.address $api
+### sheet.address $api
 
 The Sheet's unique address in Theatre.js.
 It is an object containing a `projectId`, `sheetId`, and `sheetInstanceId`.
@@ -128,7 +136,7 @@ const { projectId, sheetId, sheetInstanceId } = sheet.address
 
 A JS object that holds animation data such as Keyframes and current position.
 
-### Sequence.play $fn
+### sequence.play$api(opts?)
 
 Starts playback of a sequence. Returns a `Promise` that either resolves to `true` when the playback completes or resolves
 to `false` if playback gets interrupted (for example by calling [`Sequence.pause`](#sequence.pause))
@@ -156,7 +164,7 @@ sheet.sequence.play({ iterationCount: Infinity, direction: 'alternateReverse' })
 sheet.sequence.play().then(() => console.log('done'))
 ```
 
-### Sequence.pause $fn
+### sequence.pause$api()
 
 Pauses the currently playing animation.
 
@@ -165,7 +173,7 @@ sheet.sequence.play()
 setTimeout(() => sheet.sequence.pause(), 1000) // pause after 1 second
 ```
 
-### Sequence.position $api
+### sequence.position $api
 
 The current position of the playhead. In a time-based sequence, this represents the current time in seconds.
 
@@ -181,7 +189,7 @@ if (sheet.sequence.position > 1) {
 sheet.sequence.position = 1
 ```
 
-### Sequence.pointer $api
+### sequence.pointer $api
 
 A [Pointer](/docs/0.5/api/core#pointers) to the Sequence's inner state.
 
@@ -208,7 +216,7 @@ onChange(sequence.pointer.playing, (playing) => {
 console.log('current length is', val(sequence.pointer.length))
 ```
 
-### Sequence.attachAudio $fn
+### sequence.attachAudio$api(opts)
 
 Attaches an audio source to the sequence.
 Playing the sequence automatically plays the audio source and the audio and animation times are kept in sync.
@@ -261,7 +269,7 @@ _To read about Objects, check out the [Objects Manual](/docs/0.5/manual/objects)
 
 _To read about the props of Objects, check out the [Prop Types Manual](/docs/0.5/manual/prop-types) or the [Prop types API docs](#prop-types) below!_
 
-### Object.value $api
+### object.value $api
 
 The current values of the props of the Object.
 
@@ -270,7 +278,7 @@ const obj = sheet.object('obj', { x: 0 })
 console.log(obj.value.x) // prints 0 or the current numeric value
 ```
 
-### Object.props $api
+### object.props $api
 
 A [Pointer](/docs/0.5/api/core#pointers) to the props of the Object.
 
@@ -282,7 +290,7 @@ onChange(obj.props.x, (x) => {
 console.log('current x is', val(obj.props.x))
 ```
 
-### Object.sheet $api
+### object.sheet $api
 
 The instance of [Sheet](#sheet) that the Object belongs to.
 
@@ -294,7 +302,7 @@ const obj = sheet.object('obj', { x: 0 })
 console.log(obj.sheet === sheet)
 ```
 
-### Object.project $api
+### object.project $api
 
 The [Project](#project) this object belongs to.
 
@@ -307,7 +315,7 @@ const obj = sheet.object('My Object', { x: 0 })
 console.log(obj.project === project)
 ```
 
-### Object.address $api
+### object.address $api
 
 An Object address is a JS object representing the unique address of the Object in Theatre.js.
 It contains a `projectId`, `sheetId`, `sheetInstanceId` , and `objectKey`.
@@ -316,7 +324,7 @@ It contains a `projectId`, `sheetId`, `sheetInstanceId` , and `objectKey`.
 const { projectId, sheetId, sheetInstanceId, objectKey } = obj.address
 ```
 
-### Object.initialValue $api
+### object.initialValue $api
 
 Sets the initial value of the Object.
 This value overrides the default values defined in the Object's [prop types](#prop-types).
@@ -333,7 +341,7 @@ obj.initialValue = { position: { x: 2 } }
 obj.value // {position: {x: 2, y: 0}}
 ```
 
-### Object.onValuesChange $fn
+### object.onValuesChange$api(callback)
 
 Calls a given callback every time any of the Object's prop values change.
 
@@ -405,7 +413,7 @@ const obj = sheet.object('My Object', {
 
 _To read about Prop types, check out the [Prop Types Manual](/docs/0.5/manual/prop-types)!_
 
-### types.compound $fn
+### types.compound$api(props, opts?)
 
 Compound props are analogous to JavaScript objects in that they enable the nesting of props.
 In the example below, `position` has an inferred prop type of `types.compound`.
@@ -433,7 +441,7 @@ const obj = sheet.object('My Object', {
 })
 ```
 
-### types.number $fn
+### types.number$api(default, opts?)
 
 A number prop type.
 
@@ -462,7 +470,7 @@ const y = types.number({
 })
 ```
 
-### types.rgba $fn
+### types.rgba$api(default?)
 
 An RGBA prop type. All color channels are normalized between 0 and 1.
 
@@ -471,7 +479,7 @@ An RGBA prop type. All color channels are normalized between 0 and 1.
 const color = types.rgba({ r: 1, g: 0, b: 0, a: 1 })
 ```
 
-### types.boolean $fn
+### types.boolean$api(default)
 
 A boolean prop type.
 This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-interpolators) as an option.
@@ -480,7 +488,7 @@ This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-in
 const isOn = types.boolean(true)
 ```
 
-### types.string $fn
+### types.string$api(default, opts?)
 
 A string prop type.
 This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-interpolators) as an option.
@@ -489,7 +497,7 @@ This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-in
 const message = types.string('Animation Loading')
 ```
 
-### types.stringLiteral $fn
+### types.stringLiteral$api(default, choices, opts?)
 
 A stringLiteral prop type, useful for building menus or radio buttons.
 This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-interpolators) as an option.
@@ -510,7 +518,7 @@ const light = types.stringLiteral('r', { r: 'Red', g: 'Green' }, { as: 'menu', l
 
 Pointers basically point to values that you can [read](/docs/0.5/api/core#val-fn), [observe](/docs/0.5/api/core#onchange-fn), and in some cases [change](/docs/0.5/api/studio#studio.transaction-fn).
 
-### onChange $fn
+### onChange$api(pointer, callback)
 
 Takes a Pointer as the first argument and a callback as the second argument.
 Calls the callback every time the value pointed to by `pointer` changes.
@@ -531,7 +539,7 @@ const usubscribe = onChange(obj.props.position.x, (x) => {
 setTimeout(usubscribe, 10000) // stop listening to changes after 10 seconds
 ```
 
-### val $fn
+### val$api(pointer)
 
 Takes a Pointer and returns the value it points to.
 

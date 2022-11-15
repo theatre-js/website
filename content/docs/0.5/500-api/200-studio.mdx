@@ -8,11 +8,11 @@ excerpt: '@theatre/studio'
 import studio from '@theatre/studio'
 ```
 
-## studio.initialize $fn
+## studio.initialize$api()
 
 Initializes the studio. Call it once in your index.js/index.ts module. It silently ignores subsequent calls.
 
-## studio.transaction $fn
+## studio.transaction$api(fn)
 
 Runs an undo-able transaction. Creates a single undo level for all the operations inside the transaction.
 
@@ -25,7 +25,7 @@ studio.transaction(({ set, unset }) => {
 })
 ```
 
-### api.set $fn
+### api.set$api(pointer, value)
 
 Set the value of a prop by its [pointer](/docs/0.5/api/core#pointers). If the prop is sequenced, the value will be a keyframe at the current sequence position.
 
@@ -42,7 +42,7 @@ studio.transaction(({ set }) => {
 })
 ```
 
-### api.unset $fn
+### api.unset$api(pointer, value)
 
 Unsets the value of a prop by its [pointer](/docs/0.5/api/core#pointers).
 
@@ -56,7 +56,7 @@ studio.transaction(({ set }) => {
 })
 ```
 
-## studio.scrub $fn
+## studio.scrub$api()
 
 Creates a scrub, which is just like a transaction, except you can run it multiple times without creating extra undo levels.
 
@@ -80,7 +80,7 @@ scrub.reset() // clears all the ops in the scrub so we can run scrub.capture() a
 scrub.discard() // clears the ops and destroys it (ie. can't call scrub.capture() anymore)
 ```
 
-## studio.extend $fn
+## studio.extend$api(extension)
 
 Registers an extension.
 Extensions enable you to extend the Studio's UI and/or extend the functionality of Studio.
@@ -92,7 +92,7 @@ import { extension } from './myExtension'
 studio.extend(extension)
 ```
 
-## studio.createContentOfSaveFile $fn
+## studio.createContentOfSaveFile$api(projectId)
 
 Creates a JSON object that contains the state of the project. You can use this to programmatically save the state of your projects to the storage system of your choice, rather than [manually clicking on the "Export" button in the UI](/docs/0.5/manual/projects#docs-manual-projects-export-project).
 
@@ -105,7 +105,7 @@ fetch(`/projects/${projectId}/state`, { method: 'POST', body: string }).then(() 
 })
 ```
 
-## studio.createPane $fn
+## studio.createPane$api(paneClass)
 
 Creates a new pane. Takes a string as its argument specifying a pane class previously registered by an extension.
 
@@ -113,7 +113,7 @@ Creates a new pane. Takes a string as its argument specifying a pane class previ
 studio.createPane('snapshot')
 ```
 
-## studio.getStudioProject $fn
+## studio.getStudioProject$api()
 
 Returns the [Theatre.js project](/docs/0.5/api/core#project) that contains the studio's [sheets](/docs/0.5/api/core#sheet) and [objects](/docs/0.5/api/core#object).
 
@@ -127,7 +127,7 @@ The current selection, consisting of [sheets](/docs/0.5/api/core#sheet) and [she
 console.log(studio.selection) // [ISheetObject, ISheet]
 ```
 
-## studio.onSelectionChange $fn
+## studio.onSelectionChange$api(callback)
 
 Let's you subscribe to selection changes. Calls the provided callback with the current selection every time the selection changes.
 
@@ -137,7 +137,7 @@ return studio.onSelectionChange((newSelection) => {
 })
 ```
 
-## studio.setSelection $fn
+## studio.setSelection$api(selection)
 
 Sets the current selection.
 
@@ -149,7 +149,7 @@ studio.setSelection([someSheet, someObject])
 
 Exposes utilities to manipulate the Studio UI.
 
-### studio.ui.hide $fn
+### studio.ui.hide$api()
 
 Hides the Studio.
 
@@ -157,7 +157,7 @@ Hides the Studio.
 studio.ui.hide()
 ```
 
-### studio.ui.restore $fn
+### studio.ui.restore$api()
 
 Shows the Studio.
 
@@ -175,7 +175,7 @@ if (studio.ui.isHidden) {
 }
 ```
 
-### studio.ui.renderToolset $fn
+### studio.ui.renderToolset$api(toolsetId, container)
 
 Let's you render a toolset previously defined by an extension into a dom node of your choice.
 

@@ -25,6 +25,39 @@ however if you need more control, you can specify the types [explicitly](/docs/0
 const myObject = sheet.object('My Object', { position: { x: 0, y: 0 } })
 ```
 
+## Reconfiguring existing objects <Since version="0.5.1" />
+
+Objects can be reconfigured on the fly. For example, you can add a `rotation` prop to a live object without having to refresh the page.
+Simply call `sheet.object()` with `{reconfigure: true}` and the existing object will be reconfigured.
+
+```ts
+const obj = sheet.object('obj', { foo: 0 })
+console.log(object.value.foo) // prints 0
+// mark[46:66]
+const obj2 = sheet.object('obj', { bar: 0 }, { reconfigure: true })
+
+console.log(object.value.foo) // prints undefined, since we've removed this prop via reconfiguring the object
+
+console.log(object.value.bar) // prints 0, since we've introduced this prop by reconfiguring the object
+
+assert(obj === obj2) // passes, because reconfiguring the object returns the same object
+```
+
+## Detatching objects <Since version="0.5.1" />
+
+Objects can be detached from their sheet. This is _almost_ like deleting an object, except that Theatre will still _remember_ the prop values of this object, so if you re-create an object with the same `key`, it'll retain the old object's props values.
+
+```ts
+const obj = sheet.object('obj', { foo: 0 })
+const unsubscribe = obj.onValuesChange((values) => {
+  div.style.left = values.x + 'px'
+})
+
+// let's clean up our subscriptions before detatching the object
+unsubscribe()
+sheet.detatchObject('obj')
+```
+
 ## Namespacing objects
 
 The key of the sheet object can be used to namespace objects.

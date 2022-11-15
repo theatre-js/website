@@ -72,7 +72,7 @@ const torusKnotObj = sheet.object('Torus Knot', {
 
 Let's go through the list of props that Theatre.js currently has.
 
-### types.number $fn
+### types.number$api(default, opts?)
 
 <Video src="/images/docs/0.5/manual/prop-types/02-number-prop.mp4">The number prop</Video>
 
@@ -111,7 +111,7 @@ const x = types.number({
 })
 ```
 
-### types.compound $fn
+### types.compound$api(props, opts?)
 
 <Screenshot src="/images/docs/0.5/manual/prop-types/compound-prop.png" alt="The compound prop" />
 
@@ -128,7 +128,7 @@ const torusKnotObj = sheet.object('Torus Knot', {
 })
 ```
 
-### types.boolean $fn
+### types.boolean$api(default, opts?)
 
 <Screenshot src="/images/docs/0.5/manual/prop-types/boolean-prop.png" alt="The boolean prop" />
 
@@ -147,7 +147,7 @@ const obj = sheet.object('key', {
 })
 ```
 
-### types.string $fn
+### types.string$api(default, opts?)
 
 <Screenshot src="/images/docs/0.5/manual/prop-types/string-prop.png" alt="The string prop" />
 
@@ -166,7 +166,7 @@ const obj = sheet.object('key', {
 })
 ```
 
-### types.stringLiteral $fn
+### types.stringLiteral$api(default, opts?)
 
 <Video src="/images/docs/0.5/manual/prop-types/03-string-literal.mp4">The string literal prop</Video>
 
@@ -193,7 +193,7 @@ const obj = sheet.object(
 )
 ```
 
-### types.rgba $fn
+### types.rgba$api(default?)
 
 <Video src="/images/docs/0.5/manual/prop-types/04-color-prop.mp4">The rgba (color) prop</Video>
 

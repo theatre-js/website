@@ -135,6 +135,34 @@ function LinkToSource(props: { links: SourceLink[] }) {
   )
 }
 
+const Since = ({ version }: { version: string }) => {
+  return (
+    <span
+      //  yup, tailwind was a mistake...
+      style={{
+        // @ts-ignore
+        'font-family': 'Inter',
+        'font-style': 'normal',
+        'font-weight': '600',
+        'font-size': '12px',
+        'line-height': '15px',
+        'text-align': 'center',
+        'text-transform': 'uppercase',
+        padding: '4px 8px',
+        background: '#082D22',
+        'border-radius': '3px',
+        'letter-spacing': '0',
+        color: 'rgba(0, 215, 189, 0.56)',
+        'margin-left': '1em',
+        position: 'relative',
+        // top: '-1px',
+      }}
+    >
+      Since {version}
+    </span>
+  )
+}
+
 const mdxComponents = {
   ApiTag,
   Callout,
@@ -154,12 +182,11 @@ const mdxComponents = {
   Screenshot,
   TheatreTutorialCodePreview,
   Video,
+  Since,
 }
 
 /** Components which depend on environment values */
 const injectedComponents = (tree: TreeNode[], router: NextRouter) => {
-  // TODO: remove the logs if they are not necessary
-  // console.error(tree.map((x) => x.urlPath))
   return {
     ChildCards(props: {
       urlPath: string
@@ -225,7 +252,7 @@ const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ doc, tree, b
           </div>
           <div
             style={{ maxHeight: 'calc(100vh - 128px)' }}
-            className="sticky top-40 hidden w-80 shrink-0 overflow-y-scroll py-8 pl-10 pr-8 xl:block"
+            className="sticky top-40 hidden w-80 shrink-0 overflow-y-scroll py-16 pt-8 pl-10 pr-8 xl:block"
           >
             <PageNavigation headings={doc.headings} />
           </div>

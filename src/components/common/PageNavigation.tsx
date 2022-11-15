@@ -11,6 +11,7 @@ const transformHeading = (text: string) => {
   return heading.api ? (
     <span>
       <span
+        className="font-displayMono font-bold"
         dangerouslySetInnerHTML={{
           __html: heading.api.identifier
             .replace(/</g, '&lt;')
@@ -18,11 +19,7 @@ const transformHeading = (text: string) => {
             .replace('`', '</code>'),
         }}
       />
-      {heading.api.type === '$fn' && (
-        <span className="ml-4 inline-block whitespace-nowrap rounded border px-1.5 align-middle font-medium leading-4 tracking-wide [font-size:8px] dark:border-gray-600 dark:text-gray-400">
-          fn
-        </span>
-      )}
+      {heading.api.isFunction && <span className=" whitespace-nowrap ">()</span>}
     </span>
   ) : (
     <span
