@@ -3,6 +3,28 @@ title: Releases
 excerpt: Theatre.js Releases
 ---
 
+## v0.5.1
+
+<Callout type="info">
+  This is currently a release candidate. You can try this version by upgrading all Theatre.js packages to `0.5.1-rc.1`.
+</Callout>
+
+- **New features**
+
+  - A new [Camera](docs/0.5/api/r3f#cameras) implementation with a convenient `lookAt` target.
+  - You can now dynamically remove objects via [`Sheet.detatchObject()`](/docs/latest/manual/objects#detatching-objects).
+  - Objcts can now be reconfigured on the fly via the [`reconfigure` option](/docs/latest/manual/objects#reconfiguring-existing-objects).
+  - `@theatre/r3f` now supports hot reloading.
+  - A new in-app guide [helps](https://github.com/theatre-js/theatre/pull/320) you avoid common mistakes.
+  - [Out-of-the-box support](https://github.com/theatre-js/theatre/pull/316) for all THREE.js light types.
+  - Support for server-side rendering in Next.js and other SSR frameworks.
+
+- **Bug fixes**
+  - [Fixed a bug](https://github.com/theatre-js/theatre/pull/344) that caused only a single project to be export-able per reload.
+  - [Fixed an edge-case](https://github.com/theatre-js/theatre/pull/340) where inline keyframe values might remain stale after an edit.
+  - [Fixed an edge-case](https://github.com/theatre-js/theatre/pull/309) where some panes would get dragged out of the browser window.
+  - [Fixed a bug](https://github.com/theatre-js/theatre/commit/27ef3cc1c9dfcca8d06bd53c5a7185f20c853114) that prevented audio playback in the studio.
+
 ## v0.5
 
 Theatre.js **v0.5** · Introduces a 3D editor for React Three Fiber, complex keyframing tools, and an extensions API. [More in the blog post](/blog/theatre-05-is-out).
