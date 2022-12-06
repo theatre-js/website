@@ -21,7 +21,7 @@ supported React Three Fiber element.
 You can create editable versions of React Three Fiber elements using properties on the `editable` object.
 
 ```tsx
-<editable.pointLight theatreKey="Key light"/>
+<editable.pointLight theatreKey="Key light" />
 ```
 
 These elements behave the same as the originals, but also show up in the Studio.
@@ -34,7 +34,7 @@ The element's [object's](/docs/0.5/api/core#object) name in Theatre.js.
 All editable elements **need** to have a `theatreKey` prop so that they can be connected to a backing-object.
 
 ```tsx
-<editable.group theatreKey="My group"/>
+<editable.group theatreKey="My group" />
 ```
 
 #### props.visible$api
@@ -46,8 +46,8 @@ final scene.
 
 ```tsx
 <editable.mesh theatreKey="Marker" visible="editor">
-  <boxBufferGeometry/>
-  <meshBasicMaterial color="yellow"/>
+  <boxBufferGeometry />
+  <meshBasicMaterial color="yellow" />
 </editable.mesh>
 ```
 
@@ -68,6 +68,54 @@ through `objRef`.
 />
 ```
 
+`props.additionalProps` can be used in combination with [`props.objRef`](#props.objref)` to observe the additional props.
+
+```tsx
+const MyComponent = () => {
+  // A reference to the THREE.js object
+  const threeRef = useRef()
+
+  const [
+    // The Theatre.js object that represents our THREE.js object. It'll be initially `null`.
+    theatreObject,
+    setTheatreObject,
+  ] =
+    // Let's use `useState()` so our `useEffect()` will re-run when `theatreObject` changes
+    useState(null)
+
+  // This `useEffect()` will run when `theatreObject` changes
+  useEffect(
+    () => {
+      // if `theatreObject` is `null`, we don't need to do anything
+      if (!theatreObject) return
+
+      const unsubscribe = theatreObject.onValuesChange((newValues) => {
+        // Apply the new offset to our THREE.js object
+        threeRef.current.offset = newValues.offset
+      })
+      // unsubscribe from the listener when the component unmounts
+      return unsubscribe
+    },
+    // We only want to run this `useEffect()` when `theatreObject` changes
+    [theatreObject],
+  )
+
+  return (
+    <e.group
+      theatreKey="My group"
+      // We're defining one additional property, `offset`, which is not part of THREE.js
+      additionalProps={{
+        offset: 0,
+      }}
+      // a reference to the THREE.js object
+      ref={threeRef}
+      // a reference to the Theatre.js object
+      objRef={setTheatreObject}
+    />
+  )
+}
+```
+
 #### props.objRef$api
 
 Exposes the element's backing-object directly.
@@ -76,9 +124,11 @@ Exposes the element's backing-object directly.
 const MyComponent: React.FC = () => {
   const objRef = useRef<ISheetObject>()
 
-  return <editable.group theatreKey="My group" objRef={objRef}/>
+  return <editable.group theatreKey="My group" objRef={objRef} />
 }
 ```
+
+See [`props.additionalProps`](#props.additionalprops) for an example of how to use this.
 
 #### props.editableType$api
 
@@ -86,7 +136,7 @@ This prop is only used when using `editable.primitive`, since primitive elements
 The `editableType` prop tells Theatre.js what THREE.js object type to assume in this case.
 
 ```tsx
-<editable.primitive object={myMesh} theatreKey="My Mesh" editableType="mesh"/>
+<editable.primitive object={myMesh} theatreKey="My Mesh" editableType="mesh" />
 ```
 
 ### editable &ndash; as a function
@@ -95,8 +145,8 @@ You can also use `editable` as a function to create editable versions of react c
 that of a supported React Three Fiber element.
 
 ```ts
-import {editable} from '@theatre/r3f'
-import {PerspectiveCamera} from '@react-three/drei'
+import { editable } from '@theatre/r3f'
+import { PerspectiveCamera } from '@react-three/drei'
 
 const EditableCamera = editable(PerspectiveCamera, 'perspectiveCamera')
 ```
@@ -116,12 +166,12 @@ is through the `SheetProvider` React component.
 <Canvas>
   // focus
   <SheetProvider sheet={getProject('Playground - R3F').sheet('R3F-Canvas')}>
-    <ambientLight intensity={0.5}/>
-    <editable.spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} theatreKey="Spotlight"/>
-    <editable.pointLight theatreKey="PointLight"/>
+    <ambientLight intensity={0.5} />
+    <editable.spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} theatreKey="Spotlight" />
+    <editable.pointLight theatreKey="PointLight" />
     <editable.mesh theatreKey="Box">
-      <boxBufferGeometry/>
-      <meshStandardMaterial color="orange"/>
+      <boxBufferGeometry />
+      <meshStandardMaterial color="orange" />
     </editable.mesh>
     // focus
   </SheetProvider>
@@ -134,7 +184,7 @@ Hook to access the sheet of the nearest `SheetProvider`.
 
 ```tsx
 // focus
-import {useCurrentSheet} from '@theatre/r3f'
+import { useCurrentSheet } from '@theatre/r3f'
 
 export default function Scene() {
   // focus
@@ -143,8 +193,8 @@ export default function Scene() {
 
   return (
     <editable.mesh theatreKey="Box">
-      <boxBufferGeometry/>
-      <meshStandardMaterial color="orange"/>
+      <boxBufferGeometry />
+      <meshStandardMaterial color="orange" />
     </editable.mesh>
   )
 }
@@ -156,7 +206,7 @@ Utility to refresh the snapshot in the snapshot editor from code. Useful for exa
 some assets have loaded that otherwise would not be visible.
 
 ```ts
-import {refreshSnapshot} from '@theatre/r3f'
+import { refreshSnapshot } from '@theatre/r3f'
 
 refreshSnapshot()
 ```
@@ -168,8 +218,8 @@ and you want to refresh when the suspended components render.
 
 ```tsx
 <Suspense fallback={Fallback}>
-  <RefreshSnapshot/>
-  <MyModel/>
+  <RefreshSnapshot />
+  <MyModel />
 </Suspense>
 ```
 
@@ -183,12 +233,7 @@ import { PerspectiveCamera } from '@theatre/r3f'
 
 const MyComponent = () => (
   // ...
-  <PerspectiveCamera
-    theatreKey="Camera"
-    makeDefault
-    position={[0, 0, 16]}
-    fov={75}
-  />
+  <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 0, 16]} fov={75} />
 )
 ```
 
@@ -202,16 +247,10 @@ const MyComponent = () => {
   return (
     // ...
     <>
-      <PerspectiveCamera
-        theatreKey="Camera"
-        makeDefault
-        position={[0, 0, 16]}
-        fov={75}
-        lookAt={ref}
-      />
+      <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 0, 16]} fov={75} lookAt={ref} />
       <editable.mesh theatreKey="Target" ref={ref}>
-        <boxBufferGeometry/>
-        <meshStandardMaterial color="orange"/>
+        <boxBufferGeometry />
+        <meshStandardMaterial color="orange" />
       </editable.mesh>
     </>
   )
@@ -226,7 +265,7 @@ Note, `extension` is not exported from `@theatre/r3f`! It is instead exported fr
 order to aid in excluding it and Studio from production code.
 
 ```ts
-import {extension} from '@theatre/r3f/dist/extension'
+import { extension } from '@theatre/r3f/dist/extension'
 import studio from '@theatre/studio'
 
 studio.extend(extension)
