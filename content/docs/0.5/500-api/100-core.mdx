@@ -100,6 +100,12 @@ Detaches a previously created child object from the sheet.
 
 If you call `sheet.object(key)` again with the same `key`, the values of the object's props WILL NOT be reset to their initial values.
 
+<Callout type="info">
+  **Note**: Calling `sheet.detatchObject()` does _not_ unsubscribe the listeners you've attached to the object. For
+  example, if you've called [`const unsubscribe = object.onValuesChange(...)`](#object.onvalueschange_callback_), you
+  will have to manually call `unsubscribe()` either before or after calling `sheet.detachObject()`.
+</Callout>
+
 ### sheet.sequence $api
 
 The [Sequence](#sequence) of this sheet. Sequences are JS objects that hold animation data such as Keyframes and current position.
