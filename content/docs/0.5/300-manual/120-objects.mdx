@@ -32,13 +32,13 @@ Simply call `sheet.object()` with `{reconfigure: true}` and the existing object 
 
 ```ts
 const obj = sheet.object('obj', { foo: 0 })
-console.log(object.value.foo) // prints 0
+console.log(obj.value.foo) // prints 0
 // mark[46:66]
 const obj2 = sheet.object('obj', { bar: 0 }, { reconfigure: true })
 
-console.log(object.value.foo) // prints undefined, since we've removed this prop via reconfiguring the object
+console.log(obj.value.foo) // prints undefined, since we've removed this prop via reconfiguring the object
 
-console.log(object.value.bar) // prints 0, since we've introduced this prop by reconfiguring the object
+console.log(obj.value.bar) // prints 0, since we've introduced this prop by reconfiguring the object
 
 assert(obj === obj2) // passes, because reconfiguring the object returns the same object
 ```
