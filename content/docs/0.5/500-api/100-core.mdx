@@ -75,6 +75,23 @@ const project = getProject('My Project')
 const sheet = project.sheet('My Sheet', 'My optional Sheet instance id')
 ```
 
+### project.getAssetUrl$api(assetHandle) <Since version="0.5.2" />
+
+Gets the url for the provided asset handle.
+You would normally get an asset handle by listening to changes of asset props, like the image prop.
+
+```ts
+const object = sheet.object('My Object', {
+  texture: types.image(undefined, {
+    label: 'Texture',
+  }),
+})
+
+object.onValuesChange(({ texture }) => {
+  setImageUrl(project.getAssetUrl(texture))
+})
+```
+
 ## Sheet
 
 Sheet returned by [`Project.sheet`](#project.sheet).
@@ -518,6 +535,21 @@ Or as menus.
 
 ```ts
 const light = types.stringLiteral('r', { r: 'Red', g: 'Green' }, { as: 'menu', label: 'Street Light' })
+```
+
+### types.image$api(default, opts?)
+
+An image prop type.
+This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-interpolators) as an option.
+
+Image props are asset props, meaning their values are asset handles that can be used to [retrieve a URL for that asset](#project.getasseturl_assethandle_).
+
+The default value for image props is the id of the default asset. If you don't know the id, an empty string or `undefined` represents the lack of an assigned asset.
+
+```ts
+const texture = types.image('', {
+  label: 'Texture',
+})
 ```
 
 ## Pointers

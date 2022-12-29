@@ -213,6 +213,21 @@ const obj = sheet.object('key', {
 })
 ```
 
+### types.image$api(default, opts?)
+
+An image prop type.
+This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-interpolators) as an option.
+
+Image props are asset props, meaning their values are asset handles that can be used to [retrieve a URL for that asset](#project.getasseturl_assethandle_).
+
+The default value for image props is the id of the default asset. If you don't know the id, an empty string or `undefined` represents the lack of an assigned asset.
+
+```ts
+const texture = types.image('', {
+  label: 'Texture',
+})
+```
+
 ## Playground
 
 You can play with the available prop types here:<br/>[https://theatre-playground.vercel.app/shared/dom](https://theatre-playground.vercel.app/shared/dom).

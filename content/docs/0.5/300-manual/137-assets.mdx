@@ -1,0 +1,60 @@
+---
+title: Assets
+excerpt: >
+  Learn about assets in Theatre.js
+---
+
+Theatre.js assets let you keyframe files in props so that you can keyframe them along with the rest of your animation.
+Right now the only asset prop Theatre.js supports is the `types.image` prop.
+
+To get started with assets, decide on a location you are going to host them at (like `/theatrejs-assets`, or a CDN of your choice),
+then let Theatre.js know about it when creating a project.
+
+```ts
+const project = getProject('My project', {
+  assets: {
+    baseUrl: '/theatrejs-assets',
+  },
+})
+```
+
+Theatre.js will then look for assets at this location. If you don't specify it, it'll default to the value `'/'`.
+
+To use an asset prop, define it in a `sheet.object()` call.
+
+```ts
+const object = sheet.object('My Object', {
+  texture: types.image('', {
+    label: 'Texture',
+  }),
+})
+```
+
+Studio lets you assign files to asset props, which it will initially store in IndexedDB.
+
+<Screenshot src="/images/docs/0.5/manual/assets/image-prop-ui.png" alt="Image props in the Details panel" />
+
+If any assets are used in your project, upon exporting the project, you also get a zip file with all the assets,
+which you need to extract to the location specified in `projectConfig.assets.baseUrl`.
+As soon as an asset is found at this location, it is deleted from IndexedDB to free up space.
+
+The values of asset props are asset handles, which you can use to retrieve the URL for that asset using [`Project.getAssetUrl()`](/docs/latest/api/core#project.getasseturl_assethandle_).
+
+```ts
+const object = sheet.object('My Object', {
+  texture: types.image(undefined, {
+    label: 'Texture',
+  }),
+})
+
+object.onValuesChange(({ texture }) => {
+  setImageUrl(project.getAssetUrl(texture))
+})
+```
+
+## Learn more
+
+To learn more about assets, check out the documentation for
+
+- [`types.image`](/docs/latest/api/core#types.image_default-opts_)
+- [`Project.getAssetUrl()`](/docs/latest/api/core#project.getasseturl_assethandle_)
