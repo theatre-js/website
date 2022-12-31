@@ -7,6 +7,7 @@ import { allPosts } from 'contentlayer/generated'
 import { MetaWrapper } from '../../components/common/MetaWrapper'
 import { defineStaticProps } from '../../utils/next'
 import { Callout } from '../../components/common/Callout'
+import { Section } from '../../components/common/Section'
 import { DocsCard as Card } from '../../components/docs/DocsCard'
 import { Link } from 'src/components/common/Link'
 import NextImage from 'next/image'
@@ -71,6 +72,7 @@ const P: React.FC<React.PropsWithChildren<{}>> = ({ children }) => <div classNam
 
 const mdxComponents = {
   Callout,
+  Section,
   Card,
   Image,
   Link,

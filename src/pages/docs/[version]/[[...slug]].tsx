@@ -8,6 +8,7 @@ import { MetaWrapper } from '../../../components/common/MetaWrapper'
 import { defineStaticProps, toParams } from '../../../utils/next'
 import { DocsNavigation } from 'src/components/docs/DocsNavigation'
 import { Callout } from '../../../components/common/Callout'
+import { Section } from '../../../components/common/Section'
 import { DocsCard as Card } from 'src/components/docs/DocsCard'
 import { Card as ChildCard } from '../../../components/common/Card'
 import { Link as SourceLink } from 'src/components/common/Link'
@@ -166,6 +167,7 @@ const Since = ({ version }: { version: string }) => {
 const mdxComponents = {
   ApiTag,
   Callout,
+  Section,
   Card,
   Image,
   Link: SourceLink,
