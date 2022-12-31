@@ -50,8 +50,8 @@ export const Callout: React.FC<{ children: ReactNode; className?: string | ''; t
   const callout = { ...CALLOUT_TYPES.defaultOptions, ...CALLOUT_TYPES.types[calloutType] }
   return (
     <div className={`my-8 rounded-lg border ${callout.classes.outer} ${className}`}>
-      <div className="relative  p-6 py-4 text-violet-600 dark:text-white/80">
-        <div className={`absolute top-8 left-8 w-5 ${callout.classes.text}`}>
+      <div className="relative p-6 py-4 text-violet-600 dark:text-white/80">
+        <div className={`absolute top-7 left-8 w-5 ${callout.classes.text}`}>
           <Icon name={callout.iconName} />
         </div>
         <div className="theatre-callout-content my-2 mr-6 ml-12 prose-a:font-semibold">{children}</div>
