@@ -4,8 +4,24 @@ excerpt: >
   Learn about assets in Theatre.js
 ---
 
-Theatre.js assets let you keyframe files in props so that you can keyframe them along with the rest of your animation.
+<Since version="0.5.2" />
+
+Theatre.js assets let you use images and other files as the value of props. It also allows you to use these assets for keyframe values.
 Right now the only asset prop Theatre.js supports is the `types.image` prop.
+
+<Section>
+  <details>
+    <summary>**Need more asset types?**</summary>
+    
+    * Feel free to suggest more asset types on our [Discord server](https://discord.gg/bm9f8F9Y9N).
+    * Or submit a PR of your own. Here is how:
+      1. Fork the [repo](https://github.com/theatre-js/theatre/) and [set up your dev environment](https://github.com/theatre-js/theatre/blob/main/CONTRIBUTING.md).
+      2. Define a new prop type by copying and editing [`types.image()`](https://github.com/theatre-js/theatre/blob/8d8e2348dd3528fe508456738dddd1644f79004f/theatre/core/src/propTypes/index.ts#L159)
+      3. Define a new prop editor similar to how [`ImagePropEditor`](https://github.com/theatre-js/theatre/blob/8d8e2348dd3528fe508456738dddd1644f79004f/theatre/studio/src/propEditors/simpleEditors/ImagePropEditor.tsx#L1) is defined.
+      4. Add the new prop editor to the list of known editors [here](https://github.com/theatre-js/theatre/blob/8d8e2348dd3528fe508456738dddd1644f79004f/theatre/studio/src/propEditors/simpleEditors/simplePropEditorByPropType.ts#L18).
+
+  </details>
+</Section>
 
 To get started with assets, decide on a location you are going to host them at (like `/theatrejs-assets`, or a CDN of your choice),
 then let Theatre.js know about it when creating a project.
