@@ -75,7 +75,7 @@ const project = getProject('My Project')
 const sheet = project.sheet('My Sheet', 'My optional Sheet instance id')
 ```
 
-### project.getAssetUrl$api(assetHandle) <Since version="0.5.2" />
+### project.getAssetUrl$api(assetHandle) <Since version="0.6.0" />
 
 Gets the url for the provided asset handle.
 You would normally get an asset handle by listening to changes of asset props, like the image prop.
@@ -537,7 +537,7 @@ Or as menus.
 const light = types.stringLiteral('r', { r: 'Red', g: 'Green' }, { as: 'menu', label: 'Street Light' })
 ```
 
-### types.image$api(default, opts?) <Since version="0.5.2" />
+### types.image$api(default, opts?) <Since version="0.6.0" />
 
 An image prop type.
 This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-interpolators) as an option.
