@@ -8,13 +8,14 @@ excerpt: Theatre.js Releases
   <details>
     <summary>**Want to test out new features before they're released?**</summary>
 
-    Try our insiders build! Just upgrade to version `0.6.0@insiders` (and [let us
+    Try our dev build! Just upgrade to version `0.6.0@dev` (and [let us
     know](https://discord.gg/bm9f8F9Y9N) what you think. Just keep in mind that these builds aren't stable for production use. Be adventurous and have fun!
 
     ### v0.6.0
 
     - **New features**
       - [Assets](/docs/latest/manual/assets) allow you to use files as values for props and even keyframes.
+      - [`rafDriver`](/docs/latest/manual/advanced#rafdrivers)s allow you to control when and how often computations in Theatre tick forward, [based](https://github.com/theatre-js/theatre/commit/d6498585295962c55a6d412e74ad7f65af86adb7) on work by [Pete Feltham](https://github.com/felthy).
       - Items in the outline menu are now [collapsible](https://github.com/theatre-js/theatre/pull/367), based on work by [Clément Roche](https://github.com/clementroche).
       - A new easing option called "[Hold](https://github.com/theatre-js/theatre/pull/360)", courtesy of [Colin Duffy](https://twitter.com/tomorrowevening).
       - You can now [add actions](https://github.com/theatre-js/theatre/pull/372) (and buttons) to the props of an object.
@@ -23,6 +24,7 @@ excerpt: Theatre.js Releases
 
     - Other notable changes
       - Much simpler dataflow and faster internals via major changes to [dataverse](https://github.com/theatre-js/theatre/pull/345).
+      - Components in an object key [can now](https://github.com/theatre-js/theatre/pull/376) be 64 characters long, by [AD2018](https://github.com/AD2018).
 
   </details>
 

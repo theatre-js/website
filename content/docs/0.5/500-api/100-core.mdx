@@ -185,7 +185,12 @@ sheet.sequence.play({ iterationCount: Infinity, direction: 'alternateReverse' })
 
 // plays the sequence and logs "done" once playback is finished
 sheet.sequence.play().then(() => console.log('done'))
+
+// play the sequence using the given rafDriver (since version 0.6.0)
+sheet.sequence.play({ rafDriver })
 ```
+
+_Hint: You can control how often `sequence.play()` progresses forward by optionally providing a [`rafDriver`](/docs//docs/latest/manual/advanced#rafdrivers)._
 
 ### sequence.pause$api()
 
@@ -556,7 +561,7 @@ const texture = types.image('', {
 
 Pointers basically point to values that you can [read](/docs/0.5/api/core#val-fn), [observe](/docs/0.5/api/core#onchange-fn), and in some cases [change](/docs/0.5/api/studio#studio.transaction-fn).
 
-### onChange$api(pointer, callback)
+### onChange$api(pointer, callback, rafDriver?)
 
 Takes a Pointer as the first argument and a callback as the second argument.
 Calls the callback every time the value pointed to by `pointer` changes.
@@ -576,6 +581,8 @@ const usubscribe = onChange(obj.props.position.x, (x) => {
 
 setTimeout(usubscribe, 10000) // stop listening to changes after 10 seconds
 ```
+
+_Hint: You can control how often `onChange()` calls the callback by optoinally providing a [`rafDriver`](/docs//docs/latest/manual/advanced#rafdrivers)._
 
 ### val$api(pointer)
 
