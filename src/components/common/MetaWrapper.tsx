@@ -21,7 +21,7 @@ export const MetaWrapper: FC<
     description: 'Theatre.js is an animation editor with a visual interface.',
     url: customMeta.urlPath ? `${baseUrl}${customMeta.urlPath}` : baseUrl,
     name: 'Theatre.js Docs',
-    image: customMeta.imagePath ? `${baseUrl}${customMeta.imagePath}` : `${baseUrl}/images/beta-launch-post-meta.png`,
+    image: customMeta.imagePath ? `${baseUrl}${customMeta.imagePath}` : `${baseUrl}/images/op.jpg`,
     type: 'website',
     ...customMeta,
   }
