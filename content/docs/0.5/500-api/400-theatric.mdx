@@ -61,7 +61,7 @@ function Introduction() {
   const { name, age, $get, $set } = useControls({ name: 'Andrew', age: 28 })
 
   const increaseAge = useCallback(() => {
-    $set((values) => values.age, $get(age + 1))
+    $set((pointer) => pointer.age, $get((pointer) = pointer.age + 1))
   }, [$get, $set])
 
   return (
@@ -86,7 +86,7 @@ function Introduction() {
     name: 'Andrew',
     age: 28,
     IncrementAge: button(() => {
-      $set((values) => values.age, $get((values) => values.age) + 1)
+      $set((pointer) => pointer.age, $get((pointer) => pointer.age) + 1)
     }),
   })
 
