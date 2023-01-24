@@ -3,36 +3,31 @@ title: Releases
 excerpt: Theatre.js Releases
 ---
 
-<Section>
+## v0.6.0
 
-  <details>
-    <summary>**Want to test out new features before they're released?**</summary>
+_Jan 24th 2023_
 
-    Try our dev build! Just upgrade to version `0.6.0@dev` (and [let us
-    know](https://discord.gg/bm9f8F9Y9N) what you think. Just keep in mind that these builds aren't stable for production use. Be adventurous and have fun!
+This is the latest stable version of Theatre. Upgrade by running `npm install @theatre/core@latest @theatre/studio@latest @theatre/r3f@latest` in your project.
 
-    ### v0.6.0
+- **New features**
 
-    - **New features**
-      - [Assets](/docs/latest/manual/assets) allow you to use files as values for props and even keyframes.
-      - [`rafDriver`](/docs/latest/manual/advanced#rafdrivers)s allow you to control when and how often computations in Theatre tick forward, [based](https://github.com/theatre-js/theatre/commit/d6498585295962c55a6d412e74ad7f65af86adb7) on work by [Pete Feltham](https://github.com/felthy).
-      - Items in the outline menu are now [collapsible](https://github.com/theatre-js/theatre/pull/367), based on work by [Clément Roche](https://github.com/clementroche).
-      - A new easing option called "[Hold](https://github.com/theatre-js/theatre/pull/360)", courtesy of [Colin Duffy](https://twitter.com/tomorrowevening).
-      - You can now [add actions](https://github.com/theatre-js/theatre/pull/372) (and buttons) to the props of an object.
-      - Number props have a [more predictable](https://github.com/theatre-js/theatre/issues/314) nudging behavior.
-      - Compound props that represent vectors (such as `{x, y, z}`) now take up less space by collapsing into a single row.
+  - [Theatric](https://github.com/theatre-js/theatre/tree/main/packages/theatric) is a new controller library bulit on Theatre.js for tweaking and fine-tuning variables in your app.
+  - [Assets](/docs/latest/manual/assets) allow you to use files as values for props and even keyframes.
+  - [`rafDriver`](/docs/latest/manual/advanced#rafdrivers)s allow you to control when and how often computations in Theatre tick forward, [based](https://github.com/theatre-js/theatre/commit/d6498585295962c55a6d412e74ad7f65af86adb7) on work by [Pete Feltham](https://github.com/felthy).
+  - Items in the outline menu are now [collapsible](https://github.com/theatre-js/theatre/pull/367), based on work by [Clément Roche](https://github.com/clementroche).
+  - A new easing option called "[Hold](https://github.com/theatre-js/theatre/pull/360)", courtesy of [Colin Duffy](https://twitter.com/tomorrowevening).
+  - Number props have a [more predictable](https://github.com/theatre-js/theatre/issues/314) nudging behavior.
+  - Compound props that represent vectors (such as `{x, y, z}`) now take up less space by collapsing into a single row.
+  - Markers in the sequence editor can now [have their own labels](https://github.com/theatre-js/theatre/pull/362), by [Colin Duffy](https://twitter.com/tomorrowevening).
+  - Extensions can now contribute [flyout menus](https://github.com/theatre-js/theatre/pull/379) to the studio, by [Colin Duffy](https://twitter.com/tomorrowevening).
 
-    - Other notable changes
-      - Much simpler dataflow and faster internals via major changes to [dataverse](https://github.com/theatre-js/theatre/pull/345).
-      - Components in an object key [can now](https://github.com/theatre-js/theatre/pull/376) be 64 characters long, by [AD2018](https://github.com/AD2018).
-
-  </details>
-
-</Section>
+- Other notable changes
+  - Much simpler dataflow and faster internals via major changes to [dataverse](https://github.com/theatre-js/theatre/pull/345).
+  - Components in an object key [can now](https://github.com/theatre-js/theatre/pull/376) be 64 characters long, by [AD2018](https://github.com/AD2018).
 
 ## v0.5.1
 
-This is the latest stable version of Theatre. Upgrade by running `npm install @theatre/core@latest @theatre/studio@latest @theatre/r3f@latest` in your project.
+_December 31st 2022_
 
 - **New features**
 
@@ -51,6 +46,8 @@ This is the latest stable version of Theatre. Upgrade by running `npm install @t
   - [Fixed a bug](https://github.com/theatre-js/theatre/commit/27ef3cc1c9dfcca8d06bd53c5a7185f20c853114) that prevented audio playback in the studio.
 
 ## v0.5
+
+_September 14th 2022_
 
 Theatre.js **v0.5** · Introduces a 3D editor for React Three Fiber, complex keyframing tools, and an extensions API. [More in the blog post](/blog/theatre-05-is-out).
 
