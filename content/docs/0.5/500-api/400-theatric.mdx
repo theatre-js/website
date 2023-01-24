@@ -4,7 +4,7 @@ nav_title: 'theatric'
 excerpt: 'theatric'
 ---
 
-This is the API documentation for Theatric, an easy to use Tweakpane/Leva-like library for React, built on top of Theatre.js.
+This is the API documentation for Theatric, an easy to use [Tweakpane](https://cocopon.github.io/tweakpane/)/[Leva](https://github.com/pmndrs/leva)-like library for React, built on top of Theatre.js.
 You can use Theatric to quickly tweak values in your React components, or create quick prototypes without worrying about setting up a UI.
 
 Unlike Leva or Tweakpane, Theatric can save or export the state of your controls and load it back in later.
@@ -61,7 +61,7 @@ function Introduction() {
   const { name, age, $get, $set } = useControls({ name: 'Andrew', age: 28 })
 
   const increaseAge = useCallback(() => {
-    $set((pointer) => pointer.age, $get((pointer) = pointer.age + 1))
+    $set((pointer) => pointer.age, $get((pointer = pointer.age + 1)))
   }, [$get, $set])
 
   return (
