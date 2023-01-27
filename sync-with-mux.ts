@@ -22,7 +22,7 @@ function setOnDb(filePath: string, muxData: unknown) {
   return db
 }
 
-function getFromDb(filePath): unknown {
+function getFromDb(filePath: string): unknown {
   const db = JSON.parse(fs.readFileSync(PATH_TO_DB, { encoding: 'utf-8' }))
   return db[filePath]
 }
@@ -65,7 +65,7 @@ async function main() {
     console.log('upload', file)
 
     const readStream = await fs.createReadStream(file)
-    await fetch(upload.url, { method: 'PUT', body: readStream })
+    await fetch(upload.url, { method: 'PUT', body: readStream as any })
     const updatedUpload = await Video.Uploads.get(upload.id)
     const asset = await Video.Assets.get(updatedUpload['asset_id'])
 

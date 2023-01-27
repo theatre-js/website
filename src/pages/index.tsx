@@ -202,12 +202,6 @@ const Page: React.FC<InferGetStaticPropsType<{}>> = ({}) => {
                 create any animation, from cinematic scenes in THREE.js, to delightful UI interactions.
               </p>
               <div className="mt-12">
-                <div
-                  className="relative mt-12 flex justify-center"
-                  style={{
-                    boxShadow: '0px 0px 24px 0px rgba(0,0,0,0.7)',
-                  }}
-                ></div>
                 <Video
                   src="/images/landing-page/intro-05.mp4"
                   videoClassName="w-full"
