@@ -92,3 +92,28 @@ function createBasicRafDriver(): IRafDriver {
   return driver
 }
 ```
+
+### rafDrivers in `@theatre/r3f`
+
+You can instruct `@theatre/r3f` to use your custom `rafDriver` by wrapping your react tree in `<RafDriverProvider>`:
+
+```jsx
+import { RafDriverProvider } from '@theatre/r3f'
+import { createRafDriver } from '@theatre/core'
+
+const myCustomRafDriver = createRafDriver({ name: 'my custom raf driver', start, stop })
+
+function App() {
+  return (
+    <>
+      <RafDriverProvider driver={myCustomRafDriver}>
+        <SomeComponent />
+      </RafDriverProvider>
+      {/* you can use several rafDrivers on the same page */}
+      <RafDriverProvider driver={anotherRaDriver}>
+        <AnotherComponent />
+      </RafDriverProvider>
+    </>
+  )
+}
+```
