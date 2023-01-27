@@ -6,6 +6,7 @@ import { MetaWrapper } from '../components/common/MetaWrapper'
 import { BasicHeaderMainFooterLayout } from 'src/components/common/layouts/BasicHeaderMainFooterLayout'
 import classNames from 'classnames'
 import Image from 'next/image'
+import MuxVideoWithFallback from 'src/components/MuxVideoWithFallback'
 
 function nl2br(text: string) {
   let lines = text.split('\n')
@@ -51,7 +52,7 @@ const GetStarted = () => (
       Get started with Theatre.js
     </a>
 
-    <div className="pointer-events-none absolute inset-0 flex items-center overflow-hidden blur-lg transition-transform duration-500 group-hover:scale-110 will-change-transform">
+    <div className="pointer-events-none absolute inset-0 flex items-center overflow-hidden blur-lg transition-transform duration-500 will-change-transform group-hover:scale-110">
       <div className="aspect-square w-full scale-110">
         <div className="h-full w-full bg-gradient-to-tr from-amber-600 to-teal-600 group-hover:animate-spin-slow" />
       </div>
@@ -133,7 +134,19 @@ const Video: FC<{
         boxShadow: '0px 0px 24px 0px rgba(0,0,0,0.7)',
       }}
     >
-      <video
+      <MuxVideoWithFallback
+        className="w-full overflow-hidden rounded-lg border border-neutral-400/10"
+        path={src}
+        controls={controls}
+        autoPlay={autoplay}
+        muted={muted}
+        loop={loop}
+        playsInline={playsInline}
+        describedby={descriptorId}
+        poster={poster}
+        title=""
+      />
+      {/* <video
         className="w-full overflow-hidden rounded-lg border border-neutral-400/10"
         src={src}
         controls={controls}
@@ -143,7 +156,7 @@ const Video: FC<{
         playsInline={playsInline}
         aria-describedby={descriptorId}
         poster={poster}
-      />
+      /> */}
       <div id={descriptorId} aria-hidden="true" className="hidden">
         {children}
       </div>
@@ -189,6 +202,12 @@ const Page: React.FC<InferGetStaticPropsType<{}>> = ({}) => {
                 create any animation, from cinematic scenes in THREE.js, to delightful UI interactions.
               </p>
               <div className="mt-12">
+                <div
+                  className="relative mt-12 flex justify-center"
+                  style={{
+                    boxShadow: '0px 0px 24px 0px rgba(0,0,0,0.7)',
+                  }}
+                ></div>
                 <Video
                   src="/images/landing-page/intro-05.mp4"
                   videoClassName="w-full"

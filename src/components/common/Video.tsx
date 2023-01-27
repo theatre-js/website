@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react'
+import MuxVideoWithFallback from '../MuxVideoWithFallback'
 
 export const Video: FC<{
   src: string
@@ -14,15 +15,17 @@ export const Video: FC<{
 
   return (
     <div className={`not-prose my-8 flex justify-center overflow-hidden ${className ?? ''}`}>
-      <video
+      <MuxVideoWithFallback
         className={videoClassName ?? `w-full rounded-lg border-violet-400`}
-        src={src}
+        path={src}
         controls={controls}
         autoPlay={autoplay}
         muted
         loop={loop}
-        aria-describedby={descriptorId}
+        describedby={descriptorId}
+        title=""
       />
+
       <div id={descriptorId} aria-hidden="true" className="hidden">
         {children}
       </div>
