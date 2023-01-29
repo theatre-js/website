@@ -43,7 +43,7 @@ console.log(obj.value.bar) // prints 0, since we've introduced this prop by reco
 assert(obj === obj2) // passes, because reconfiguring the object returns the same object
 ```
 
-## Detatching objects <Since version="0.5.1" />
+## Detaching objects <Since version="0.5.1" />
 
 Objects can be detached from their sheet. This is _almost_ like deleting an object, except that Theatre will still _remember_ the prop values of this object, so if you re-create an object with the same `key`, it'll retain the old object's props values.
 
@@ -53,9 +53,9 @@ const unsubscribe = obj.onValuesChange((values) => {
   div.style.left = values.x + 'px'
 })
 
-// let's clean up our subscriptions before detatching the object
+// let's clean up our subscriptions before detaching the object
 unsubscribe()
-sheet.detatchObject('obj')
+sheet.detachObject('obj')
 ```
 
 ## Namespacing objects
