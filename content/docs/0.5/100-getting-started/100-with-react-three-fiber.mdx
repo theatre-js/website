@@ -39,16 +39,18 @@ npm install --save-dev @types/three
 ```
 
 <details>
-  <summary>Want to use `yarn`?</summary>
+<summary>Want to use `yarn`?</summary>
 
 ```bash
 # r3f and its deps
 yarn add react three @react-three/fiber
 
 # Theatre.js
+
 yarn add @theatre/core@0.5 @theatre/studio@0.5 @theatre/r3f@0.5
 
 # Three.js types (when using Typescript)
+
 yarn add --dev @types/three
 ```
 
@@ -68,31 +70,33 @@ of the `main.tsx` file with the following:
 
 ```tsx
 import * as THREE from 'three'
-import {createRoot} from 'react-dom/client'
-import React, {useRef, useState} from 'react'
-import {Canvas, useFrame} from '@react-three/fiber'
-import {getProject} from '@theatre/core'
+import { createRoot } from 'react-dom/client'
+import React, { useRef, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { getProject } from '@theatre/core'
 
 // our Theatre.js project sheet, we'll use this later
 const demoSheet = getProject('Demo Project').sheet('Demo Sheet')
 
 const App = () => {
   return (
-    <Canvas camera={{
-      position: [5, 5, -5],
-      fov: 75
-    }}>
-      <ambientLight/>
-      <pointLight position={[10, 10, 10]}/>
+    <Canvas
+      camera={{
+        position: [5, 5, -5],
+        fov: 75,
+      }}
+    >
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
       <mesh>
-        <boxGeometry args={[1, 1, 1]}/>
-        <meshStandardMaterial color="orange"/>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="orange" />
       </mesh>
     </Canvas>
   )
 }
 
-createRoot(document.getElementById('root')!).render(<App/>)
+createRoot(document.getElementById('root')!).render(<App />)
 ```
 
 <Callout type="info">
@@ -176,23 +180,25 @@ which will make the scene visible in the editor. Let's do that.
 Add an import of [SheetProvider](/docs/0.5/api/r3f#sheetprovider) from `@theatre/r3f`:
 
 ```tsx
-import {SheetProvider} from '@theatre/r3f'
+import { SheetProvider } from '@theatre/r3f'
 ```
 
 Then, add a wrapping `<SheetProvider sheet={demoSheet}>` with reference to the `demoSheet` from above:
 
 ```tsx
-<Canvas camera={{
-  position: [5, 5, -5],
-  fov: 75
-}}>
+<Canvas
+  camera={{
+    position: [5, 5, -5],
+    fov: 75,
+  }}
+>
   {/* Provide sheet created earlier with `const demoSheet = getProject('Demo Project').sheet('Demo Sheet')` */}
   <SheetProvider sheet={demoSheet}>
-    <ambientLight/>
-    <pointLight position={[10, 10, 10]}/>
+    <ambientLight />
+    <pointLight position={[10, 10, 10]} />
     <mesh>
-      <boxGeometry args={[1, 1, 1]}/>
-      <meshStandardMaterial color="orange"/>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="orange" />
     </mesh>
   </SheetProvider>
 </Canvas>
@@ -210,23 +216,25 @@ We need to mark objects as editable for the r3f extension to be able to instrume
 To make an object editable, import `editable as e` from the extension.
 
 ```tsx
-import {editable as e, SheetProvider} from '@theatre/r3f'
+import { editable as e, SheetProvider } from '@theatre/r3f'
 ```
 
 Then prefix the object's JSX element with `e.`, and add the `theatreKey` prop.
 The following code will make the point light object editable:
 
 ```tsx
-<Canvas camera={{
-  position: [5, 5, -5],
-  fov: 75
-}}>
+<Canvas
+  camera={{
+    position: [5, 5, -5],
+    fov: 75,
+  }}
+>
   <SheetProvider sheet={getProject('Demo Project').sheet('Demo Sheet')}>
-    <ambientLight/>
-    <e.pointLight theatreKey="Light" position={[10, 10, 10]}/>
+    <ambientLight />
+    <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
     <mesh>
-      <boxGeometry args={[1, 1, 1]}/>
-      <meshStandardMaterial color="orange"/>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="orange" />
     </mesh>
   </SheetProvider>
 </Canvas>
@@ -243,17 +251,19 @@ We can verify that the point light object is editable by opening the scene edito
 We can make the cube editable in the same way:
 
 ```tsx
-<Canvas camera={{
-  position: [5, 5, -5],
-  fov: 75
-}}>
+<Canvas
+  camera={{
+    position: [5, 5, -5],
+    fov: 75,
+  }}
+>
   <SheetProvider sheet={getProject('Demo Project').sheet('Demo Sheet')}>
-    <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75}/>
-    <ambientLight/>
-    <e.pointLight theatreKey="Light" position={[10, 10, 10]}/>
+    <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
+    <ambientLight />
+    <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
     <e.mesh theatreKey="Cube">
-      <boxGeometry args={[1, 1, 1]}/>
-      <meshStandardMaterial color="orange"/>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="orange" />
     </e.mesh>
   </SheetProvider>
 </Canvas>
@@ -269,18 +279,18 @@ use it for rendering, and it is also editable.
 Let's remove the `camera` prop from the `Canvas` element, and add our `PerspectiveCamera` component from `@theatre/r3f`.
 
 ```tsx
-import {PerspectiveCamera} from '@react-three/r3f'
+import { PerspectiveCamera } from '@react-three/r3f'
 ```
 
 ```tsx
 <Canvas>
   <SheetProvider sheet={getProject('Demo Project').sheet('Demo Sheet')}>
-    <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75}/>
-    <ambientLight/>
-    <e.pointLight theatreKey="Light" position={[10, 10, 10]}/>
+    <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
+    <ambientLight />
+    <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
     <e.mesh theatreKey="Cube">
-      <boxGeometry args={[1, 1, 1]}/>
-      <meshStandardMaterial color="orange"/>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="orange" />
     </e.mesh>
   </SheetProvider>
 </Canvas>
@@ -338,7 +348,7 @@ getProject('Demo Project')
 with this new code:
 
 ```ts
-getProject('Demo Project', {state: demoProjectState})
+getProject('Demo Project', { state: demoProjectState })
 ```
 
 We are now passing the saved animation state to [getProject](/docs/0.5/api/core#getproject).
@@ -361,18 +371,18 @@ the `1` second mark:
 ```tsx
 const App = () => {
   useEffect(() => {
-    demoSheet.project.ready.then(() => demoSheet.sequence.play({iterationCount: Infinity, range: [0, 1]}))
+    demoSheet.project.ready.then(() => demoSheet.sequence.play({ iterationCount: Infinity, range: [0, 1] }))
   }, [])
 
   return (
     <Canvas>
       <SheetProvider sheet={demoSheet}>
-        <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75}/>
-        <ambientLight/>
-        <e.pointLight theatreKey="Light" position={[10, 10, 10]}/>
+        <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
+        <ambientLight />
+        <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
         <e.mesh theatreKey="Cube">
-          <boxGeometry args={[1, 1, 1]}/>
-          <meshStandardMaterial color="orange"/>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="orange" />
         </e.mesh>
       </SheetProvider>
     </Canvas>
@@ -384,41 +394,41 @@ In summary, your `main.tsx` should now have the following code:
 
 ```tsx
 import './index.css'
-import {createRoot} from 'react-dom/client'
-import React, {useEffect} from 'react'
-import {Canvas} from '@react-three/fiber'
+import { createRoot } from 'react-dom/client'
+import React, { useEffect } from 'react'
+import { Canvas } from '@react-three/fiber'
 import studio from '@theatre/studio'
 import extension from '@theatre/r3f/dist/extension'
-import {SheetProvider, editable as e, PerspectiveCamera} from '@theatre/r3f'
-import {getProject} from '@theatre/core'
+import { SheetProvider, editable as e, PerspectiveCamera } from '@theatre/r3f'
+import { getProject } from '@theatre/core'
 import demoProjectState from './state.json'
 
 studio.initialize()
 studio.extend(extension)
 
-const demoSheet = getProject('Demo Project', {state: demoProjectState}).sheet('Demo Sheet')
+const demoSheet = getProject('Demo Project', { state: demoProjectState }).sheet('Demo Sheet')
 
 const App = () => {
   useEffect(() => {
-    demoSheet.project.ready.then(() => demoSheet.sequence.play({iterationCount: Infinity, range: [0, 1]}))
+    demoSheet.project.ready.then(() => demoSheet.sequence.play({ iterationCount: Infinity, range: [0, 1] }))
   }, [])
 
   return (
     <Canvas>
       <SheetProvider sheet={demoSheet}>
-        <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75}/>
-        <ambientLight/>
-        <e.pointLight theatreKey="Light" position={[10, 10, 10]}/>
+        <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
+        <ambientLight />
+        <e.pointLight theatreKey="Light" position={[10, 10, 10]} />
         <e.mesh theatreKey="Cube">
-          <boxGeometry args={[1, 1, 1]}/>
-          <meshStandardMaterial color="orange"/>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="orange" />
         </e.mesh>
       </SheetProvider>
     </Canvas>
   )
 }
 
-createRoot(document.getElementById('root')!).render(<App/>)
+createRoot(document.getElementById('root')!).render(<App />)
 ```
 
 To check what our page looks like without the Studio, we can press `Alt/Option + \` to hide it. Alternatively, we can

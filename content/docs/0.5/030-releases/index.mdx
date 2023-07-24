@@ -3,11 +3,37 @@ title: Releases
 excerpt: Theatre.js Releases
 ---
 
+## v0.6.2
+
+_July 24th 2023_
+
+This is a maintenance release, ahead of the upcoming 1.0 release. Upgrade by running `npm install @theatre/core@latest @theatre/studio@latest @theatre/r3f@latest` in your project.
+
+- This update includes:
+  - [A fix](https://github.com/theatre-js/theatre/pull/433) for the compatibility issue with THREE.js r154, by [Colin Duffy](https://twitter.com/tomorrowevening).
+  - You can now read the keyframes of a prop by calling [`sequence.__experimental_getKeyframes()`](/docs/latest/api/core#sequence.__experimental_getkeyframes_pointer_), [implemented](https://github.com/theatre-js/theatre/pull/426) by [Adam Krebs](https://github.com/akre54).
+  - It is [now](https://github.com/theatre-js/theatre/pull/425) easier to sequence props by just clicking on their control indicator.
+
+## v0.6.1
+
+_May 12th 2023_
+
+This is a maintenance release, ahead of the upcomign 1.0 release.
+
+- This update includes:
+  - [Added](https://github.com/theatre-js/theatre/commit/4d7373e1a9b4263923c0923d0e48976db65a10be) support for typescript's bundle mode to `@theatre/r3f`.
+  - [Implemented](https://github.com/theatre-js/theatre/pull/391) the experimental `createContentOfSaveFileTyped()`, by [Adam Krebs](https://github.com/akre54).
+  - A small UX [improvement](https://github.com/theatre-js/theatre/commit/6c7da6f653b452f1ce9d2995eae65606703598ab) for PlayheadPositionPopover.
+  - An [experimental API](https://github.com/theatre-js/theatre/pull/393) for forgetting sheets and objects.
+  - [Implemented](https://github.com/theatre-js/theatre/pull/142) a method to clear the persistent storage.
+  - A substantial perf improvement for `@theatre/studio`.
+  - The default and static overrides are now [distinguisable](https://github.com/theatre-js/theatre/commit/6f8e91ed5f6ed34a527553ec4c04b9e5b8316524) in the UI.
+  - A [temporary](https://github.com/theatre-js/theatre/pull/386) API for enabling/disabling triggering playback via the spacebar.
+  - And several UX improvements.
+
 ## v0.6.0
 
 _Jan 25th 2023_
-
-This is the latest stable version of Theatre. Upgrade by running `npm install @theatre/core@latest @theatre/studio@latest @theatre/r3f@latest` in your project.
 
 - **New features**
 

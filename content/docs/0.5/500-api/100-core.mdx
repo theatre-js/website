@@ -285,6 +285,17 @@ button.addEventListener('click', async () => {
 
 _To read about Audio, check out the [Using Audio Manual](/docs/0.5/manual/audio)!_
 
+### sequence.\_\_experimental_getKeyframes$api(pointer) <Since version="0.6.1" />
+
+Returns the keyframes of a given prop of an object.
+
+```ts
+const obj = sheet.object('My Object', { position: { x: 0, y: 0 } })
+
+// (assuming the user has sequenced the x prop)
+const keyframes = sequence.__experimental_getKeyframes(obj.props.position.x) // an array of keyframes
+```
+
 ## Object
 
 A Sheet Object returned by [`sheet.object`](#sheet.object) with some given props.
