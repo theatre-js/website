@@ -568,6 +568,21 @@ const texture = types.image('', {
 })
 ```
 
+### types.file$api(default, opts?) <Since version="0.7.0" />
+
+An file prop type.
+This prop type may take [a custom interpolator](#docs-500-api-100-core-custom-interpolators) as an option.
+
+File props are asset props, meaning their values are asset handles that can be used to [retrieve a URL for that asset](#project.getasseturl_assethandle_).
+
+The default value for file props is the id of the default asset. If you don't know the id, an empty string or `undefined` represents the lack of an assigned asset.
+
+```ts
+const model = types.file('', {
+  label: '3D Model (GLTF)',
+})
+```
+
 ## Pointers
 
 Pointers basically point to values that you can [read](/docs/0.5/api/core#val-fn), [observe](/docs/0.5/api/core#onchange-fn), and in some cases [change](/docs/0.5/api/studio#studio.transaction-fn).

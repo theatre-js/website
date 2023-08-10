@@ -461,6 +461,11 @@ Below is a CodeSandbox with running TypeScript code.
   and vice versa. You can even drag around the objects while creating keyframes for animations.
 </Callout>
 
+## Extensions are hot-reloadable <Since version="0.7.0" />
+
+Studio extensions are hot-reloadable, meaning that you can make changes to your extension code and see the changes reflected in the Studio without having to reload the page.
+Simply run `studio.extend(extension, {__experimental_reconfigure: true})` to replace your extension with its new version.
+
 ## Next steps
 
 Want to learn more?

@@ -3,11 +3,37 @@ title: Releases
 excerpt: Theatre.js Releases
 ---
 
+## v0.7.0
+
+This is the latest version of Theatre.js. Upgrade by running `npm install @theatre/core@latest @theatre/studio@latest @theatre/r3f@latest` in your project.
+
+_August 10th 2023_
+
+- **New features**
+
+  - [`@theatre/r3f`](/docs/latest/extensions/react-three-fiber) now supports THREE.js r155.
+  - [Assets](/docs/latest/manual/assets) [now](https://github.com/theatre-js/theatre/pull/408) support the file type, so any file can be used as an asset, by [João Leite](https://github.com/joaogsleite).
+  - [`@theatre/dataverse`](https://github.com/theatre-js/theatre/blob/main/packages/dataverse) and [`@theatre/react`](https://github.com/theatre-js/theatre/blob/main/packages/react) are now marked as stable and can be used outside of Theatre.js.
+  - [Extensions](/docs/latest/manual/authoring-extensions) are not hot-reloadable.
+
+- **Breaking changes**
+
+  - [`@theatre/r3f`](/docs/latest/extensions/react-three-fiber): The r3f extension now requires `three` at `>=0.155.0` and `@react-three/fiber` at `>=8.13.6`.
+  - [`@theatre/react`](https://github.com/theatre-js/theatre/blob/main/packages/react): The `usePrismWithoutReRender()` and `usePrismInstanceWithoutReRender()` have been removed.
+
+- **Bug fixes**
+
+  - [`@theatre/react`](https://github.com/theatre-js/theatre/blob/main/packages/react) is now hot-reloadable.
+
+- **Internal changes**
+  - Theatre.js now uses React 18 under the hood.
+  - The playground is now hot-reloadable.
+  - New visual regression tests.
+  - Compat fixtures now test Theatre.js with Vite, Next.js, React 18, React 17, and other popular JS tools.
+
 ## v0.6.2
 
 _July 24th 2023_
-
-This is a maintenance release, ahead of the upcoming 1.0 release. Upgrade by running `npm install @theatre/core@latest @theatre/studio@latest @theatre/r3f@latest` in your project.
 
 - This update includes:
   - [A fix](https://github.com/theatre-js/theatre/pull/433) for the compatibility issue with THREE.js r154, by [Colin Duffy](https://twitter.com/tomorrowevening).
@@ -17,8 +43,6 @@ This is a maintenance release, ahead of the upcoming 1.0 release. Upgrade by run
 ## v0.6.1
 
 _May 12th 2023_
-
-This is a maintenance release, ahead of the upcomign 1.0 release.
 
 - This update includes:
   - [Added](https://github.com/theatre-js/theatre/commit/4d7373e1a9b4263923c0923d0e48976db65a10be) support for typescript's bundle mode to `@theatre/r3f`.
