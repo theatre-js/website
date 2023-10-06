@@ -61,13 +61,13 @@ sheet.detachObject('obj')
 ## Namespacing objects
 
 The key of the sheet object can be used to namespace objects.
-Namespaces are separated by "/" characters in the object's key (e.g. "Namespace-1/Namespace-2/Object-name") and displayed in indented groups in the [Outline Panel](/docs/0.5/manual/Studio#outline-panel) as seen in the screenshot below.
+Namespaces are separated by "/" characters in the object's key (e.g. "Namespace-1 / Namespace-2 / Object-name") and displayed in indented groups in the [Outline Panel](/docs/0.5/manual/Studio#outline-panel) as seen in the screenshot below.
 
 ```ts
 // `obj1` and `obj2` belong to the `Boxes` namepace,
 // which is under the `Basics` namespace
-const obj1 = sheet.object('Basics/Boxes/box-0', { x: 0 })
-const obj2 = sheet.object('Basics/Boxes/box-1', { x: 0 })
+const obj1 = sheet.object('Basics / Boxes / box-0', { x: 0 })
+const obj2 = sheet.object('Basics / Boxes / box-1', { x: 0 })
 ```
 
 <Screenshot src="/images/docs/0.5/manual/objects/namespacing.png" alt="Namespacing" />
