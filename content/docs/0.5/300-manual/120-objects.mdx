@@ -7,7 +7,7 @@ excerpt: >
 ## What is an Object in Theatre.js?
 
 Everything on the page or in the scene is represented by a Theatre.js Sheet Object.
-These Sheet Objects have a matching [prop](/docs/0.5/manual/prop-types) for all the properties we want to animate for an object in our scene.
+These Sheet Objects have a matching [prop](/docs/latest/manual/prop-types) for all the properties we want to animate for an object in our scene.
 
 Sheet Object props in all cases have a type (`number`, `string`, etc.), and an initial value.
 
@@ -15,10 +15,10 @@ Objects can represent THREE.js objects, `<div>`s, or virtual objects that don't 
 
 ## Creating Sheet Objects
 
-You can create a Sheet Object with the [Sheet.object](/docs/0.5/api/core#sheet.object) function in `@theatre/core`.
+You can create a Sheet Object with the [Sheet.object](/docs/latest/api/core#sheet.object) function in `@theatre/core`.
 If a Sheet Object with the given name already exists, it will return the existing Sheet Object instead of creating a new one.
 We create a Sheet Object by specifying its name and its props. In many cases, you can use a regular JavaScript object to specify the props,
-however if you need more control, you can specify the types [explicitly](/docs/0.5/manual/prop-types).
+however if you need more control, you can specify the types [explicitly](/docs/latest/manual/prop-types).
 
 ```ts
 // sheet is a Sheet created earlier through Poject.sheet
@@ -61,7 +61,7 @@ sheet.detachObject('obj')
 ## Namespacing objects
 
 The key of the sheet object can be used to namespace objects.
-Namespaces are separated by "/" characters in the object's key (e.g. "Namespace-1 / Namespace-2 / Object-name") and displayed in indented groups in the [Outline Panel](/docs/0.5/manual/Studio#outline-panel) as seen in the screenshot below.
+Namespaces are separated by "/" characters in the object's key (e.g. "Namespace-1 / Namespace-2 / Object-name") and displayed in indented groups in the [Outline Panel](/docs/latest/manual/Studio#outline-panel) as seen in the screenshot below.
 
 ```ts
 // `obj1` and `obj2` belong to the `Boxes` namepace,
@@ -74,11 +74,11 @@ const obj2 = sheet.object('Basics / Boxes / box-1', { x: 0 })
 
 ## API
 
-Learn more about related API at [Sheet Object API docs](/docs/0.5/api/core#object).
+Learn more about related API at [Sheet Object API docs](/docs/latest/api/core#object).
 
 ## Learn more
 
 Want to learn more?
-Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+Take a look at some more in-depth topics from [our manual](/docs/latest/manual):
 
 <ChildCards urlPath="/docs/0.5manual" exclude={(n) => n.urlPath.includes('objects')} />

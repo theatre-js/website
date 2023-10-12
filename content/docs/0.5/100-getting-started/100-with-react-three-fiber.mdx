@@ -7,7 +7,7 @@ excerpt: >
 
 In this guide, you'll learn how to animate a 3D scene by integrating Theatre.js into
 a [`@react-three/fiber`](https://docs.pmnd.rs/react-three-fiber) project using the `@theatre/r3f` extension. For a plain
-Three.js guide, see [Getting started with THREE.js](/docs/0.5/getting-started/with-three-js).
+Three.js guide, see [Getting started with THREE.js](/docs/latest/getting-started/with-three-js).
 
 **While Theatre.js is library-agnostic, extensions help you more easily integrate it with other tools, frameworks, and
 libraries.**
@@ -113,7 +113,7 @@ following screenshot:
 Now, let's add Theatre.js Studio, the Theatre.js GUI that enables you to edit your scene and animations while developing
 your project.
 
-Add the following lines below the other imports in `main.tsx` to [initialize](/docs/0.5/api/studio#studio.initialize)
+Add the following lines below the other imports in `main.tsx` to [initialize](/docs/latest/api/studio#studio.initialize)
 Theatre.js Studio.
 
 ```ts
@@ -126,7 +126,7 @@ studio.initialize()
 
 You will now see the Studio appear on top of your webpage.
 However, the r3f extension is still missing.
-Let's add the extension by calling [studio.extend](/docs/0.5/api/studio#studio.extend):
+Let's add the extension by calling [studio.extend](/docs/latest/api/studio#studio.extend):
 
 ```ts
 import studio from '@theatre/studio'
@@ -136,9 +136,9 @@ studio.initialize()
 studio.extend(extension)
 ```
 
-You can call [studio.extend](/docs/0.5/api/studio#studio.extend) as many times as you want, once for any extension you
+You can call [studio.extend](/docs/latest/api/studio#studio.extend) as many times as you want, once for any extension you
 want to use.
-You can even [make your own extension](/docs/0.5/manual/authoring-extensions) to extend Theatre.js's capabilities.
+You can even [make your own extension](/docs/latest/manual/authoring-extensions) to extend Theatre.js's capabilities.
 
 <details>
   <summary>Tip: only include Theatre.js Studio in "development" builds</summary>
@@ -174,10 +174,10 @@ our scene yet.
 <Screenshot src="/images/docs/0.5/getting-started/with-react-three-fiber/scene-not-connected.png" />
 
 We can connect our scene to the r3f extension by wrapping our r3f scene in
-a [SheetProvider](/docs/0.5/api/r3f#sheetprovider) component,
+a [SheetProvider](/docs/latest/api/r3f#sheetprovider) component,
 which will make the scene visible in the editor. Let's do that.
 
-Add an import of [SheetProvider](/docs/0.5/api/r3f#sheetprovider) from `@theatre/r3f`:
+Add an import of [SheetProvider](/docs/latest/api/r3f#sheetprovider) from `@theatre/r3f`:
 
 ```tsx
 import { SheetProvider } from '@theatre/r3f'
@@ -351,7 +351,7 @@ with this new code:
 getProject('Demo Project', { state: demoProjectState })
 ```
 
-We are now passing the saved animation state to [getProject](/docs/0.5/api/core#getproject).
+We are now passing the saved animation state to [getProject](/docs/latest/api/core#getproject).
 By doing this, The Theatre.js Project will be initialized with the saved animation from `state.json` instead of with the
 animation saved in `localStorage`.
 Don't worry; any changes you make to your animation in Studio will still be saved to `localStorage` after you do this (
@@ -362,9 +362,9 @@ Perhaps you will want to play the animation when the App component mounts,
 or you may want to play it in response to events like a button-click.
 Here, we'll use code to play the animation in a `useEffect` inside our `App` component.
 
-To play an animation, we need to get a reference to its [sequence](/docs/0.5/concepts#sequences) and call
-the [play](/docs/0.5/api/core#sequence.play) method on it.
-[Sequence.play](/docs/0.5/api/core#sequence.play) accepts a number of options.
+To play an animation, we need to get a reference to its [sequence](/docs/latest/concepts#sequences) and call
+the [play](/docs/latest/api/core#sequence.play) method on it.
+[Sequence.play](/docs/latest/api/core#sequence.play) accepts a number of options.
 Here, we are going to instruct Theatre.js to play the animation forever and in the range between the `0` second and
 the `1` second mark:
 
@@ -439,9 +439,9 @@ comment out `studio.initialize()`.
 When we are done and ready to deploy our webpage to production, we only need to do two things.
 
 1. Make sure that we have the latest project state exported to a JSON file and passed
-   to [getProject](/docs/0.5/api/core#getproject).
-2. Remove [studio.initialize](/docs/0.5/api/studio#studio.initialize)
-   and [studio.extend](/docs/0.5/api/studio#studio.extend).
+   to [getProject](/docs/latest/api/core#getproject).
+2. Remove [studio.initialize](/docs/latest/api/studio#studio.initialize)
+   and [studio.extend](/docs/latest/api/studio#studio.extend).
 
 We can also achieve the last step without manually editing the code every time by using environment-checks and relying
 on our bundler's tree-shaking feature:
@@ -465,10 +465,10 @@ if (process.env.NODE_ENV === 'development') {
 ## Next steps
 
 In this guide, we walked through how Theatre.js can be used to bring animations to our R3F projects.
-Consider taking your project a step further by learning a more in-depth topic from [our manual](/docs/0.5/manual):
+Consider taking your project a step further by learning a more in-depth topic from [our manual](/docs/latest/manual):
 
 <ChildCards urlPath="/docs/0.5/manual" />
 
-Additionally, learn more about [Theatre.js' concepts](/docs/0.5/concepts).
+Additionally, learn more about [Theatre.js' concepts](/docs/latest/concepts).
 If you need any help or would like to share what you're working on with our community,
 please [join the Theatre.js Discord](https://discord.gg/bm9f8F9Y9N).

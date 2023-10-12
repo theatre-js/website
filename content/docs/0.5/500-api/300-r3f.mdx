@@ -7,7 +7,7 @@ excerpt: '@theatre/r3f'
 This is a documentation page for the r3f extension that makes it easier to use Theatre.js
 with [React Three Fiber](https://www.npmjs.com/package/@react-three/fiber).
 Want to learn how to set up Theater.js with React Three Fiber?
-Head over to the [Getting Started with React Three Fiber](/docs/0.5/getting-started/with-react-three-fiber) page
+Head over to the [Getting Started with React Three Fiber](/docs/latest/getting-started/with-react-three-fiber) page
 
 ## editable
 
@@ -30,7 +30,7 @@ While they take the same props as their r3f counterparts, there are a couple of 
 
 #### props.theatreKey$api
 
-The element's [object's](/docs/0.5/api/core#object) name in Theatre.js.
+The element's [object's](/docs/latest/api/core#object) name in Theatre.js.
 All editable elements **need** to have a `theatreKey` prop so that they can be connected to a backing-object.
 
 ```tsx
@@ -153,8 +153,8 @@ const EditableCamera = editable(PerspectiveCamera, 'perspectiveCamera')
 
 ## SheetProvider
 
-All editable elements are backed by a Theatre.js [sheet object](/docs/0.5/api/core#object).
-The r3f extension needs to know what [sheet](/docs/0.5/api/core#sheet) to attach these objects to. The way it does this
+All editable elements are backed by a Theatre.js [sheet object](/docs/latest/api/core#object).
+The r3f extension needs to know what [sheet](/docs/latest/api/core#sheet) to attach these objects to. The way it does this
 is through the `SheetProvider` React component.
 `SheetPovider`s can be arbitrarily placed and nested, there are only two rules:
 

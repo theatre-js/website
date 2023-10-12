@@ -40,23 +40,23 @@ The object would look like the following in the studio.
   alt="The intensity property of the Directional Light in the Details Panel"
 />
 
-To animate the `intensity` property of the object above, right-click on its name in the [Details Panel](/docs/0.5/manual/Studio#details-panel), and select the "Sequence" option from the context menu.
+To animate the `intensity` property of the object above, right-click on its name in the [Details Panel](/docs/latest/manual/Studio#details-panel), and select the "Sequence" option from the context menu.
 
 <Video src="/images/docs/0.5/manual/sequences/01-sequence-a-prop.mp4">Sequence the "intensity" prop</Video>
 
-In the [prop types guide](/docs/0.5/manual/prop-types), we mentioned the difference between simple props (like `string` or `number`) and compound props (a group of named props).
+In the [prop types guide](/docs/latest/manual/prop-types), we mentioned the difference between simple props (like `string` or `number`) and compound props (a group of named props).
 The props within compound props can be sequenced all at once by right-clicking on the name of the compound prop and selecting the "Sequence all" option in the context menu.
 
 <Video src="/images/docs/0.5/manual/sequences/02-sequence-compound-props.mp4">Sequence the rotation prop</Video>
 
-You can use the "Make static"/"Make all static" menu items from the same context menus for removing the prop from the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor).
+You can use the "Make static"/"Make all static" menu items from the same context menus for removing the prop from the [Sequence Editor](/docs/latest/manual/Studio#sequence-editor).
 Note that this will also remove all the keyframes that belong to that prop, and thus all the animation.
 
 <Video src="/images/docs/0.5/manual/sequences/03-make-props-static.mp4">Make props static</Video>
 
 ## Adding/removing keyframes
 
-Now that we have the props in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor), we can finally animate them by inserting keyframes into the timeline.
+Now that we have the props in the [Sequence Editor](/docs/latest/manual/Studio#sequence-editor), we can finally animate them by inserting keyframes into the timeline.
 
 <Video src="/images/docs/0.5/manual/sequences/04-adding-keyframes.mp4">Adding keyframes</Video>
 
@@ -66,7 +66,7 @@ Removing keyframes is as easy as right-clicking on them and selecting the "Delet
 
 ## Editing keyframe values in the inline editor
 
-An easy and quick way to edit the value of a keyframe is to left-click on the keyframe in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor) and modify its value in the inline editor popup.
+An easy and quick way to edit the value of a keyframe is to left-click on the keyframe in the [Sequence Editor](/docs/latest/manual/Studio#sequence-editor) and modify its value in the inline editor popup.
 This works for all the prop types.
 
 <Video src="/images/docs/0.5/manual/sequences/14-inline-editor.mp4">Inline editor</Video>
@@ -97,7 +97,7 @@ After that, you can move the playhead to the position where you want the pasted 
 ## Focus range
 
 The Focus Range is a very useful feature if you want to focus on editing a small section of the sequence.
-Create a focus range on the selected section of the sequence by holding down the `Shift` key and dragging the cursor from the start of the section to the end in the top bar of the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor).
+Create a focus range on the selected section of the sequence by holding down the `Shift` key and dragging the cursor from the start of the section to the end in the top bar of the [Sequence Editor](/docs/latest/manual/Studio#sequence-editor).
 
 <Video src="/images/docs/0.5/manual/sequences/06-create-a-focus-range.mp4">Create a focus range</Video>
 
@@ -119,7 +119,7 @@ You can fuzzy-search for the function's name (like "linear" or "quad-in-out"), o
 ## Using the multi-track editor
 
 The multi-track curve editor comes in handy when you want to edit the speed curve of one or more tracks by hand.
-To activate it you just have to click the icon next to the name of the track in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor).
+To activate it you just have to click the icon next to the name of the track in the [Sequence Editor](/docs/latest/manual/Studio#sequence-editor).
 This will open up the multi-track curve editor with the speed curves in it that you can edit by moving their handles.
 The curves have the same color as the icon of the track they belong to.
 
@@ -127,7 +127,7 @@ The curves have the same color as the icon of the track they belong to.
 
 ## Selections
 
-Selections can be made in the [Sequence Editor](/docs/0.5/manual/Studio#sequence-editor) by holding down `Shift` and dragging the mouse to create a selection rectangle area.
+Selections can be made in the [Sequence Editor](/docs/latest/manual/Studio#sequence-editor) by holding down `Shift` and dragging the mouse to create a selection rectangle area.
 Selected keyframes can be moved or deleted together.
 
 <Video src="/images/docs/0.5/manual/sequences/13-selections.mp4">Selections</Video>
@@ -138,17 +138,17 @@ Play and pause with `Space` while the Studio is focused.
 
 ## Programmatic control
 
-You can do a lot more when interacting with the `sheet.sequence` directly in our code which you can learn more about in [the Sequence API Reference](/docs/0.5/api/core#sequence).
+You can do a lot more when interacting with the `sheet.sequence` directly in our code which you can learn more about in [the Sequence API Reference](/docs/latest/api/core#sequence).
 
-- [Sequence.play](/docs/0.5/api/core#sequence.play): play at a position, with repeats, in direction, etc
-- [Sequence.pause](/docs/0.5/api/core#sequence.pause): pausing a sequence
-- [Sequence.position](/docs/0.5/api/core#sequence.position): getting the position of the playhead
-- [Sequence.pointer](/docs/0.5/api/core#sequence.pointer): watching additional data as it changes
-- [Sequence.attachAudio](/docs/0.5/api/core#sequence.attachAudio): directly attaching audio to play with the sequence
+- [Sequence.play](/docs/latest/api/core#sequence.play): play at a position, with repeats, in direction, etc
+- [Sequence.pause](/docs/latest/api/core#sequence.pause): pausing a sequence
+- [Sequence.position](/docs/latest/api/core#sequence.position): getting the position of the playhead
+- [Sequence.pointer](/docs/latest/api/core#sequence.pointer): watching additional data as it changes
+- [Sequence.attachAudio](/docs/latest/api/core#sequence.attachAudio): directly attaching audio to play with the sequence
 
 ## Learn more
 
 Want to learn more?
-Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+Take a look at some more in-depth topics from [our manual](/docs/latest/manual):
 
 <ChildCards urlPath="/docs/0.5/manual" exclude={(n) => n.urlPath.includes('sequences')} />

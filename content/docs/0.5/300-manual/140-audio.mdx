@@ -16,12 +16,12 @@ export const playButton = (
 ## Introduction
 
 In this manual, we'll learn how to add music tracks that are synchronized to our animation.
-We'll add a music track to a [Sequence](/docs/0.5/manual/sequences).
-If you're new to sequences, check out [Working with Sequences](/docs/0.5/manual/sequences) or the [`Sequence` API Reference](/docs/0.5/api/core#sequence).
+We'll add a music track to a [Sequence](/docs/latest/manual/sequences).
+If you're new to sequences, check out [Working with Sequences](/docs/latest/manual/sequences) or the [`Sequence` API Reference](/docs/latest/api/core#sequence).
 
 ## Adding audio tracks to Sequences
 
-We can attach audio tracks to Sequences using [sequence.attachAudio](/docs/0.5/api/core#sequence.attachaudio).
+We can attach audio tracks to Sequences using [sequence.attachAudio](/docs/latest/api/core#sequence.attachaudio).
 Theatre.js will then play the audio track every time the Sequence is played with the timings in sync.
 
 ```ts
@@ -44,7 +44,7 @@ In the above example, Theatre.js will:
    </Callout>
 
 3. [Decode](https://docs.theatrejs.com/in-depth/#sound-and-music:~:text=Decode,the%20audio.) the audio.
-4. Resolve the returned Promise. After this, when you call [Sequence.play](/docs/0.5/api/core#sequence.play), the audio track will play simultaneously and in sync.
+4. Resolve the returned Promise. After this, when you call [Sequence.play](/docs/latest/api/core#sequence.play), the audio track will play simultaneously and in sync.
 
 ## Create a custom audio graph
 
@@ -106,6 +106,6 @@ sheet.sequence
 ## Learn more
 
 Want to learn more?
-Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+Take a look at some more in-depth topics from [our manual](/docs/latest/manual):
 
 <ChildCards urlPath="/docs/0.5/manual" exclude={(n) => n.urlPath.includes('audio')} />

@@ -105,10 +105,10 @@ Now we should see `HTML Animation Tutorial > Sheet 1: Default > Heading 1` under
 <TheatreTutorialCodePreview filename={htmlFileNameString} />
 
 We've just configured our Theatre.js Project structure, but if we try to change any values
-in the [Details Panel](/docs/0.5/manual/Studio#details-panel) on the right, they will not yet change any part of the original HTML Welcome page.
+in the [Details Panel](/docs/latest/manual/Studio#details-panel) on the right, they will not yet change any part of the original HTML Welcome page.
 
 Next, let's ensure the values in Theatre.js are applied to our page's elements.
-We can call the [Object.onValuesChange](/docs/0.5/api/core#object.onvalueschange) method on `obj` to listen to the value changes on our Object.
+We can call the [Object.onValuesChange](/docs/latest/api/core#object.onvalueschange) method on `obj` to listen to the value changes on our Object.
 
 ```javascript
 const articleHeadingElement = document.getElementById('article-heading')
@@ -120,7 +120,7 @@ obj.onValuesChange((obj) => {
 ```
 
 Now that our code synchronizes Theatre.js with the `articleHeadingElement`'s style,
-try dragging or clicking on the number beside "y" or "opacity" in the [Details Panel](/docs/0.5/manual/Studio#details-panel)
+try dragging or clicking on the number beside "y" or "opacity" in the [Details Panel](/docs/latest/manual/Studio#details-panel)
 on the right in the preview below.
 
 <TheatreTutorialCodePreview filename={htmlFileNameString} />
@@ -328,6 +328,6 @@ Want to learn more ways to use Theatre.js? Check out another getting started gui
 
 <ChildCards urlPath="/docs/0.5/getting-started" exclude={(n) => n.urlPath.includes('with-html-svg')} />
 
-Also, take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+Also, take a look at some more in-depth topics from [our manual](/docs/latest/manual):
 
 <ChildCards urlPath="/docs/0.5/manual" />

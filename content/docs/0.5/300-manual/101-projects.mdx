@@ -13,7 +13,7 @@ We can create multiple Projects on a single web page, but often one project is s
 
 ## Creating projects
 
-You can create a project with the [getProject](/docs/0.5/api/core#getproject) function in `@theatre/core`.
+You can create a project with the [getProject](/docs/latest/api/core#getproject) function in `@theatre/core`.
 If a project with the given name already exists, it will return the existing project instead of creating a new one.
 
 ```typescript
@@ -36,11 +36,11 @@ This state is stored as a JSON object in `localStorage` when the studio is open 
   alt="The state of the project in the local storage"
 />
 
-To export the project, click on the name of the project in the [Outline Panel](/docs/0.5/manual/Studio#outline-panel) of the studio and then click on the "Export [Project's name]" button in the top right corner of the screen as seen below.
+To export the project, click on the name of the project in the [Outline Panel](/docs/latest/manual/Studio#outline-panel) of the studio and then click on the "Export [Project's name]" button in the top right corner of the screen as seen below.
 
 <Video src="/images/docs/0.5/manual/projects/01-save-a-project.mp4">Saving a project's state</Video>
 
-You can load a project's state from a JSON file by passing the state down as an object in the configuration of [getProject](/docs/0.5/api/core#getproject):
+You can load a project's state from a JSON file by passing the state down as an object in the configuration of [getProject](/docs/latest/api/core#getproject):
 
 ```typescript
 import { getProject } from '@theatre/core'
@@ -50,9 +50,9 @@ import projectState from './state.json'
 const project = getProject('My Project', { state: projectState })
 ```
 
-Currently, the configuration object of [getProject](/docs/0.5/api/core#getproject) consists only of the `state` property.
+Currently, the configuration object of [getProject](/docs/latest/api/core#getproject) consists only of the `state` property.
 
-When using Studio, loading a project happens asynchronously. You can wait for the project to load through [Project.ready](/docs/0.5/api/core#project.ready) and [Project.isReady](/docs/0.5/api/core#project.isready)
+When using Studio, loading a project happens asynchronously. You can wait for the project to load through [Project.ready](/docs/latest/api/core#project.ready) and [Project.isReady](/docs/latest/api/core#project.isready)
 
 ```ts
 project.ready.then(() => console.log('Project loaded!'))
@@ -60,11 +60,11 @@ project.ready.then(() => console.log('Project loaded!'))
 
 ## API
 
-Learn more about related API at [Project API docs](/docs/0.5/api/core#project).
+Learn more about related API at [Project API docs](/docs/latest/api/core#project).
 
 ## Learn more
 
 Want to learn more?
-Take a look at some more in-depth topics from [our manual](/docs/0.5/manual):
+Take a look at some more in-depth topics from [our manual](/docs/latest/manual):
 
 <ChildCards urlPath="/docs/0.5/manual" exclude={(n) => n.urlPath.includes('projects')} />

@@ -82,7 +82,7 @@ _December 31st 2022_
 
 - **New features**
 
-  - A new [Camera](docs/0.5/api/r3f#cameras) implementation with a convenient `lookAt` target.
+  - A new [Camera](/docs/0.5/api/r3f#cameras) implementation with a convenient `lookAt` target.
   - You can now dynamically remove objects via [`Sheet.detatchObject()`](/docs/latest/manual/objects#detatching-objects).
   - Objects can now be reconfigured on the fly via the [`reconfigure` option](/docs/latest/manual/objects#reconfiguring-existing-objects).
   - `@theatre/r3f` now supports hot reloading.
@@ -102,23 +102,23 @@ _September 14th 2022_
 
 Theatre.js **v0.5** · Introduces a 3D editor for React Three Fiber, complex keyframing tools, and an extensions API. [More in the blog post](/blog/theatre-05-is-out).
 
-- [Prop types](/docs/0.5/manual/prop-types)
-  - All prop types are now [sequenceable](/docs/0.5/manual/sequences#sequencing-props)
-  - Prop types can optionally have [custom linear interpolators](/docs/0.5/api/core#docs-500-api-100-core-custom-interpolators)
-  - Added [color prop](/docs/0.5/manual/prop-types#types.rgba_initval_)
-  - [Numeric props](/docs/0.5/manual/prop-types#types.number_initval-options_) can now be dragged with a pointer lock
-- [Sequence editor](/docs/0.5/manual/sequences)
-  - [Keyframe values can now be edited inline](/docs/0.5/manual/sequences#editing-keyframe-values-in-the-inline-editor)
-  - [Single easing editor, with easing presets and fuzzy search](/docs/0.5/manual/sequences#using-the-tween-editor)
-  - [Aggregate keyframe tracks](/docs/0.5/manual/sequences#aggregate-keyframes)
+- [Prop types](/docs/latest/manual/prop-types)
+  - All prop types are now [sequenceable](/docs/latest/manual/sequences#sequencing-props)
+  - Prop types can optionally have [custom linear interpolators](/docs/latest/api/core#docs-500-api-100-core-custom-interpolators)
+  - Added [color prop](/docs/latest/manual/prop-types#types.rgba_initval_)
+  - [Numeric props](/docs/latest/manual/prop-types#types.number_initval-options_) can now be dragged with a pointer lock
+- [Sequence editor](/docs/latest/manual/sequences)
+  - [Keyframe values can now be edited inline](/docs/latest/manual/sequences#editing-keyframe-values-in-the-inline-editor)
+  - [Single easing editor, with easing presets and fuzzy search](/docs/latest/manual/sequences#using-the-tween-editor)
+  - [Aggregate keyframe tracks](/docs/latest/manual/sequences#aggregate-keyframes)
   - Markers
-  - [Focus range](/docs/0.5/manual/sequences#focus-range)
-  - Several UX improvements with the scroll/pinch gestures ([Keyboard controls](/docs/0.5/manual/keyboard-shortcuts))
-  - [Selections](/docs/0.5/manual/sequences#selections)
-  - [Copy/paste](/docs/0.5/manual/sequences#copyingpasting-keyframes)
+  - [Focus range](/docs/latest/manual/sequences#focus-range)
+  - Several UX improvements with the scroll/pinch gestures ([Keyboard controls](/docs/latest/manual/keyboard-shortcuts))
+  - [Selections](/docs/latest/manual/sequences#selections)
+  - [Copy/paste](/docs/latest/manual/sequences#copyingpasting-keyframes)
 - Workspaces
   - An update checker that shows a badge if there is a new version of Theatre.js available
-  - It is possible now to [nest/namespace objects](/docs/0.5/manual/objects#namespacing-objects)
+  - It is possible now to [nest/namespace objects](/docs/latest/manual/objects#namespacing-objects)
   - The outline menu's items are now sorted alphabetically
   - The left/right panels can now auto-hide or be pinned
   - Better support for windows
@@ -126,7 +126,7 @@ Theatre.js **v0.5** · Introduces a 3D editor for React Three Fiber, complex key
   - Performance improvements
   - New helpful warnings in the API
 - `@theatre/core`
-  - [Audio playback](/docs/0.5/manual/audio)
-  - Added [an API for reading/observing the position of the seeker in the sequence, its length, and its playback state](/docs/0.5/api/core#sequence.pointer-api)
-  - You can now [export the state of each project programmatically](/docs/0.5/api/studio#studio.createcontentofsavefile-fn)
-- First release of [`@theatre/r3f`](https://www.npmjs.com/package/@theatre/r3f) (read the ["Getting started with React Three Fiber"](/docs/0.5/getting-started/with-react-three-fiber) guide for an introduction to the library, or check the [API docs](/docs/0.5/api/r3f) to dive deeper)
+  - [Audio playback](/docs/latest/manual/audio)
+  - Added [an API for reading/observing the position of the seeker in the sequence, its length, and its playback state](/docs/latest/api/core#sequence.pointer-api)
+  - You can now [export the state of each project programmatically](/docs/latest/api/studio#studio.createcontentofsavefile-fn)
+- First release of [`@theatre/r3f`](https://www.npmjs.com/package/@theatre/r3f) (read the ["Getting started with React Three Fiber"](/docs/latest/getting-started/with-react-three-fiber) guide for an introduction to the library, or check the [API docs](/docs/latest/api/r3f) to dive deeper)

@@ -27,7 +27,7 @@ studio.transaction(({ set, unset }) => {
 
 ### api.set$api(pointer, value)
 
-Set the value of a prop by its [pointer](/docs/0.5/api/core#pointers). If the prop is sequenced, the value will be a keyframe at the current sequence position.
+Set the value of a prop by its [pointer](/docs/latest/api/core#pointers). If the prop is sequenced, the value will be a keyframe at the current sequence position.
 
 ```ts
 const obj = sheet.object('box', { x: 0, y: 0 })
@@ -44,7 +44,7 @@ studio.transaction(({ set }) => {
 
 ### api.unset$api(pointer, value)
 
-Unsets the value of a prop by its [pointer](/docs/0.5/api/core#pointers).
+Unsets the value of a prop by its [pointer](/docs/latest/api/core#pointers).
 
 ```ts
 const obj = sheet.object('box', { x: 0, y: 0 })
@@ -84,7 +84,7 @@ scrub.discard() // clears the ops and destroys it (ie. can't call scrub.capture(
 
 Registers an extension.
 Extensions enable you to extend the Studio's UI and/or extend the functionality of Studio.
-Read more about working with extensions in the ["Authoring extensions" manual](/docs/0.5/manual/authoring-extensions).
+Read more about working with extensions in the ["Authoring extensions" manual](/docs/latest/manual/authoring-extensions).
 
 ```ts
 import { extension } from './myExtension'
@@ -94,7 +94,7 @@ studio.extend(extension)
 
 ## studio.createContentOfSaveFile$api(projectId)
 
-Creates a JSON object that contains the state of the project. You can use this to programmatically save the state of your projects to the storage system of your choice, rather than [manually clicking on the "Export" button in the UI](/docs/0.5/manual/projects#docs-manual-projects-export-project).
+Creates a JSON object that contains the state of the project. You can use this to programmatically save the state of your projects to the storage system of your choice, rather than [manually clicking on the "Export" button in the UI](/docs/latest/manual/projects#docs-manual-projects-export-project).
 
 ```ts
 const projectId = 'project'
@@ -115,13 +115,13 @@ studio.createPane('snapshot')
 
 ## studio.getStudioProject$api()
 
-Returns the [Theatre.js project](/docs/0.5/api/core#project) that contains the studio's [sheets](/docs/0.5/api/core#sheet) and [objects](/docs/0.5/api/core#object).
+Returns the [Theatre.js project](/docs/latest/api/core#project) that contains the studio's [sheets](/docs/latest/api/core#sheet) and [objects](/docs/latest/api/core#object).
 
 It is useful if you'd like to have sheets/objects that are present only when the studio is present.
 
 ## studio.selection
 
-The current selection, consisting of [sheets](/docs/0.5/api/core#sheet) and [sheet objects](/docs/0.5/api/core#object).
+The current selection, consisting of [sheets](/docs/latest/api/core#sheet) and [sheet objects](/docs/latest/api/core#object).
 
 ```ts
 console.log(studio.selection) // [ISheetObject, ISheet]

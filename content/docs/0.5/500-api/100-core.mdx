@@ -6,7 +6,7 @@ excerpt: '@theatre/core'
 
 ## getProject$api(id, config)
 
-If you import and [initialize Studio](/docs/0.5/api/studio#studio.initialize-fn), you can call `getProject()` without an explicit state.
+If you import and [initialize Studio](/docs/latest/api/studio#studio.initialize-fn), you can call `getProject()` without an explicit state.
 In this case, the state of the project will be managed by Studio.
 
 ```ts
@@ -28,7 +28,7 @@ const project = getProject('My Project', config)
 
 Project returned by `getProject`.
 
-_To read about Projects, check out the [Projects Manual](/docs/0.5/manual/projects)!_
+_To read about Projects, check out the [Projects Manual](/docs/latest/manual/projects)!_
 
 ### project.ready $api
 
@@ -219,7 +219,7 @@ sheet.sequence.position = 1
 
 ### sequence.pointer $api
 
-A [Pointer](/docs/0.5/api/core#pointers) to the Sequence's inner state.
+A [Pointer](/docs/latest/api/core#pointers) to the Sequence's inner state.
 
 As with any Pointer, you can use this with [`onChange()`](#onchange) to listen to its value changes or with `val()` to read its current value.
 
@@ -251,7 +251,7 @@ Playing the sequence automatically plays the audio source and the audio and anim
 
 Returns a `Promise` that resolves once the audio source is loaded and decoded.
 
-Learn more from the [Using Audio](/docs/0.5/manual/audio) manual.
+Learn more from the [Using Audio](/docs/latest/manual/audio) manual.
 
 ```ts
 // Loads and decodes audio from the URL and then attaches it to the sequence
@@ -283,7 +283,7 @@ button.addEventListener('click', async () => {
 })
 ```
 
-_To read about Audio, check out the [Using Audio Manual](/docs/0.5/manual/audio)!_
+_To read about Audio, check out the [Using Audio Manual](/docs/latest/manual/audio)!_
 
 ### sequence.\_\_experimental_getKeyframes$api(pointer) <Since version="0.6.1" />
 
@@ -304,9 +304,9 @@ A Sheet Object returned by [`sheet.object`](#sheet.object) with some given props
 const obj = sheet.object('My Object', { x: 0 })
 ```
 
-_To read about Objects, check out the [Objects Manual](/docs/0.5/manual/objects)._
+_To read about Objects, check out the [Objects Manual](/docs/latest/manual/objects)._
 
-_To read about the props of Objects, check out the [Prop Types Manual](/docs/0.5/manual/prop-types) or the [Prop types API docs](#prop-types) below!_
+_To read about the props of Objects, check out the [Prop Types Manual](/docs/latest/manual/prop-types) or the [Prop types API docs](#prop-types) below!_
 
 ### object.value $api
 
@@ -319,7 +319,7 @@ console.log(obj.value.x) // prints 0 or the current numeric value
 
 ### object.props $api
 
-A [Pointer](/docs/0.5/api/core#pointers) to the props of the Object.
+A [Pointer](/docs/latest/api/core#pointers) to the props of the Object.
 
 ```ts
 onChange(obj.props.x, (x) => {
@@ -367,7 +367,7 @@ const { projectId, sheetId, sheetInstanceId, objectKey } = obj.address
 
 Sets the initial value of the Object.
 This value overrides the default values defined in the Object's [prop types](#prop-types).
-And, it can then be overridden if the user [overrides it in the Studio UI](/docs/0.5/manual/sequences#sequencing-props) with a static or sequenced value.
+And, it can then be overridden if the user [overrides it in the Studio UI](/docs/latest/manual/sequences#sequencing-props) with a static or sequenced value.
 
 ```ts
 const obj = sheet.object('obj', { position: { x: 0, y: 0 } })
@@ -450,7 +450,7 @@ const obj = sheet.object('My Object', {
 })
 ```
 
-_To read about Prop types, check out the [Prop Types Manual](/docs/0.5/manual/prop-types)!_
+_To read about Prop types, check out the [Prop Types Manual](/docs/latest/manual/prop-types)!_
 
 ### types.compound$api(props, opts?)
 
@@ -585,7 +585,7 @@ const model = types.file('', {
 
 ## Pointers
 
-Pointers basically point to values that you can [read](/docs/0.5/api/core#val-fn), [observe](/docs/0.5/api/core#onchange-fn), and in some cases [change](/docs/0.5/api/studio#studio.transaction-fn).
+Pointers basically point to values that you can [read](/docs/latest/api/core#val-fn), [observe](/docs/latest/api/core#onchange-fn), and in some cases [change](/docs/latest/api/studio#studio.transaction-fn).
 
 ### onChange$api(pointer, callback, rafDriver?)
 
@@ -608,7 +608,7 @@ const usubscribe = onChange(obj.props.position.x, (x) => {
 setTimeout(usubscribe, 10000) // stop listening to changes after 10 seconds
 ```
 
-_Hint: You can control how often `onChange()` calls the callback by optoinally providing a [`rafDriver`](/docs//docs/latest/manual/advanced#rafdrivers)._
+_Hint: You can control how often `onChange()` calls the callback by optoinally providing a [`rafDriver`](/docs/latest/manual/advanced#rafdrivers)._
 
 ### val$api(pointer)
 
