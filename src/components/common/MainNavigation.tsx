@@ -11,6 +11,8 @@ import { Button } from './Button'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import HorizontalContainer from './HorizontalContainer'
 import classNames from 'classnames'
+import { DocsNavigation } from '../docs/DocsNavigation'
+import { TreeNode } from 'types/TreeNode'
 
 const navLinks: Array<{ label: string; url: string }> = [
   { label: 'Docs', url: '/docs/latest' },
@@ -73,7 +75,7 @@ export const SearchButton: FC<{ showShortcut?: boolean }> = ({ showShortcut = tr
   )
 }
 
-export const MainNavigation: React.FC<{ className?: string }> = (props) => {
+export const MainNavigation: React.FC<{ className?: string; docsTree?: TreeNode[] }> = (props) => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -94,7 +96,7 @@ export const MainNavigation: React.FC<{ className?: string }> = (props) => {
             </a>
           </Link>
         </div>
-        <div className="lg:hidden">
+        <div className="md:hidden">
           <button
             type="button"
             aria-label="Toggle menu"
@@ -106,29 +108,33 @@ export const MainNavigation: React.FC<{ className?: string }> = (props) => {
             </span>
           </button>
           {open && (
-            <div className="fixed inset-0 top-[65px] z-50-global-nav h-screen bg-gray-950/10 pb-20 backdrop-blur-lg backdrop-filter dark:bg-gray-950/50">
+            <div className="fixed inset-0 top-[65px] z-50-global-nav h-screen bg-gray-950/10 pb-20  backdrop-filter dark:bg-gray-950/50">
               <nav className="absolute right-0 h-full divide-y divide-gray-200 border-l border-gray-200 bg-white p-8 dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950">
                 <div className="flex flex-col items-start space-y-2 pb-8 lg:items-end">
-                  <div className="mb-2">
-                    <SearchButton showShortcut={false} />
-                  </div>
+                  {!props.docsTree && (
+                    <div className="mb-2">
+                      <SearchButton showShortcut={false} />
+                    </div>
+                  )}
+
                   {navLinks.map(({ label, url }, index) => (
                     <NavLink key={index} label={label} url={url} />
                   ))}
+                  {props.docsTree && <DocsNavigation tree={props.docsTree} />}
                 </div>
+
                 <div className="flex flex-col content-center items-center justify-center pt-8 align-middle">
                   <div className="flex gap-4 pb-8">
                     {iconLinks.map(({ label, icon, url }, index) => (
                       <NavLink key={index} label={label} hideLabel url={url} icon={icon} />
                     ))}
                   </div>
-                  <Button label="Get started" href="/docs/latest" theme="primary" />
                 </div>
               </nav>
             </div>
           )}
         </div>
-        <nav className="hidden items-center divide-x divide-gray-200 dark:divide-gray-800 lg:flex">
+        <nav className="hidden items-center divide-x divide-gray-200 dark:divide-gray-800 md:flex">
           <div className="flex items-center pr-2 lg:space-x-4 lg:pr-8">
             {navLinks.map(({ label, url }, index) => (
               <NavLink key={index} label={label} url={url} />

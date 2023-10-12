@@ -87,6 +87,7 @@ export const SearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
     mapPosts(allPosts)
     mapDocs(docsTree, 'Docs')
+    console.log(actions)
     return actions
   }, [docsTree, router])
 

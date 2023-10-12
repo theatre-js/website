@@ -36,7 +36,7 @@ export const H2: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
     <h2
       id={slug}
       onClick={() => (window.location.hash = `#${slug}`)}
-      className={`${headingClass} mt-12 flex items-center text-h2-mobile md:text-h2-desktop`}
+      className={`${headingClass} mt-16 flex items-center text-h2-mobile first:mt-4 md:text-h2-desktop`}
     >
       <span className={spanClass}>#</span>
       {heading}

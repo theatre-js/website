@@ -232,16 +232,16 @@ const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ doc, tree, b
 
   return (
     <MetaWrapper title={doc.title + ' – Theatre.js'} description={doc.excerpt}>
-      <BasicHeaderMainFooterLayout>
-        <HorizontalContainer className={`theatre-docs-page ${doc.class_names} relative mt-12 lg:flex lg:items-start`}>
-          <div style={{ height: 'calc(100vh - 64px)' }} className="sticky top-16 hidden shrink-0  lg:block">
-            <div className="-ml-3 h-full overflow-y-scroll py-8 pr-8">
+      <BasicHeaderMainFooterLayout docsTree={tree}>
+        <HorizontalContainer className={`theatre-docs-page ${doc.class_names} relative mt-12 md:flex md:items-start`}>
+          <div style={{ height: 'calc(100vh - 64px)' }} className="sticky top-16 hidden shrink-0 md:block md:w-1/5">
+            <div className="-ml-3 h-full overflow-y-scroll py-8 md:ml-0 lg:pr-4 ">
               <DocsNavigation tree={tree} />
             </div>
           </div>
-          <div className="relative w-full grow lg:pl-16" contentEditable={checkGrammar}>
+          <div className="relative grow md:w-4/5 md:pl-8 lg:pl-16" contentEditable={checkGrammar}>
             <DocsHeader tree={tree} breadcrumbs={breadcrumbs} title={doc.title} />
-            <TextBody>
+            <TextBody className="">
               {content}
               {doc.show_child_cards && (
                 <>

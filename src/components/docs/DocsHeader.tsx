@@ -11,8 +11,6 @@ export const DocsHeader: FC<{ tree: TreeNode[]; breadcrumbs: any[]; title: strin
   breadcrumbs,
   title,
 }) => {
-  const { asPath } = useRouter()
-  const [navBurgerOpen, setNavBurgerOpen] = useState<boolean>(false)
   const [top, setTop] = useState<boolean>(true)
 
   useEffect(() => {
@@ -23,10 +21,6 @@ export const DocsHeader: FC<{ tree: TreeNode[]; breadcrumbs: any[]; title: strin
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
-
-  useEffect(() => {
-    setNavBurgerOpen(false)
-  }, [asPath])
 
   return (
     <>
@@ -50,52 +44,12 @@ export const DocsHeader: FC<{ tree: TreeNode[]; breadcrumbs: any[]; title: strin
               </Fragment>
             ))}
           </ul>
-          <h1 className="sr-only font-sans font-black tracking-tight text-headings-light dark:text-headings-dark md:text-3xl lg:not-sr-only lg:text-6xl">
+          <h1 className="font-sans text-4xl font-black tracking-tight text-headings-light dark:text-headings-dark md:text-4xl lg:text-6xl">
             {title}
           </h1>
-          <div className="lg:hidden">
-            <button aria-label="Show docs navigation" onClick={() => setNavBurgerOpen((v) => !v)}>
-              <span className="fixed top-5 left-36 z-45-global-topbar flex items-center space-x-2 text-gray-800 dark:text-gray-200 md:top-5 md:left-40">
-                {/* <span className="inline-block w-4 flex-shrink-0">
-                  <Icon name="bars" />
-                </span> */}
-                <span>Docs Menu</span>
-              </span>
-              <span className="inline-block flex-shrink font-sans text-2xl font-black text-headings-light dark:text-headings-dark md:space-x-3 md:text-3xl lg:text-4xl">
-                {title}
-              </span>
-            </button>
-          </div>
         </div>
       </header>
-      {navBurgerOpen && (
-        <div
-          className="fixed inset-0 z-50-global-nav h-screen bg-gray-950/10 pb-20 backdrop-blur-lg backdrop-filter dark:bg-gray-950/50"
-          onClick={() => setNavBurgerOpen(!navBurgerOpen)}
-        >
-          <div
-            className="absolute left-0 h-full divide-y divide-gray-200 overflow-y-scroll border-r border-gray-200 bg-white p-4 dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950"
-            onClick={(evt) => evt.stopPropagation()}
-          >
-            <div className="flex items-center justify-between pb-4">
-              <h2 className="text-xl font-semibold text-headings-light dark:text-headings-dark">Theatre.js Docs</h2>
-              <button
-                type="button"
-                aria-label="Close docs navigation"
-                onClick={() => setNavBurgerOpen(!navBurgerOpen)}
-                className="flex h-8 w-8 items-center justify-end text-gray-600 dark:text-gray-300"
-              >
-                <span className="inline-block w-4">
-                  <Icon name="close" />
-                </span>
-              </button>
-            </div>
-            <div className="pt-4">
-              <DocsNavigation tree={tree} />
-            </div>
-          </div>
-        </div>
-      )}
+
       <div
         className={classNames(
           `fixed top-16 z-10 hidden h-16 w-full border-b border-gray-200 `,

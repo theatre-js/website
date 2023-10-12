@@ -3,11 +3,16 @@ import { FC, PropsWithChildren } from 'react'
 import { children } from 'cheerio/lib/api/traversing'
 import { Footer } from '../Footer'
 import { MainNavigation } from '../MainNavigation'
+import { TreeNode } from 'types/TreeNode'
 
-export const BasicHeaderMainFooterLayout: FC<PropsWithChildren<{ className?: string }>> = ({ children, className }) => {
+export const BasicHeaderMainFooterLayout: FC<PropsWithChildren<{ className?: string; docsTree?: TreeNode[] }>> = ({
+  children,
+  className,
+  docsTree,
+}) => {
   return (
     <>
-      <MainNavigation />
+      <MainNavigation docsTree={docsTree} />
       <div
         className={classNames('flex min-h-screen w-full flex-col justify-between', className)}
         style={{

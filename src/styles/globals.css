@@ -84,7 +84,7 @@
   .prose a code {
     /* position: relative; */
     --tw-prose-underline-size: 6px;
-    @apply text-white decoration-glow-700 underline-offset-4 hover:decoration-glow-100 active:decoration-glow-100;
+    @apply text-white decoration-glow-500 underline-offset-4 hover:decoration-glow-100 active:decoration-glow-100;
 
     /* @apply after:-inset-1 after:bg-slate-800 after:absolute after:-z-10 after:rounded-sm; */
   }

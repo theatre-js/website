@@ -104,7 +104,7 @@ export const DocsNavigation: FC<{ tree: TreeNode[] }> = ({ tree }) => {
   const router = useRouter()
 
   return (
-    <aside className="w-50 md:pr-16">
+    <aside className="w-full ">
       <div>
         <div className="w-full py-3">
           <SearchButton />

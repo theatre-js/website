@@ -46,7 +46,7 @@ module.exports = {
         ],
         'h2-desktop': [
           // should be `font-bold` (700)
-          '1.875rem', // 30px
+          '1.65rem', // 30px
           { letterSpacing: '-0.05rem' },
         ],
         hero: ['66px', { lineHeight: '80px' }],
@@ -105,7 +105,7 @@ module.exports = {
           600: '#515355',
           800: '#25282B',
           850: '#1F2124',
-          900: '#0D1013',
+          900: 'rgb(20 24 28)',
           950: '#070A0D',
         },
         teal: {
@@ -117,6 +117,7 @@ module.exports = {
         },
         glow: {
           100: 'rgb(63, 205, 238)',
+          500: '#14414c',
           700: '#1e798e',
         },
       },
