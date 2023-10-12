@@ -108,9 +108,13 @@ export const MainNavigation: React.FC<{ className?: string; docsTree?: TreeNode[
             </span>
           </button>
           {open && (
-            <div className="fixed inset-0 top-[65px] z-50-global-nav h-screen bg-gray-950/10 pb-20  backdrop-filter dark:bg-gray-950/50">
-              <nav className="absolute right-0 h-full divide-y divide-gray-200 border-l border-gray-200 bg-white p-8 dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950">
-                <div className="flex flex-col items-start space-y-2 pb-8 lg:items-end">
+            <div
+              className="fixed right-0 bottom-0 left-0 top-[65px] z-50-global-nav bg-gray-950/10 pb-20 dark:bg-gray-950/50"
+              onClick={() => setOpen(false)}
+            >
+              <div className="absolute inset-0 -z-10" />
+              <nav className="-b-30 pb-30 t-0 absolute right-0 h-full divide-y divide-gray-200 overflow-y-auto border-l border-gray-200 bg-white  dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950">
+                <div className="m-8 flex flex-col items-start space-y-2 pb-8 lg:items-end">
                   {!props.docsTree && (
                     <div className="mb-2">
                       <SearchButton showShortcut={false} />
