@@ -17,7 +17,7 @@ import { TreeNode } from 'types/TreeNode'
 const navLinks: Array<{ label: string; url: string }> = [
   { label: 'Docs', url: '/docs/latest' },
   { label: 'Blog', url: '/blog' },
-  { label: 'Jobs', url: 'https://join.theatrejs.com' },
+  { label: 'Jobs', url: '/join' },
 ]
 
 const iconLinks: Array<{ label: string; icon: IconName; url: string }> = [

@@ -22,6 +22,11 @@ module.exports = withContentlayer({
         destination: '/docs/latest',
         permanent: true,
       },
+      {
+        source: '/join',
+        destination: 'https://theatrejs.notion.site/Join-Theatre-js-9bf931f3a5ef4872beff7b0e2fa217c1',
+        permanent: false,
+      },
     ]
   },
 })

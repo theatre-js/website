@@ -49,7 +49,7 @@ const content = {
       elements: [
         {
           label: 'Jobs',
-          url: 'https://join.theatrejs.com',
+          url: '/join',
         },
         {
           label: 'Blog',
